@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct SmartTrainerApp: App {
+    @StateObject private var vm = HomeViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SmartTrainerTabView()
+                .environmentObject(vm)
         }
     }
 }

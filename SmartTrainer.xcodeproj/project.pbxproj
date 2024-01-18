@@ -8,17 +8,100 @@
 
 /* Begin PBXBuildFile section */
 		EC0E00222B4DB00600F06B98 /* SmartTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00212B4DB00600F06B98 /* SmartTrainerApp.swift */; };
-		EC0E00242B4DB00600F06B98 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00232B4DB00600F06B98 /* ContentView.swift */; };
 		EC0E00262B4DB01D00F06B98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0E00252B4DB01D00F06B98 /* Assets.xcassets */; };
 		EC0E00292B4DB01D00F06B98 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0E00282B4DB01D00F06B98 /* Preview Assets.xcassets */; };
+		EC0E00332B4DB11E00F06B98 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00322B4DB11E00F06B98 /* Color.swift */; };
+		EC0E00352B4DB23900F06B98 /* Technique.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00342B4DB23800F06B98 /* Technique.swift */; };
+		EC0E00372B4DB2C100F06B98 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00362B4DB2C100F06B98 /* PreviewProvider.swift */; };
+		EC0E00392B4DB73200F06B98 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00382B4DB73200F06B98 /* Attempt.swift */; };
+		EC0E003C2B4DB8AE00F06B98 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E003B2B4DB8AE00F06B98 /* HomeView.swift */; };
+		EC0E00402B4DB8FA00F06B98 /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E003F2B4DB8FA00F06B98 /* CircleButtonView.swift */; };
+		EC0E00422B4DC48C00F06B98 /* SmartTrainerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00412B4DC48C00F06B98 /* SmartTrainerTabView.swift */; };
+		EC0E00452B4DC75300F06B98 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00442B4DC75300F06B98 /* SearchBarView.swift */; };
+		EC4DCAAD2B4DD3F700B610DC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4DCAAC2B4DD3F700B610DC /* HomeViewModel.swift */; };
+		EC4DCAB12B4DD59100B610DC /* AttemptCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4DCAB02B4DD59100B610DC /* AttemptCardView.swift */; };
+		EC6AE2CA2B4DE7F100F8C0D2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6AE2C92B4DE7F100F8C0D2 /* Notification.swift */; };
+		EC6AE2CF2B4DECF200F8C0D2 /* PlayerAttemptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6AE2CE2B4DECF200F8C0D2 /* PlayerAttemptView.swift */; };
+		EC6AE2D22B4DEFA000F8C0D2 /* back_squat.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC6AE2D12B4DEFA000F8C0D2 /* back_squat.mp4 */; };
+		EC6AE2D72B4DF5F200F8C0D2 /* PlayerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6AE2D62B4DF5F200F8C0D2 /* PlayerProfileView.swift */; };
+		EC903EF62B5015E300B3AB1F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903EF52B5015E300B3AB1F /* Date.swift */; };
+		EC903EF92B501A3900B3AB1F /* ProfileBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903EF82B501A3900B3AB1F /* ProfileBaseView.swift */; };
+		EC903EFE2B501BF700B3AB1F /* CoachProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903EFD2B501BF700B3AB1F /* CoachProfileView.swift */; };
+		EC903F032B501E1D00B3AB1F /* CoachPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F022B501E1D00B3AB1F /* CoachPlayersView.swift */; };
+		EC903F072B5024BE00B3AB1F /* CoachPlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F062B5024BE00B3AB1F /* CoachPlayersViewModel.swift */; };
+		EC903F092B5024FC00B3AB1F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F082B5024FC00B3AB1F /* Player.swift */; };
+		EC903F0B2B5029E800B3AB1F /* CoachPlayerRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F0A2B5029E800B3AB1F /* CoachPlayerRequestsView.swift */; };
+		EC903F0F2B50309800B3AB1F /* PlayerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F0E2B50309800B3AB1F /* PlayerCardView.swift */; };
+		EC903F112B5039B200B3AB1F /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F102B5039B200B3AB1F /* GroupCardView.swift */; };
+		EC903F132B5039CB00B3AB1F /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F122B5039CB00B3AB1F /* Group.swift */; };
+		EC903F182B503F4400B3AB1F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F172B503F4400B3AB1F /* PlayerView.swift */; };
+		EC903F1A2B5041A500B3AB1F /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F192B5041A500B3AB1F /* PlayerViewModel.swift */; };
+		EC903F1F2B505A4F00B3AB1F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC903F1E2B505A4F00B3AB1F /* NetworkManager.swift */; };
+		ECAA8EA12B51B6C40001FE7D /* AttemptDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EA02B51B6C40001FE7D /* AttemptDataService.swift */; };
+		ECAA8EA62B51D1DD0001FE7D /* RecordVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EA52B51D1DD0001FE7D /* RecordVideoView.swift */; };
+		ECAA8EAE2B5495240001FE7D /* DrawFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EAD2B5495240001FE7D /* DrawFeedbackView.swift */; };
+		ECAA8EB02B54981A0001FE7D /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EAF2B54981A0001FE7D /* ColorPickerView.swift */; };
+		ECAA8EB22B54993C0001FE7D /* DrawFeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EB12B54993C0001FE7D /* DrawFeedbackViewModel.swift */; };
+		ECAA8EB72B54A6520001FE7D /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EB62B54A6520001FE7D /* RecordingView.swift */; };
+		ECE43EA52B4E09E200BDE0C7 /* TechniqueCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EA42B4E09E200BDE0C7 /* TechniqueCardView.swift */; };
+		ECE43EAA2B4E0E9300BDE0C7 /* PlayerRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EA92B4E0E9300BDE0C7 /* PlayerRecordView.swift */; };
+		ECE43EAC2B4E114000BDE0C7 /* PlayerRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EAB2B4E114000BDE0C7 /* PlayerRecordViewModel.swift */; };
+		ECE43EAE2B4EB81200BDE0C7 /* PlayerRecordAttemptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EAD2B4EB81200BDE0C7 /* PlayerRecordAttemptView.swift */; };
+		ECE43EB02B4ECE8C00BDE0C7 /* PlayerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EAF2B4ECE8C00BDE0C7 /* PlayerProfileViewModel.swift */; };
+		ECE43EB22B4ECEC000BDE0C7 /* Coach.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EB12B4ECEC000BDE0C7 /* Coach.swift */; };
+		ECE43EB52B4ED02E00BDE0C7 /* CirclePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EB42B4ED02E00BDE0C7 /* CirclePhotoView.swift */; };
+		ECE43EB72B4ED13F00BDE0C7 /* CoachRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EB62B4ED13F00BDE0C7 /* CoachRowView.swift */; };
+		ECE43EB92B4ED49200BDE0C7 /* NewCoachPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EB82B4ED49200BDE0C7 /* NewCoachPopupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EC0E001E2B4DB00600F06B98 /* SmartTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC0E00212B4DB00600F06B98 /* SmartTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTrainerApp.swift; sourceTree = "<group>"; };
-		EC0E00232B4DB00600F06B98 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EC0E00252B4DB01D00F06B98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC0E00282B4DB01D00F06B98 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EC0E00322B4DB11E00F06B98 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		EC0E00342B4DB23800F06B98 /* Technique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Technique.swift; sourceTree = "<group>"; };
+		EC0E00362B4DB2C100F06B98 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
+		EC0E00382B4DB73200F06B98 /* Attempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
+		EC0E003B2B4DB8AE00F06B98 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EC0E003F2B4DB8FA00F06B98 /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
+		EC0E00412B4DC48C00F06B98 /* SmartTrainerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTrainerTabView.swift; sourceTree = "<group>"; };
+		EC0E00442B4DC75300F06B98 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		EC4DCAAC2B4DD3F700B610DC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		EC4DCAB02B4DD59100B610DC /* AttemptCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptCardView.swift; sourceTree = "<group>"; };
+		EC6AE2C92B4DE7F100F8C0D2 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		EC6AE2CE2B4DECF200F8C0D2 /* PlayerAttemptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAttemptView.swift; sourceTree = "<group>"; };
+		EC6AE2D12B4DEFA000F8C0D2 /* back_squat.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = back_squat.mp4; sourceTree = "<group>"; };
+		EC6AE2D62B4DF5F200F8C0D2 /* PlayerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfileView.swift; sourceTree = "<group>"; };
+		EC903EF52B5015E300B3AB1F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		EC903EF82B501A3900B3AB1F /* ProfileBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBaseView.swift; sourceTree = "<group>"; };
+		EC903EFD2B501BF700B3AB1F /* CoachProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachProfileView.swift; sourceTree = "<group>"; };
+		EC903F022B501E1D00B3AB1F /* CoachPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachPlayersView.swift; sourceTree = "<group>"; };
+		EC903F062B5024BE00B3AB1F /* CoachPlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachPlayersViewModel.swift; sourceTree = "<group>"; };
+		EC903F082B5024FC00B3AB1F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		EC903F0A2B5029E800B3AB1F /* CoachPlayerRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachPlayerRequestsView.swift; sourceTree = "<group>"; };
+		EC903F0E2B50309800B3AB1F /* PlayerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCardView.swift; sourceTree = "<group>"; };
+		EC903F102B5039B200B3AB1F /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
+		EC903F122B5039CB00B3AB1F /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		EC903F172B503F4400B3AB1F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		EC903F192B5041A500B3AB1F /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		EC903F1E2B505A4F00B3AB1F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		ECAA8EA02B51B6C40001FE7D /* AttemptDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptDataService.swift; sourceTree = "<group>"; };
+		ECAA8EA22B51C8810001FE7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ECAA8EA52B51D1DD0001FE7D /* RecordVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoView.swift; sourceTree = "<group>"; };
+		ECAA8EAD2B5495240001FE7D /* DrawFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawFeedbackView.swift; sourceTree = "<group>"; };
+		ECAA8EAF2B54981A0001FE7D /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		ECAA8EB12B54993C0001FE7D /* DrawFeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawFeedbackViewModel.swift; sourceTree = "<group>"; };
+		ECAA8EB62B54A6520001FE7D /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		ECE43EA42B4E09E200BDE0C7 /* TechniqueCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniqueCardView.swift; sourceTree = "<group>"; };
+		ECE43EA92B4E0E9300BDE0C7 /* PlayerRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRecordView.swift; sourceTree = "<group>"; };
+		ECE43EAB2B4E114000BDE0C7 /* PlayerRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRecordViewModel.swift; sourceTree = "<group>"; };
+		ECE43EAD2B4EB81200BDE0C7 /* PlayerRecordAttemptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRecordAttemptView.swift; sourceTree = "<group>"; };
+		ECE43EAF2B4ECE8C00BDE0C7 /* PlayerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfileViewModel.swift; sourceTree = "<group>"; };
+		ECE43EB12B4ECEC000BDE0C7 /* Coach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coach.swift; sourceTree = "<group>"; };
+		ECE43EB42B4ED02E00BDE0C7 /* CirclePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePhotoView.swift; sourceTree = "<group>"; };
+		ECE43EB62B4ED13F00BDE0C7 /* CoachRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachRowView.swift; sourceTree = "<group>"; };
+		ECE43EB82B4ED49200BDE0C7 /* NewCoachPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCoachPopupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +134,15 @@
 		EC0E00202B4DB00600F06B98 /* SmartTrainer */ = {
 			isa = PBXGroup;
 			children = (
-				EC0E00302B4DB09000F06B98 /* New Group */,
+				ECAA8EA22B51C8810001FE7D /* Info.plist */,
+				ECAA8E9F2B51B45E0001FE7D /* Services */,
+				EC903F1D2B505A1F00B3AB1F /* Utilities */,
+				EC0E00312B4DB0B800F06B98 /* Models */,
+				EC0E00302B4DB09000F06B98 /* Extensions */,
 				EC0E002F2B4DB06200F06B98 /* Core */,
+				EC6AE2D02B4DEFA000F8C0D2 /* Videos */,
 				EC0E00212B4DB00600F06B98 /* SmartTrainerApp.swift */,
-				EC0E00232B4DB00600F06B98 /* ContentView.swift */,
+				EC0E00412B4DC48C00F06B98 /* SmartTrainerTabView.swift */,
 				EC0E00252B4DB01D00F06B98 /* Assets.xcassets */,
 				EC0E00272B4DB01D00F06B98 /* Preview Content */,
 			);
@@ -72,15 +160,372 @@
 		EC0E002F2B4DB06200F06B98 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				ECAA8EB32B54A61F0001FE7D /* Recording */,
+				ECAA8EA82B5494CC0001FE7D /* DrawFeedback */,
+				ECAA8EA32B51D1B70001FE7D /* RecordVideo */,
+				EC903F142B503F1000B3AB1F /* Player */,
+				EC903EFF2B501DEB00B3AB1F /* CoachPlayers */,
+				EC903EFA2B501BBA00B3AB1F /* CoachProfile */,
+				ECE43EA62B4E0E7700BDE0C7 /* PlayerRecord */,
+				EC6AE2D32B4DF5D200F8C0D2 /* PlayerProfile */,
+				EC6AE2CB2B4DECC800F8C0D2 /* PlayerAttempt */,
+				EC0E003D2B4DB8D900F06B98 /* Components */,
+				EC0E003A2B4DB88C00F06B98 /* Home */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		EC0E00302B4DB09000F06B98 /* New Group */ = {
+		EC0E00302B4DB09000F06B98 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EC0E00322B4DB11E00F06B98 /* Color.swift */,
+				EC0E00362B4DB2C100F06B98 /* PreviewProvider.swift */,
+				EC903EF52B5015E300B3AB1F /* Date.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EC0E00312B4DB0B800F06B98 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC0E00342B4DB23800F06B98 /* Technique.swift */,
+				EC0E00382B4DB73200F06B98 /* Attempt.swift */,
+				EC6AE2C92B4DE7F100F8C0D2 /* Notification.swift */,
+				ECE43EB12B4ECEC000BDE0C7 /* Coach.swift */,
+				EC903F082B5024FC00B3AB1F /* Player.swift */,
+				EC903F122B5039CB00B3AB1F /* Group.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EC0E003A2B4DB88C00F06B98 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EC4DCAAB2B4DD3E700B610DC /* ViewModels */,
+				EC0E00462B4DCB4100F06B98 /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EC0E003D2B4DB8D900F06B98 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EC903EF72B501A2300B3AB1F /* ProfileBase */,
+				ECE43EB32B4ED01E00BDE0C7 /* CirclePhoto */,
+				ECE43EA32B4E09CB00BDE0C7 /* TechniqueCard */,
+				EC4DCAAF2B4DD56900B610DC /* AttemptCard */,
+				EC0E00432B4DC73D00F06B98 /* SearchBar */,
+				EC0E003E2B4DB8E600F06B98 /* CircleButton */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EC0E003E2B4DB8E600F06B98 /* CircleButton */ = {
+			isa = PBXGroup;
+			children = (
+				EC0E003F2B4DB8FA00F06B98 /* CircleButtonView.swift */,
+			);
+			path = CircleButton;
+			sourceTree = "<group>";
+		};
+		EC0E00432B4DC73D00F06B98 /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				EC0E00442B4DC75300F06B98 /* SearchBarView.swift */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
+		EC0E00462B4DCB4100F06B98 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC0E003B2B4DB8AE00F06B98 /* HomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC4DCAAB2B4DD3E700B610DC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC4DCAAC2B4DD3F700B610DC /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC4DCAAF2B4DD56900B610DC /* AttemptCard */ = {
+			isa = PBXGroup;
+			children = (
+				EC4DCAB02B4DD59100B610DC /* AttemptCardView.swift */,
+			);
+			path = AttemptCard;
+			sourceTree = "<group>";
+		};
+		EC6AE2CB2B4DECC800F8C0D2 /* PlayerAttempt */ = {
+			isa = PBXGroup;
+			children = (
+				EC6AE2CD2B4DECE000F8C0D2 /* ViewModels */,
+				EC6AE2CC2B4DECDA00F8C0D2 /* Views */,
+			);
+			path = PlayerAttempt;
+			sourceTree = "<group>";
+		};
+		EC6AE2CC2B4DECDA00F8C0D2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC6AE2CE2B4DECF200F8C0D2 /* PlayerAttemptView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC6AE2CD2B4DECE000F8C0D2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "New Group";
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC6AE2D02B4DEFA000F8C0D2 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				EC6AE2D12B4DEFA000F8C0D2 /* back_squat.mp4 */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		EC6AE2D32B4DF5D200F8C0D2 /* PlayerProfile */ = {
+			isa = PBXGroup;
+			children = (
+				EC6AE2D52B4DF5E300F8C0D2 /* ViewModels */,
+				EC6AE2D42B4DF5DD00F8C0D2 /* Views */,
+			);
+			path = PlayerProfile;
+			sourceTree = "<group>";
+		};
+		EC6AE2D42B4DF5DD00F8C0D2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC6AE2D62B4DF5F200F8C0D2 /* PlayerProfileView.swift */,
+				ECE43EB62B4ED13F00BDE0C7 /* CoachRowView.swift */,
+				ECE43EB82B4ED49200BDE0C7 /* NewCoachPopupView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC6AE2D52B4DF5E300F8C0D2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				ECE43EAF2B4ECE8C00BDE0C7 /* PlayerProfileViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC903EF72B501A2300B3AB1F /* ProfileBase */ = {
+			isa = PBXGroup;
+			children = (
+				EC903EF82B501A3900B3AB1F /* ProfileBaseView.swift */,
+			);
+			path = ProfileBase;
+			sourceTree = "<group>";
+		};
+		EC903EFA2B501BBA00B3AB1F /* CoachProfile */ = {
+			isa = PBXGroup;
+			children = (
+				EC903EFC2B501BDE00B3AB1F /* ViewModels */,
+				EC903EFB2B501BD800B3AB1F /* Views */,
+			);
+			path = CoachProfile;
+			sourceTree = "<group>";
+		};
+		EC903EFB2B501BD800B3AB1F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC903EFD2B501BF700B3AB1F /* CoachProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC903EFC2B501BDE00B3AB1F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC903EFF2B501DEB00B3AB1F /* CoachPlayers */ = {
+			isa = PBXGroup;
+			children = (
+				EC903F012B501E0900B3AB1F /* ViewModels */,
+				EC903F002B501DFD00B3AB1F /* Views */,
+			);
+			path = CoachPlayers;
+			sourceTree = "<group>";
+		};
+		EC903F002B501DFD00B3AB1F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC903F022B501E1D00B3AB1F /* CoachPlayersView.swift */,
+				EC903F0A2B5029E800B3AB1F /* CoachPlayerRequestsView.swift */,
+				EC903F0E2B50309800B3AB1F /* PlayerCardView.swift */,
+				EC903F102B5039B200B3AB1F /* GroupCardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC903F012B501E0900B3AB1F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC903F062B5024BE00B3AB1F /* CoachPlayersViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC903F142B503F1000B3AB1F /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				EC903F162B503F2C00B3AB1F /* ViewModels */,
+				EC903F152B503F2800B3AB1F /* Views */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		EC903F152B503F2800B3AB1F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC903F172B503F4400B3AB1F /* PlayerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC903F162B503F2C00B3AB1F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC903F192B5041A500B3AB1F /* PlayerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC903F1D2B505A1F00B3AB1F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EC903F1E2B505A4F00B3AB1F /* NetworkManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		ECAA8E9F2B51B45E0001FE7D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA8EA02B51B6C40001FE7D /* AttemptDataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		ECAA8EA32B51D1B70001FE7D /* RecordVideo */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA8EA42B51D1CC0001FE7D /* Views */,
+			);
+			path = RecordVideo;
+			sourceTree = "<group>";
+		};
+		ECAA8EA42B51D1CC0001FE7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA8EA52B51D1DD0001FE7D /* RecordVideoView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ECAA8EA82B5494CC0001FE7D /* DrawFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA8EAA2B5494EF0001FE7D /* Views */,
+				ECAA8EA92B5494E90001FE7D /* ViewModels */,
+			);
+			path = DrawFeedback;
+			sourceTree = "<group>";
+		};
+		ECAA8EA92B5494E90001FE7D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA8EB12B54993C0001FE7D /* DrawFeedbackViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		ECAA8EAA2B5494EF0001FE7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA8EAD2B5495240001FE7D /* DrawFeedbackView.swift */,
+				ECAA8EAF2B54981A0001FE7D /* ColorPickerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ECAA8EB32B54A61F0001FE7D /* Recording */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA8EB52B54A63D0001FE7D /* ViewModels */,
+				ECAA8EB42B54A6350001FE7D /* Views */,
+			);
+			path = Recording;
+			sourceTree = "<group>";
+		};
+		ECAA8EB42B54A6350001FE7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA8EB62B54A6520001FE7D /* RecordingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ECAA8EB52B54A63D0001FE7D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		ECE43EA32B4E09CB00BDE0C7 /* TechniqueCard */ = {
+			isa = PBXGroup;
+			children = (
+				ECE43EA42B4E09E200BDE0C7 /* TechniqueCardView.swift */,
+			);
+			path = TechniqueCard;
+			sourceTree = "<group>";
+		};
+		ECE43EA62B4E0E7700BDE0C7 /* PlayerRecord */ = {
+			isa = PBXGroup;
+			children = (
+				ECE43EA82B4E0E8500BDE0C7 /* ViewModels */,
+				ECE43EA72B4E0E8000BDE0C7 /* Views */,
+			);
+			path = PlayerRecord;
+			sourceTree = "<group>";
+		};
+		ECE43EA72B4E0E8000BDE0C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECE43EA92B4E0E9300BDE0C7 /* PlayerRecordView.swift */,
+				ECE43EAD2B4EB81200BDE0C7 /* PlayerRecordAttemptView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ECE43EA82B4E0E8500BDE0C7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				ECE43EAB2B4E114000BDE0C7 /* PlayerRecordViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		ECE43EB32B4ED01E00BDE0C7 /* CirclePhoto */ = {
+			isa = PBXGroup;
+			children = (
+				ECE43EB42B4ED02E00BDE0C7 /* CirclePhotoView.swift */,
+			);
+			path = CirclePhoto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC0E00292B4DB01D00F06B98 /* Preview Assets.xcassets in Resources */,
+				EC6AE2D22B4DEFA000F8C0D2 /* back_squat.mp4 in Resources */,
 				EC0E00262B4DB01D00F06B98 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,8 +599,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC0E00242B4DB00600F06B98 /* ContentView.swift in Sources */,
+				EC903F1F2B505A4F00B3AB1F /* NetworkManager.swift in Sources */,
+				EC903F132B5039CB00B3AB1F /* Group.swift in Sources */,
+				EC903F072B5024BE00B3AB1F /* CoachPlayersViewModel.swift in Sources */,
+				ECE43EB22B4ECEC000BDE0C7 /* Coach.swift in Sources */,
+				EC903EFE2B501BF700B3AB1F /* CoachProfileView.swift in Sources */,
+				EC0E00352B4DB23900F06B98 /* Technique.swift in Sources */,
+				EC0E00452B4DC75300F06B98 /* SearchBarView.swift in Sources */,
+				ECE43EAE2B4EB81200BDE0C7 /* PlayerRecordAttemptView.swift in Sources */,
+				EC903F0B2B5029E800B3AB1F /* CoachPlayerRequestsView.swift in Sources */,
+				ECE43EA52B4E09E200BDE0C7 /* TechniqueCardView.swift in Sources */,
+				EC903EF92B501A3900B3AB1F /* ProfileBaseView.swift in Sources */,
+				EC903F0F2B50309800B3AB1F /* PlayerCardView.swift in Sources */,
+				EC0E003C2B4DB8AE00F06B98 /* HomeView.swift in Sources */,
+				ECE43EB72B4ED13F00BDE0C7 /* CoachRowView.swift in Sources */,
+				EC6AE2D72B4DF5F200F8C0D2 /* PlayerProfileView.swift in Sources */,
+				EC903F092B5024FC00B3AB1F /* Player.swift in Sources */,
+				ECE43EAC2B4E114000BDE0C7 /* PlayerRecordViewModel.swift in Sources */,
+				ECE43EB52B4ED02E00BDE0C7 /* CirclePhotoView.swift in Sources */,
+				ECAA8EB22B54993C0001FE7D /* DrawFeedbackViewModel.swift in Sources */,
+				EC903F112B5039B200B3AB1F /* GroupCardView.swift in Sources */,
+				EC4DCAB12B4DD59100B610DC /* AttemptCardView.swift in Sources */,
+				EC0E00422B4DC48C00F06B98 /* SmartTrainerTabView.swift in Sources */,
+				EC903F032B501E1D00B3AB1F /* CoachPlayersView.swift in Sources */,
+				EC903F182B503F4400B3AB1F /* PlayerView.swift in Sources */,
+				ECE43EB02B4ECE8C00BDE0C7 /* PlayerProfileViewModel.swift in Sources */,
+				EC0E00402B4DB8FA00F06B98 /* CircleButtonView.swift in Sources */,
+				ECE43EAA2B4E0E9300BDE0C7 /* PlayerRecordView.swift in Sources */,
 				EC0E00222B4DB00600F06B98 /* SmartTrainerApp.swift in Sources */,
+				EC903F1A2B5041A500B3AB1F /* PlayerViewModel.swift in Sources */,
+				EC0E00392B4DB73200F06B98 /* Attempt.swift in Sources */,
+				EC6AE2CA2B4DE7F100F8C0D2 /* Notification.swift in Sources */,
+				ECAA8EAE2B5495240001FE7D /* DrawFeedbackView.swift in Sources */,
+				EC6AE2CF2B4DECF200F8C0D2 /* PlayerAttemptView.swift in Sources */,
+				EC903EF62B5015E300B3AB1F /* Date.swift in Sources */,
+				EC0E00332B4DB11E00F06B98 /* Color.swift in Sources */,
+				EC4DCAAD2B4DD3F700B610DC /* HomeViewModel.swift in Sources */,
+				ECAA8EA12B51B6C40001FE7D /* AttemptDataService.swift in Sources */,
+				ECE43EB92B4ED49200BDE0C7 /* NewCoachPopupView.swift in Sources */,
+				EC0E00372B4DB2C100F06B98 /* PreviewProvider.swift in Sources */,
+				ECAA8EA62B51D1DD0001FE7D /* RecordVideoView.swift in Sources */,
+				ECAA8EB02B54981A0001FE7D /* ColorPickerView.swift in Sources */,
+				ECAA8EB72B54A6520001FE7D /* RecordingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +777,10 @@
 				DEVELOPMENT_TEAM = QR9J2FWA6N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SmartTrainer/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Record Video Attempt";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Record Video Attempt";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -320,6 +810,10 @@
 				DEVELOPMENT_TEAM = QR9J2FWA6N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SmartTrainer/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Record Video Attempt";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Record Video Attempt";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
