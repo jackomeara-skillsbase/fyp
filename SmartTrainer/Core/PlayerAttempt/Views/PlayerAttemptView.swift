@@ -9,6 +9,7 @@ import SwiftUI
 import AVKit
 
 struct PlayerAttemptView: View {
+    @StateObject private var vm: HomeViewModel = HomeViewModel()
     let attempt: Attempt
     
     var body: some View {
@@ -18,7 +19,7 @@ struct PlayerAttemptView: View {
                 .ignoresSafeArea()
             
             // content layer
-            ScrollView {
+            NavigationStack {
                 VStack(alignment: .leading) {
                     HStack {
                         Text(attempt.technique_name)
@@ -34,6 +35,10 @@ struct PlayerAttemptView: View {
                     
                     videoPreview
                     
+//                    if vm.role == "coach" {
+                        coachReview
+//                    }
+                    
                     Spacer()
                 }
             }
@@ -43,10 +48,13 @@ struct PlayerAttemptView: View {
 
 extension PlayerAttemptView {
     private var videoPreview: some View {
-        Rectangle()
-            .fill(Color.blue)
-            .frame(width: 180, height: 320)
-            .padding(.horizontal)
+//        Rectangle()
+//            .fill(Color.blue)
+//            .frame(width: 180, height: 320)
+//            .padding(.horizontal)
+
+        VideoAutoplayView(videoFile: "squat_attempt", videoType: "MOV")
+            .frame(maxHeight: 320)
     }
 }
 
@@ -63,6 +71,12 @@ extension PlayerAttemptView {
                 .font(.subheadline)
         }
         .padding(.horizontal)
+    }
+}
+
+extension PlayerAttemptView {
+    private var coachReview: some View {
+        ReviewAttemptView()
     }
 }
 

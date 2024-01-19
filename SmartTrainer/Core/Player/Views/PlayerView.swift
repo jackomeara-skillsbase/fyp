@@ -18,7 +18,7 @@ struct PlayerView: View {
             
             ScrollView {
                 VStack {
-                    ProfileBaseView(name: player.name, email: player.email, profilePhoto: player.profilePhoto)
+                    ProfileBaseView(name: player.name, email: player.email, profilePhoto: player.image)
                     
                     Button(action: {
                         print("generating report...")
@@ -55,5 +55,5 @@ struct PlayerView: View {
 }
 
 #Preview {
-    PlayerView(player: Player(id: UUID(), name: "Michael Jordan", email: "mj@gmail.com", profilePhoto: "player"))
+    PlayerView(player: Player(id: 123456, name: "Michael Jordan", email: "mj@gmail.com", image: "player"))
 }

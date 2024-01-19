@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Player: Identifiable, Hashable {
-    let id: UUID
+struct Player: Identifiable, Codable, Hashable {
+    let id: Int64
     let name: String
     let email: String
-    let profilePhoto: String
+    let image: String
 }

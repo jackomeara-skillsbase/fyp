@@ -10,11 +10,16 @@ import SwiftUI
 @main
 struct SmartTrainerApp: App {
     @StateObject private var vm = HomeViewModel()
+    @StateObject private var globalVM: GlobalViewModel = GlobalViewModel.shared
     
     var body: some Scene {
         WindowGroup {
-            SmartTrainerTabView()
-                .environmentObject(vm)
+            if globalVM.authenticated {
+                SmartTrainerTabView()
+                    .environmentObject(vm)
+            } else {
+                LogInView()
+            }
         }
     }
 }

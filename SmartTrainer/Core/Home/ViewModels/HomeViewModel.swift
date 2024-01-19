@@ -46,11 +46,11 @@ class HomeViewModel: ObservableObject {
     
     func fakeNotifications() {
         self.notifications = [
-            Notification(id: UUID(), content: "Phil Jackson reviewed your Back Squat attempt.", Date: Date()),
-            Notification(id: UUID(), content: "Sir Alex Ferguson reviewed your Penalty Kick attempt.", Date: Date()),
-            Notification(id: UUID(), content: "Jose Mourinho reviewed your Sit Up attempt.", Date: Date()),
-            Notification(id: UUID(), content: "Jose Mourinho assigned Sit Up to you.", Date: Date()),
-            Notification(id: UUID(), content: "Phil Jackson reviewed your Back Squat attempt.", Date: Date()),
+            Notification(id: 123, date: Date(), is_player: true, subject_id: 1, message: "Someone viewed your something"),
+            Notification(id: 12, date: Date(), is_player: true, subject_id: 1, message: "Someone viewed your something"),
+            Notification(id: 1, date: Date(), is_player: true, subject_id: 1, message: "Someone viewed your something"),
+            Notification(id: 23, date: Date(), is_player: true, subject_id: 1, message: "Someone viewed your something"),
+            Notification(id: 13, date: Date(), is_player: true, subject_id: 1, message: "Someone viewed your something"),
         ]
     }
 }

@@ -18,24 +18,24 @@ struct PlayerRecordAttemptView: View {
             
             // content layer
             NavigationStack {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(technique.techniqueName)
-                            .foregroundStyle(Color.theme.accent)
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .padding()
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(technique.techniqueName)
+                                .foregroundStyle(Color.theme.accent)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding()
+                            
+                            Spacer()
+                        }
+                        
+                        videoPreview
+                        
+                        exerciseDescription
+                        
+                        recordButton
                         
                         Spacer()
-                    }
-                    
-                    videoPreview
-                    
-                    exerciseDescription
-                    
-                    recordButton
-                    
-                    Spacer()
                 }
             }
         }
@@ -44,23 +44,22 @@ struct PlayerRecordAttemptView: View {
 
 extension PlayerRecordAttemptView {
     private var videoPreview: some View {
-        Rectangle()
-            .fill(Color.blue)
-            .frame(width: 180, height: 320)
-            .padding(.horizontal)
+//        Rectangle()
+//            .fill(Color.blue)
+//            .frame(width: 180, height: 320)
+//            .padding(.horizontal)
+        VideoAutoplayView(videoFile: "back_squat")
+            .frame(maxHeight: 320)
     }
 }
 
 extension PlayerRecordAttemptView {
     private var exerciseDescription: some View {
         VStack {
-            Text(technique.description)
-                .foregroundStyle(Color.theme.accent)
-                .padding(.bottom)
-            Text("Record one repetition of this exercise. Film in portrait mode. Try to keep the phone reasonably still as you record.")
-                .foregroundStyle(Color.theme.accent)
+            Text("\(technique.description)\n\nRecord one repetition. Film in portrait mode. Try to keep the phone still.")
         }
         .padding()
+        .foregroundStyle(Color.theme.accent)
             
     }
 }

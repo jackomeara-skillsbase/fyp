@@ -11,7 +11,7 @@ struct CoachRowView: View {
     let coach: Coach
     var body: some View {
         HStack {
-            CirclePhotoView(url: coach.profilePhoto)
+            CirclePhotoView(url: coach.image)
             Text(coach.name)
                 .foregroundStyle(Color.theme.accent)
                 .fontWeight(.bold)
@@ -24,5 +24,5 @@ struct CoachRowView: View {
 }
 
 #Preview {
-    CoachRowView(coach: Coach(id: UUID(), name: "Roy Hodgson", profilePhoto: "coach"))
+    CoachRowView(coach: Coach(id: 123, name: "Roy Hodgson", email: "roy.hodgson@hotmail.com", image: "coach"))
 }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct PlayersGroup: Identifiable, Hashable {
-    let id: UUID
+struct PlayersGroup: Identifiable, Codable, Hashable {
+    let id: Int64
     let name: String
     let members: [Player]
 }

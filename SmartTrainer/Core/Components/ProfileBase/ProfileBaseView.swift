@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProfileBaseView: View {
-    var name: String = "Jack O'Meara"
-    var email: String = "jackomeara@gmail.com"
+    var name: String = GlobalViewModel.shared.name
+    var email: String = GlobalViewModel.shared.email
     var profilePhoto: String = "none"
     var body: some View {
         VStack {

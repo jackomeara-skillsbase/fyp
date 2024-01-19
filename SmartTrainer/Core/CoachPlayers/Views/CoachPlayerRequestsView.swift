@@ -52,7 +52,7 @@ extension CoachPlayerRequestsView {
         VStack {
             ForEach(requestedPlayers, id: \.self) { player in
                 HStack {
-                    CirclePhotoView(url: player.profilePhoto, size: 50)
+                    CirclePhotoView(url: player.image, size: 50)
                     Text(player.name)
                         .foregroundStyle(Color.theme.accent)
                     Spacer()

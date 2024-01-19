@@ -10,6 +10,7 @@ import Combine
 
 class AttemptDataService {
     @Published var allAttempts: [Attempt] = []
+    @Published var personalAttempts: [Attempt] = []
     
     var attemptSubscription: AnyCancellable?
     
@@ -31,6 +32,9 @@ class AttemptDataService {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: NetworkManager.handleCompletion, receiveValue: {[weak self] (response) in
                 self?.allAttempts = response.data
+                if GlobalViewModel.shared.role == "player" {
+                    self?.personalAttempts = response.data.filter { Int($0.player_id) == GlobalViewModel.shared.id }
+                }
                 self?.attemptSubscription?.cancel()
             })
     }

@@ -37,7 +37,7 @@ struct CoachPlayersView: View {
                     } else {
                         SearchBarView(promptText: "Search for a group..", searchText: $vm.searchText)
                         
-                        List(vm.groups) { group in
+                        List(vm.searchText == "" ? vm.groups : vm.groups.filter { $0.name.contains(vm.searchText) }) { group in
                             GroupCardView(group: group)
                                 .background(NavigationLink("", destination: Text(group.name))
                                     .opacity(0))
@@ -67,6 +67,7 @@ extension CoachPlayersView {
                 .onTapGesture {
                     withAnimation(.spring()) {
                         showGroups.toggle()
+                        vm.searchText = ""
                         showRequests = false
                     }
                 }

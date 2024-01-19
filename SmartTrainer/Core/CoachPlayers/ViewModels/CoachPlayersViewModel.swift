@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class CoachPlayersViewModel: ObservableObject {
     @Published var players: [Player] = []
@@ -13,10 +14,24 @@ class CoachPlayersViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var groups: [PlayersGroup] = []
     
+    private var playerDataService: PlayerDataService = PlayerDataService()
+    private var cancellables: Set<AnyCancellable> = []
+    
     init() {
-        fakePlayers()
+        setupBindings()
+        fetchPlayers()
         fakeRequestedPlayers()
         fakeGroups()
+    }
+    
+    private func setupBindings() {
+        playerDataService.$allPlayers
+            .assign(to: \.players, on: self)
+            .store(in: &cancellables)
+    }
+    
+    private func fetchPlayers() {
+        playerDataService.getPlayers()
     }
     
     func acceptRequest(player: Player) {
@@ -30,61 +45,61 @@ class CoachPlayersViewModel: ObservableObject {
     
     func fakePlayers() {
         self.players = [
-            Player(id: UUID(), name: "Lionel Messi", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Cristiano Ronaldo", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Shay Given", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Joel Matip", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Roger Federer", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Dirk Nowitzki", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Yaya Toure", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Dirk Kuyt", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Roy Keane", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Denis Irwin", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Jeff Hendrick", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Caoimhin Kelleher", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Nikola Jokic", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "John Wall", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Isiah Thomas", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Kyrie Irving", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Stephen Curry", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Anthony Davis", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Jason Williams", email: "", profilePhoto: "player"),
+            Player(id: 12345, name: "Lionel Messi", email: "", image: "player"),
+            Player(id: 12345, name: "Cristiano Ronaldo", email: "", image: "player"),
+            Player(id: 12345, name: "Shay Given", email: "", image: "player"),
+            Player(id: 12345, name: "Joel Matip", email: "", image: "player"),
+            Player(id: 12345, name: "Roger Federer", email: "", image: "player"),
+            Player(id: 12345, name: "Dirk Nowitzki", email: "", image: "player"),
+            Player(id: 12345, name: "Yaya Toure", email: "", image: "player"),
+            Player(id: 12345, name: "Dirk Kuyt", email: "", image: "player"),
+            Player(id: 12345, name: "Roy Keane", email: "", image: "player"),
+            Player(id: 12345, name: "Denis Irwin", email: "", image: "player"),
+            Player(id: 12345, name: "Jeff Hendrick", email: "", image: "player"),
+            Player(id: 12345, name: "Caoimhin Kelleher", email: "", image: "player"),
+            Player(id: 12345, name: "Nikola Jokic", email: "", image: "player"),
+            Player(id: 12345, name: "John Wall", email: "", image: "player"),
+            Player(id: 12345, name: "Isiah Thomas", email: "", image: "player"),
+            Player(id: 12345, name: "Kyrie Irving", email: "", image: "player"),
+            Player(id: 12345, name: "Stephen Curry", email: "", image: "player"),
+            Player(id: 12345, name: "Anthony Davis", email: "", image: "player"),
+            Player(id: 12345, name: "Jason Williams", email: "", image: "player"),
         ]
     }
     
     func fakeRequestedPlayers() {
         self.requestedPlayers = [
-            Player(id: UUID(), name: "David Beckham", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Didier Drogba", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Andy Roddick", email: "", profilePhoto: "player"),
-            Player(id: UUID(), name: "Mo Farah", email: "", profilePhoto: "player"),
+            Player(id: 12345, name: "David Beckham", email: "", image: "player"),
+            Player(id: 12345, name: "Didier Drogba", email: "", image: "player"),
+            Player(id: 12345, name: "Andy Roddick", email: "", image: "player"),
+            Player(id: 12345, name: "Mo Farah", email: "", image: "player"),
         ]
     }
     
     func fakeGroups() {
         self.groups = [
-            PlayersGroup(id: UUID(), name: "Football", members: [
-                Player(id: UUID(), name: "Lionel Messi", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Cristiano Ronaldo", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Shay Given", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Yaya Toure", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Dirk Kuyt", email: "", profilePhoto: "player"),
+            PlayersGroup(id: 1234, name: "Football", members: [
+                Player(id: 1234, name: "Lionel Messi", email: "", image: "player"),
+                Player(id: 1234, name: "Cristiano Ronaldo", email: "", image: "player"),
+                Player(id: 1234, name: "Shay Given", email: "", image: "player"),
+                Player(id: 1234, name: "Yaya Toure", email: "", image: "player"),
+                Player(id: 1234, name: "Dirk Kuyt", email: "", image: "player"),
             ]),
-            PlayersGroup(id: UUID(), name: "Irish", members: [
-                Player(id: UUID(), name: "Shay Given", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Roy Keane", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Denis Irwin", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Jeff Hendrick", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Caoimhin Kelleher", email: "", profilePhoto: "player"),
+            PlayersGroup(id: 1234, name: "Irish", members: [
+                Player(id: 1234, name: "Shay Given", email: "", image: "player"),
+                Player(id: 1234, name: "Roy Keane", email: "", image: "player"),
+                Player(id: 1234, name: "Denis Irwin", email: "", image: "player"),
+                Player(id: 1234, name: "Jeff Hendrick", email: "", image: "player"),
+                Player(id: 1234, name: "Caoimhin Kelleher", email: "", image: "player"),
             ]),
-            PlayersGroup(id: UUID(), name: "NBA Players", members: [
-                Player(id: UUID(), name: "Nikola Jokic", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "John Wall", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Isiah Thomas", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Kyrie Irving", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Stephen Curry", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Anthony Davis", email: "", profilePhoto: "player"),
-                Player(id: UUID(), name: "Jason Williams", email: "", profilePhoto: "player"),
+            PlayersGroup(id: 1234, name: "NBA Players", members: [
+                Player(id: 1234, name: "Nikola Jokic", email: "", image: "player"),
+                Player(id: 1234, name: "John Wall", email: "", image: "player"),
+                Player(id: 1234, name: "Isiah Thomas", email: "", image: "player"),
+                Player(id: 1234, name: "Kyrie Irving", email: "", image: "player"),
+                Player(id: 1234, name: "Stephen Curry", email: "", image: "player"),
+                Player(id: 1234, name: "Anthony Davis", email: "", image: "player"),
+                Player(id: 1234, name: "Jason Williams", email: "", image: "player"),
             ]),
         ]
     }

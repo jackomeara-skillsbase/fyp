@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Coach: Identifiable, Hashable {
-    let id: UUID
+struct Coach: Identifiable, Codable, Hashable {
+    let id: Int64
     let name: String
-    let profilePhoto: String
+    let email: String
+    let image: String
 }

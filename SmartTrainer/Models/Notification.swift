@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct Notification: Identifiable {
-    let id: UUID
-    let content: String
-    let Date: Date
+struct Notification: Identifiable, Codable, Hashable {
+    let id: Int64
+    let date: Date
+    let is_player: Bool
+    let subject_id: Int64
+    let message: String
 }

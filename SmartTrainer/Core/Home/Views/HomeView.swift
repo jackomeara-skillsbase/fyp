@@ -25,7 +25,7 @@ struct HomeView: View {
                     
                     if showNotifications {
                         List(vm.notifications) { notification in
-                            Text(notification.content)
+                            Text(notification.message)
                                 .foregroundStyle(Color.theme.accent)
                         }
                         .listStyle(PlainListStyle())
@@ -66,7 +66,8 @@ extension HomeView {
 
 extension HomeView {
     private var attemptsList: some View {
-            List(vm.attempts) { attempt in
+        
+            List(vm.searchText == "" ? vm.attempts : vm.attempts.filter { $0.technique_name.contains(vm.searchText) }) { attempt in
                 AttemptCardView(attempt: attempt)
                     .background(NavigationLink("", destination: PlayerAttemptView(attempt: attempt))
                         .opacity(0))

@@ -6,19 +6,36 @@
 //
 
 import Foundation
+import Combine
 
 class PlayerProfileViewModel: ObservableObject {
     @Published var coaches: [Coach] = []
     @Published var searchText: String = ""
+    @Published var attempts: [Attempt] = []
+    
+    private var attemptDataService: AttemptDataService = AttemptDataService()
+    private var cancellables: Set<AnyCancellable> = []
     
     init() {
         fakeCoaches()
+        setupBindings()
+        fetchAttempts()
+    }
+    
+    private func setupBindings() {
+        attemptDataService.$personalAttempts
+            .assign(to: \.attempts, on: self)
+            .store(in: &cancellables)
+    }
+    
+    private func fetchAttempts() {
+        attemptDataService.getAttempts()
     }
     
     func fakeCoaches() {
         self.coaches = [
-            Coach(id: UUID(), name: "Sean Dyche", profilePhoto: "coach"),
-            Coach(id: UUID(), name: "Deion Sanders", profilePhoto: "coach")
+            Coach(id: 123, name: "Sean Dyche", email: "email", image: "coach"),
+            Coach(id: 234, name: "Deion Sanders", email: "email", image: "coach")
         ]
     }
 }

@@ -30,7 +30,7 @@ struct PlayerProfileView: View {
                                 .foregroundStyle(Color.theme.secondaryText)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .padding(.bottom, 2)
-                            Text("46")
+                            Text("\(vm.attempts.count)")
                                 .foregroundStyle(Color.theme.accent)
                                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

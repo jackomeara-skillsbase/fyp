@@ -25,11 +25,11 @@ struct GroupCardView: View {
 }
 
 #Preview {
-    GroupCardView(group: PlayersGroup(id: UUID(), name: "Football", members: [
-        Player(id: UUID(), name: "Lionel Messi", email: "", profilePhoto: "player"),
-        Player(id: UUID(), name: "Cristiano Ronaldo", email: "", profilePhoto: "player"),
-        Player(id: UUID(), name: "Shay Given", email: "", profilePhoto: "player"),
-        Player(id: UUID(), name: "Yaya Toure", email: "", profilePhoto: "player"),
-        Player(id: UUID(), name: "Dirk Kuyt", email: "", profilePhoto: "player"),
+    GroupCardView(group: PlayersGroup(id: 1234, name: "Football", members: [
+        Player(id: 1234, name: "Lionel Messi", email: "", image: "player"),
+        Player(id: 1234, name: "Cristiano Ronaldo", email: "", image: "player"),
+        Player(id: 1234, name: "Shay Given", email: "", image: "player"),
+        Player(id: 1234, name: "Yaya Toure", email: "", image: "player"),
+        Player(id: 1234, name: "Dirk Kuyt", email: "", image: "player"),
     ]))
 }
