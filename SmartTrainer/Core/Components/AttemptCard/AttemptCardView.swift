@@ -9,6 +9,18 @@ import SwiftUI
 
 struct AttemptCardView: View {
     let attempt: Attempt
+    
+    func getAIScoreColor(score: String) -> Color {
+        var scores = [String: Color]()
+        scores["A"] = Color.green
+        scores["B"] = Color.green
+        scores["C"] = Color.yellow
+        scores["D"] = Color.yellow
+        scores["E"] = Color.red
+        scores["F"] = Color.red
+        
+        return scores[score]!
+    }
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -30,8 +42,8 @@ struct AttemptCardView: View {
                         .foregroundStyle(Color.theme.accent)
                         .frame(width: 25, height: 25)
                     Spacer()
-                    Text("A")
-                        .foregroundStyle(Color.green)
+                    Text(attempt.ai_review)
+                        .foregroundStyle(getAIScoreColor(score: attempt.ai_review))
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.title)
                 }
@@ -42,9 +54,9 @@ struct AttemptCardView: View {
                         .frame(width: 25, height: 25)
                         .foregroundStyle(Color.theme.accent)
                     Spacer()
-                    Image(systemName: "xmark")
+                    Image(systemName: attempt.coach_review == 0 ? "xmark" : "checkmark")
                         .resizable()
-                        .foregroundStyle(Color.red)
+                        .foregroundStyle(attempt.coach_review == 0 ? Color.red : Color.green)
                         .frame(width: 20, height: 20)
                         
                 }

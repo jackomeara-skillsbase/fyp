@@ -19,6 +19,7 @@ class CoachDataService {
     
     init() {
         getCoaches()
+//        addCoach(coach: "")
     }
     
     func getCoaches() {
@@ -33,5 +34,9 @@ class CoachDataService {
                 self?.coachSubscription?.cancel()
             })
     }
+    
+//    func addCoach(coach: String) {
+//        print("adding coach")
+//    }
 }
 

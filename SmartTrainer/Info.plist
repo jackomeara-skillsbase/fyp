@@ -11,8 +11,6 @@
 	<dict>
 		<key>UIColorName</key>
 		<string>Color.theme.background</string>
-		<key>UIImageName</key>
-		<string>AppIcon</string>
 		<key>UILaunchScreen</key>
 		<dict/>
 	</dict>

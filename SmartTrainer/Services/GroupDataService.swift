@@ -22,13 +22,14 @@ class GroupDataService {
     }
     
     func getGroups() {
-        guard let url = URL(string: "http://ec2-54-170-28-60.eu-west-1.compute.amazonaws.com:8080/fyp/items/relationship") else {return}
+        guard let url = URL(string: "http://ec2-54-170-28-60.eu-west-1.compute.amazonaws.com:8080/fyp/items/group") else {return}
         let decoder = JSONDecoder()
         
         groupSubscription = NetworkManager.download(url: url)
             .decode(type: GroupResponse.self, decoder: decoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: NetworkManager.handleCompletion, receiveValue: {[weak self] (response) in
+                print("Response: \(response.data)")
                 self?.allGroups = response.data
                 self?.groupSubscription?.cancel()
             })

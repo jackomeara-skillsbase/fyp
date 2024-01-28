@@ -9,8 +9,10 @@ import SwiftUI
 import AVKit
 
 struct PlayerAttemptView: View {
-    @StateObject private var vm: HomeViewModel = HomeViewModel()
+    @EnvironmentObject private var vm: HomeViewModel
+    @State var coachFeedback: String = ""
     let attempt: Attempt
+    let coachReviewData: CoachReview = CoachReview(id: 1, date: Date(), overall: 4, depth: 3, range: 4, control: 5, comments: "Overall good attempt.")
     
     var body: some View {
         ZStack {
@@ -20,26 +22,40 @@ struct PlayerAttemptView: View {
             
             // content layer
             NavigationStack {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(attempt.technique_name)
-                            .frame(alignment: .leading)
-                            .foregroundStyle(Color.theme.accent)
-                            .font(.title)
-                            .fontWeight(.bold)
+                VStack(alignment: .leading)  {
+                
+                        HStack {
+                            Text(attempt.technique_name)
+                                .frame(alignment: .leading)
+                                .foregroundStyle(Color.theme.accent)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding()
+                            Spacer()
+                        }
+                        
+                        player
+                        
+                        videoPreview
+
+                        ScrollView {
+                            if vm.role == "coach" {
+                                coachReview
+                            } else {
+                                playerCoachReview
+                            }
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Text("AI Review")
+                                        .foregroundStyle(Color.theme.accent)
+                                        .font(.headline)
+                                    Spacer()
+                                }
+                            }
                             .padding()
-                        Spacer()
+                            Spacer()
                     }
-                    
-                    player
-                    
-                    videoPreview
-                    
-//                    if vm.role == "coach" {
-                        coachReview
-//                    }
-                    
-                    Spacer()
                 }
             }
         }
@@ -76,7 +92,43 @@ extension PlayerAttemptView {
 
 extension PlayerAttemptView {
     private var coachReview: some View {
-        ReviewAttemptView()
+        VStack {
+            Text("Coach's Review")
+                .padding()
+                .foregroundStyle(Color.theme.accent)
+                .font(.headline)
+            
+            ReviewAttemptView()
+            
+            TextField("Other Feedback", text: $coachFeedback)
+                .padding()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            Button("Save") {
+            }
+        }
+    }
+}
+
+extension PlayerAttemptView {
+    private var playerCoachReview: some View {
+        VStack {
+            Text("Coach's Review")
+                .foregroundStyle(Color.theme.accent)
+                .font(.headline)
+                .padding()
+            StarReviewView(label: "Overall", score: coachReviewData.overall)
+            StarReviewView(label: "Range", score: coachReviewData.range)
+            StarReviewView(label: "Depth", score: coachReviewData.depth)
+            StarReviewView(label: "Control", score: coachReviewData.control)
+            HStack {
+                Text(coachReviewData.comments)
+                    .padding()
+                .foregroundStyle(Color.theme.accent)
+                Spacer()
+            }
+
+        }
     }
 }
 

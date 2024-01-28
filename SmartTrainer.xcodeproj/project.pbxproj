@@ -23,6 +23,15 @@
 		EC2CAFA02B5AFC300079DE11 /* NotificationDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CAF9F2B5AFC300079DE11 /* NotificationDataService.swift */; };
 		EC2CAFA52B5AFDAB0079DE11 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CAFA42B5AFDAB0079DE11 /* LogInView.swift */; };
 		EC2CAFA72B5AFFF70079DE11 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CAFA62B5AFFF70079DE11 /* SignUpView.swift */; };
+		EC43B8F22B5D9790007A55F0 /* CoachGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B8F12B5D9790007A55F0 /* CoachGroupView.swift */; };
+		EC43B8F42B5D9EED007A55F0 /* GroupPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B8F32B5D9EED007A55F0 /* GroupPlayerView.swift */; };
+		EC43B8F62B5DA1A0007A55F0 /* EditGroupMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B8F52B5DA1A0007A55F0 /* EditGroupMembersView.swift */; };
+		EC43B8F82B5DA4A0007A55F0 /* CoachGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B8F72B5DA4A0007A55F0 /* CoachGroupViewModel.swift */; };
+		EC43B8FE2B5DD9B9007A55F0 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B8FD2B5DD9B9007A55F0 /* VideoPlayerView.swift */; };
+		EC43B9002B5DDEF6007A55F0 /* CoachReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B8FF2B5DDEF6007A55F0 /* CoachReview.swift */; };
+		EC43B9022B5DDF40007A55F0 /* CoachReviewDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B9012B5DDF40007A55F0 /* CoachReviewDataService.swift */; };
+		EC43B9052B5DE0A1007A55F0 /* StarReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B9042B5DE0A1007A55F0 /* StarReviewView.swift */; };
+		EC43B9072B5E6C4E007A55F0 /* NewGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B9062B5E6C4E007A55F0 /* NewGroupView.swift */; };
 		EC4DCAAD2B4DD3F700B610DC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4DCAAC2B4DD3F700B610DC /* HomeViewModel.swift */; };
 		EC4DCAB12B4DD59100B610DC /* AttemptCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4DCAB02B4DD59100B610DC /* AttemptCardView.swift */; };
 		EC6AE2CA2B4DE7F100F8C0D2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6AE2C92B4DE7F100F8C0D2 /* Notification.swift */; };
@@ -84,6 +93,15 @@
 		EC2CAF9F2B5AFC300079DE11 /* NotificationDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataService.swift; sourceTree = "<group>"; };
 		EC2CAFA42B5AFDAB0079DE11 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		EC2CAFA62B5AFFF70079DE11 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		EC43B8F12B5D9790007A55F0 /* CoachGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachGroupView.swift; sourceTree = "<group>"; };
+		EC43B8F32B5D9EED007A55F0 /* GroupPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPlayerView.swift; sourceTree = "<group>"; };
+		EC43B8F52B5DA1A0007A55F0 /* EditGroupMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupMembersView.swift; sourceTree = "<group>"; };
+		EC43B8F72B5DA4A0007A55F0 /* CoachGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachGroupViewModel.swift; sourceTree = "<group>"; };
+		EC43B8FD2B5DD9B9007A55F0 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		EC43B8FF2B5DDEF6007A55F0 /* CoachReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachReview.swift; sourceTree = "<group>"; };
+		EC43B9012B5DDF40007A55F0 /* CoachReviewDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachReviewDataService.swift; sourceTree = "<group>"; };
+		EC43B9042B5DE0A1007A55F0 /* StarReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarReviewView.swift; sourceTree = "<group>"; };
+		EC43B9062B5E6C4E007A55F0 /* NewGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupView.swift; sourceTree = "<group>"; };
 		EC4DCAAC2B4DD3F700B610DC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EC4DCAB02B4DD59100B610DC /* AttemptCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptCardView.swift; sourceTree = "<group>"; };
 		EC6AE2C92B4DE7F100F8C0D2 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -184,6 +202,8 @@
 		EC0E002F2B4DB06200F06B98 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				EC43B8FB2B5DD967007A55F0 /* VideoPlayer */,
+				EC43B8EE2B5D976F007A55F0 /* CoachGroup */,
 				EC2CAFA12B5AFD890079DE11 /* Authenticate */,
 				EC8134202B59C99D00CB8723 /* ReviewAttempt */,
 				ECAA8EB32B54A61F0001FE7D /* Recording */,
@@ -220,6 +240,7 @@
 				EC903F082B5024FC00B3AB1F /* Player.swift */,
 				EC903F122B5039CB00B3AB1F /* Group.swift */,
 				EC8134192B59BD0000CB8723 /* Relationship.swift */,
+				EC43B8FF2B5DDEF6007A55F0 /* CoachReview.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,6 +257,7 @@
 		EC0E003D2B4DB8D900F06B98 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EC43B9032B5DE091007A55F0 /* StarReview */,
 				EC81341D2B59C54500CB8723 /* AttemptRating */,
 				ECCDEED52B599B8600F19A1F /* VideoAutoplay */,
 				EC903EF72B501A2300B3AB1F /* ProfileBase */,
@@ -295,6 +317,57 @@
 			children = (
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC43B8EE2B5D976F007A55F0 /* CoachGroup */ = {
+			isa = PBXGroup;
+			children = (
+				EC43B8F02B5D977C007A55F0 /* ViewModels */,
+				EC43B8EF2B5D9777007A55F0 /* Views */,
+			);
+			path = CoachGroup;
+			sourceTree = "<group>";
+		};
+		EC43B8EF2B5D9777007A55F0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC43B8F12B5D9790007A55F0 /* CoachGroupView.swift */,
+				EC43B8F32B5D9EED007A55F0 /* GroupPlayerView.swift */,
+				EC43B8F52B5DA1A0007A55F0 /* EditGroupMembersView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC43B8F02B5D977C007A55F0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EC43B8F72B5DA4A0007A55F0 /* CoachGroupViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EC43B8FB2B5DD967007A55F0 /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				EC43B8FC2B5DD9AD007A55F0 /* Views */,
+			);
+			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		EC43B8FC2B5DD9AD007A55F0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC43B8FD2B5DD9B9007A55F0 /* VideoPlayerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC43B9032B5DE091007A55F0 /* StarReview */ = {
+			isa = PBXGroup;
+			children = (
+				EC43B9042B5DE0A1007A55F0 /* StarReviewView.swift */,
+			);
+			path = StarReview;
 			sourceTree = "<group>";
 		};
 		EC4DCAAB2B4DD3E700B610DC /* ViewModels */ = {
@@ -445,6 +518,7 @@
 				EC903F0A2B5029E800B3AB1F /* CoachPlayerRequestsView.swift */,
 				EC903F0E2B50309800B3AB1F /* PlayerCardView.swift */,
 				EC903F102B5039B200B3AB1F /* GroupCardView.swift */,
+				EC43B9062B5E6C4E007A55F0 /* NewGroupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -500,6 +574,7 @@
 				EC81341B2B59BD7D00CB8723 /* RelationshipDataService.swift */,
 				EC2CAF9D2B5AFA5E0079DE11 /* GroupDataService.swift */,
 				EC2CAF9F2B5AFC300079DE11 /* NotificationDataService.swift */,
+				EC43B9012B5DDF40007A55F0 /* CoachReviewDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -690,35 +765,44 @@
 				EC2CAF9E2B5AFA5E0079DE11 /* GroupDataService.swift in Sources */,
 				EC903F0B2B5029E800B3AB1F /* CoachPlayerRequestsView.swift in Sources */,
 				ECE43EA52B4E09E200BDE0C7 /* TechniqueCardView.swift in Sources */,
+				EC43B8F62B5DA1A0007A55F0 /* EditGroupMembersView.swift in Sources */,
 				EC903EF92B501A3900B3AB1F /* ProfileBaseView.swift in Sources */,
 				EC903F0F2B50309800B3AB1F /* PlayerCardView.swift in Sources */,
+				EC43B9072B5E6C4E007A55F0 /* NewGroupView.swift in Sources */,
 				EC0E003C2B4DB8AE00F06B98 /* HomeView.swift in Sources */,
 				ECE43EB72B4ED13F00BDE0C7 /* CoachRowView.swift in Sources */,
 				EC6AE2D72B4DF5F200F8C0D2 /* PlayerProfileView.swift in Sources */,
 				EC903F092B5024FC00B3AB1F /* Player.swift in Sources */,
 				EC8134182B59BC9000CB8723 /* CoachDataService.swift in Sources */,
 				ECE43EAC2B4E114000BDE0C7 /* PlayerRecordViewModel.swift in Sources */,
+				EC43B8FE2B5DD9B9007A55F0 /* VideoPlayerView.swift in Sources */,
 				ECE43EB52B4ED02E00BDE0C7 /* CirclePhotoView.swift in Sources */,
 				EC2CAF9C2B5AF3A60079DE11 /* GlobalViewModel.swift in Sources */,
+				EC43B8F82B5DA4A0007A55F0 /* CoachGroupViewModel.swift in Sources */,
 				ECAA8EB22B54993C0001FE7D /* DrawFeedbackViewModel.swift in Sources */,
 				EC903F112B5039B200B3AB1F /* GroupCardView.swift in Sources */,
 				EC4DCAB12B4DD59100B610DC /* AttemptCardView.swift in Sources */,
+				EC43B9052B5DE0A1007A55F0 /* StarReviewView.swift in Sources */,
 				EC0E00422B4DC48C00F06B98 /* SmartTrainerTabView.swift in Sources */,
 				EC903F032B501E1D00B3AB1F /* CoachPlayersView.swift in Sources */,
 				EC903F182B503F4400B3AB1F /* PlayerView.swift in Sources */,
 				ECE43EB02B4ECE8C00BDE0C7 /* PlayerProfileViewModel.swift in Sources */,
 				EC0E00402B4DB8FA00F06B98 /* CircleButtonView.swift in Sources */,
+				EC43B8F42B5D9EED007A55F0 /* GroupPlayerView.swift in Sources */,
 				ECE43EAA2B4E0E9300BDE0C7 /* PlayerRecordView.swift in Sources */,
 				EC0E00222B4DB00600F06B98 /* SmartTrainerApp.swift in Sources */,
 				EC2CAFA72B5AFFF70079DE11 /* SignUpView.swift in Sources */,
 				EC81341F2B59C55600CB8723 /* AttemptRatingView.swift in Sources */,
 				EC2CAFA02B5AFC300079DE11 /* NotificationDataService.swift in Sources */,
 				EC903F1A2B5041A500B3AB1F /* PlayerViewModel.swift in Sources */,
+				EC43B9022B5DDF40007A55F0 /* CoachReviewDataService.swift in Sources */,
 				EC0E00392B4DB73200F06B98 /* Attempt.swift in Sources */,
 				EC2CAFA52B5AFDAB0079DE11 /* LogInView.swift in Sources */,
 				EC6AE2CA2B4DE7F100F8C0D2 /* Notification.swift in Sources */,
 				EC81341C2B59BD7D00CB8723 /* RelationshipDataService.swift in Sources */,
 				ECAA8EAE2B5495240001FE7D /* DrawFeedbackView.swift in Sources */,
+				EC43B8F22B5D9790007A55F0 /* CoachGroupView.swift in Sources */,
+				EC43B9002B5DDEF6007A55F0 /* CoachReview.swift in Sources */,
 				EC6AE2CF2B4DECF200F8C0D2 /* PlayerAttemptView.swift in Sources */,
 				EC903EF62B5015E300B3AB1F /* Date.swift in Sources */,
 				EC0E00332B4DB11E00F06B98 /* Color.swift in Sources */,

@@ -40,7 +40,7 @@ struct PlayerView: View {
                     }
                     .padding()
                     
-                    ForEach(vm.attempts, id: \.self) { attempt in
+                    ForEach(vm.attempts.filter {Int($0.player_id)! == player.id}, id: \.self) { attempt in
                         AttemptCardView(attempt: attempt)
                             .background(NavigationLink("", destination: PlayerAttemptView(attempt: attempt))
                                 .opacity(0))

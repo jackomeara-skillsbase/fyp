@@ -10,5 +10,10 @@ import Foundation
 struct PlayersGroup: Identifiable, Codable, Hashable {
     let id: Int64
     let name: String
-    let members: [Player]
+    let coach_id: Int
+    let members: [Member]
+}
+
+struct Member: Identifiable, Codable, Hashable {
+    let id: Int
 }

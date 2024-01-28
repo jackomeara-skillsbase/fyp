@@ -14,11 +14,12 @@ struct SmartTrainerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if globalVM.authenticated {
+            if vm.authenticated {
                 SmartTrainerTabView()
                     .environmentObject(vm)
             } else {
                 LogInView()
+                    .environmentObject(vm)
             }
         }
     }

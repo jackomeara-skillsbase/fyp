@@ -6,21 +6,36 @@
 //
 
 import Foundation
+import Combine
 
 class PlayerViewModel: ObservableObject {
     @Published var attempts: [Attempt] = []
     
+    private var attemptDataService: AttemptDataService = AttemptDataService()
+    private var cancellables: Set<AnyCancellable> = []
+    
     init() {
-        fakeAttempts()
+        setupBindings()
+        fetchAttempts()
     }
     
-    func fakeAttempts() {
-        self.attempts = [
-            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Kobe Bryant", player_id: "12345", technique_name: "Back Squat", technique_id: "12414"),
-            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Michael Jordan", player_id: "12345", technique_name: "Back Squat", technique_id: "12414"),
-            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Kobe Bryant", player_id: "12345", technique_name: "Push Up", technique_id: "12414"),
-            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Cristiano Ronaldo", player_id: "12345", technique_name: "Sit Up", technique_id: "12414"),
-            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Barry Bonds", player_id: "12345", technique_name: "Back Squat", technique_id: "12414"),
-        ]
+    private func setupBindings() {
+        attemptDataService.$allAttempts
+            .assign(to: \.attempts, on: self)
+            .store(in: &cancellables)
     }
+    
+    private func fetchAttempts() {
+        attemptDataService.getAttempts()
+    }
+    
+//    func fakeAttempts() {
+//        self.attempts = [
+//            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Kobe Bryant", player_id: "12345", technique_name: "Back Squat", technique_id: "12414"),
+//            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Michael Jordan", player_id: "12345", technique_name: "Back Squat", technique_id: "12414"),
+//            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Kobe Bryant", player_id: "12345", technique_name: "Push Up", technique_id: "12414"),
+//            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Cristiano Ronaldo", player_id: "12345", technique_name: "Sit Up", technique_id: "12414"),
+//            Attempt(id: 123, date: Date(), video_url: "back_squat", player_name: "Barry Bonds", player_id: "12345", technique_name: "Back Squat", technique_id: "12414"),
+//        ]
+//    }
 }

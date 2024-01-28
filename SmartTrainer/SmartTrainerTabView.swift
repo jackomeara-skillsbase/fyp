@@ -44,6 +44,10 @@ struct SmartTrainerTabView: View {
                     .tabItem {
                         Image(systemName: "pencil")
                     }
+                VideoPlayerView()
+                    .tabItem {
+                        Image(systemName: "video")
+                    }
             }
         }
     }

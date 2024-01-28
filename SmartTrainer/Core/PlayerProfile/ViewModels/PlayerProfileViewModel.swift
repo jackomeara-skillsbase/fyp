@@ -14,6 +14,7 @@ class PlayerProfileViewModel: ObservableObject {
     @Published var attempts: [Attempt] = []
     
     private var attemptDataService: AttemptDataService = AttemptDataService()
+    private var coachDataService: CoachDataService = CoachDataService()
     private var cancellables: Set<AnyCancellable> = []
     
     init() {
@@ -31,6 +32,10 @@ class PlayerProfileViewModel: ObservableObject {
     private func fetchAttempts() {
         attemptDataService.getAttempts()
     }
+    
+//    private func addCoach(coach: String) {
+//        coachDataService.addCoach(coach: coach)
+//    }
     
     func fakeCoaches() {
         self.coaches = [

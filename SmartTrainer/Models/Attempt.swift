@@ -15,4 +15,6 @@ struct Attempt: Identifiable, Codable, Hashable {
     let player_id: String
     let technique_name: String
     let technique_id: String
+    let coach_review: Int
+    let ai_review: String
 }

@@ -14,6 +14,7 @@ class CoachPlayersViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var groups: [PlayersGroup] = []
     
+    private var groupDataService: GroupDataService = GroupDataService()
     private var playerDataService: PlayerDataService = PlayerDataService()
     private var cancellables: Set<AnyCancellable> = []
     
@@ -21,17 +22,25 @@ class CoachPlayersViewModel: ObservableObject {
         setupBindings()
         fetchPlayers()
         fakeRequestedPlayers()
-        fakeGroups()
+        fetchGroups()
+        
     }
     
     private func setupBindings() {
         playerDataService.$allPlayers
             .assign(to: \.players, on: self)
             .store(in: &cancellables)
+        groupDataService.$allGroups
+            .assign(to: \.groups, on: self)
+            .store(in: &cancellables)
     }
     
     private func fetchPlayers() {
         playerDataService.getPlayers()
+    }
+    
+    private func fetchGroups() {
+        groupDataService.getGroups()
     }
     
     func acceptRequest(player: Player) {
@@ -41,6 +50,13 @@ class CoachPlayersViewModel: ObservableObject {
     
     func rejectRequest(player: Player) {
         self.requestedPlayers.removeAll { $0 == player }
+    }
+    
+    func inflateMembers(group: PlayersGroup) -> [Player] {
+        print("group: \(group)")
+        let members = self.players.filter {group.members.contains(Member(id: Int($0.id)))}
+        print("members: \(members)")
+        return members
     }
     
     func fakePlayers() {
@@ -76,31 +92,31 @@ class CoachPlayersViewModel: ObservableObject {
         ]
     }
     
-    func fakeGroups() {
-        self.groups = [
-            PlayersGroup(id: 1234, name: "Football", members: [
-                Player(id: 1234, name: "Lionel Messi", email: "", image: "player"),
-                Player(id: 1234, name: "Cristiano Ronaldo", email: "", image: "player"),
-                Player(id: 1234, name: "Shay Given", email: "", image: "player"),
-                Player(id: 1234, name: "Yaya Toure", email: "", image: "player"),
-                Player(id: 1234, name: "Dirk Kuyt", email: "", image: "player"),
-            ]),
-            PlayersGroup(id: 1234, name: "Irish", members: [
-                Player(id: 1234, name: "Shay Given", email: "", image: "player"),
-                Player(id: 1234, name: "Roy Keane", email: "", image: "player"),
-                Player(id: 1234, name: "Denis Irwin", email: "", image: "player"),
-                Player(id: 1234, name: "Jeff Hendrick", email: "", image: "player"),
-                Player(id: 1234, name: "Caoimhin Kelleher", email: "", image: "player"),
-            ]),
-            PlayersGroup(id: 1234, name: "NBA Players", members: [
-                Player(id: 1234, name: "Nikola Jokic", email: "", image: "player"),
-                Player(id: 1234, name: "John Wall", email: "", image: "player"),
-                Player(id: 1234, name: "Isiah Thomas", email: "", image: "player"),
-                Player(id: 1234, name: "Kyrie Irving", email: "", image: "player"),
-                Player(id: 1234, name: "Stephen Curry", email: "", image: "player"),
-                Player(id: 1234, name: "Anthony Davis", email: "", image: "player"),
-                Player(id: 1234, name: "Jason Williams", email: "", image: "player"),
-            ]),
-        ]
-    }
+//    func fakeGroups() {
+//        self.groups = [
+//            PlayersGroup(id: 1234, name: "Football", members: [
+//                Player(id: 1234, name: "Lionel Messi", email: "", image: "player"),
+//                Player(id: 1234, name: "Cristiano Ronaldo", email: "", image: "player"),
+//                Player(id: 1234, name: "Shay Given", email: "", image: "player"),
+//                Player(id: 1234, name: "Yaya Toure", email: "", image: "player"),
+//                Player(id: 1234, name: "Dirk Kuyt", email: "", image: "player"),
+//            ]),
+//            PlayersGroup(id: 1234, name: "Irish", members: [
+//                Player(id: 1234, name: "Shay Given", email: "", image: "player"),
+//                Player(id: 1234, name: "Roy Keane", email: "", image: "player"),
+//                Player(id: 1234, name: "Denis Irwin", email: "", image: "player"),
+//                Player(id: 1234, name: "Jeff Hendrick", email: "", image: "player"),
+//                Player(id: 1234, name: "Caoimhin Kelleher", email: "", image: "player"),
+//            ]),
+//            PlayersGroup(id: 1234, name: "NBA Players", members: [
+//                Player(id: 1234, name: "Nikola Jokic", email: "", image: "player"),
+//                Player(id: 1234, name: "John Wall", email: "", image: "player"),
+//                Player(id: 1234, name: "Isiah Thomas", email: "", image: "player"),
+//                Player(id: 1234, name: "Kyrie Irving", email: "", image: "player"),
+//                Player(id: 1234, name: "Stephen Curry", email: "", image: "player"),
+//                Player(id: 1234, name: "Anthony Davis", email: "", image: "player"),
+//                Player(id: 1234, name: "Jason Williams", email: "", image: "player"),
+//            ]),
+//        ]
+//    }
 }

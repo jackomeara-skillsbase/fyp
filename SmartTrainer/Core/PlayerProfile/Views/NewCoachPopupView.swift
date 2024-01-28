@@ -10,6 +10,7 @@ import SwiftUI
 struct NewCoachPopupView: View {
     @Binding var searchText: String
     @Binding var showPopup: Bool
+    @EnvironmentObject private var vm: PlayerProfileViewModel
     
     var body: some View {
         VStack {
@@ -27,7 +28,7 @@ struct NewCoachPopupView: View {
             .padding(.horizontal)
             .padding(.top)
             
-            SearchBarView(promptText: "Enter a coach's email...", searchText: .constant(""))
+            SearchBarView(promptText: "Enter a coach's email...", searchText: .constant(""), type: "go")
             
             
         }

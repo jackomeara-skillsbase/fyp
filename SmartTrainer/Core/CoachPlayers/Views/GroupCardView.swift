@@ -24,12 +24,12 @@ struct GroupCardView: View {
     }
 }
 
-#Preview {
-    GroupCardView(group: PlayersGroup(id: 1234, name: "Football", members: [
-        Player(id: 1234, name: "Lionel Messi", email: "", image: "player"),
-        Player(id: 1234, name: "Cristiano Ronaldo", email: "", image: "player"),
-        Player(id: 1234, name: "Shay Given", email: "", image: "player"),
-        Player(id: 1234, name: "Yaya Toure", email: "", image: "player"),
-        Player(id: 1234, name: "Dirk Kuyt", email: "", image: "player"),
-    ]))
-}
+//#Preview {
+//    GroupCardView(group: PlayersGroup(id: 1234, name: "Football", members: [
+//        Player(id: 1234, name: "Lionel Messi", email: "", image: "player"),
+//        Player(id: 1234, name: "Cristiano Ronaldo", email: "", image: "player"),
+//        Player(id: 1234, name: "Shay Given", email: "", image: "player"),
+//        Player(id: 1234, name: "Yaya Toure", email: "", image: "player"),
+//        Player(id: 1234, name: "Dirk Kuyt", email: "", image: "player"),
+//    ]))
+//}

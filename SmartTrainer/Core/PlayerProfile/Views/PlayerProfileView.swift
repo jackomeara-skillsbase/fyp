@@ -21,7 +21,7 @@ struct PlayerProfileView: View {
             // content layer
             ScrollView {
                 VStack {
-                    ProfileBaseView()
+                    ProfileBaseView(name: hvm.name, email: hvm.email)
                     
                     HStack {
                         Spacer()
@@ -56,7 +56,7 @@ struct PlayerProfileView: View {
                     
                     Button(action: {
                         print("logging out..")
-                        hvm.role = "coach"
+                        hvm.authenticated = false
                     }) {
                         Text("Log Out")
                             .foregroundStyle(Color.white)
@@ -75,6 +75,7 @@ struct PlayerProfileView: View {
                 
                 // show popup
                 NewCoachPopupView(searchText: $vm.searchText, showPopup: $showNewCoach)
+                    .environmentObject(vm)
             }
         }
     }

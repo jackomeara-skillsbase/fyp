@@ -11,12 +11,14 @@ struct SearchBarView: View {
     let promptText: String
     
     @Binding var searchText: String
+    var type: String = "default"
     
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(Color.theme.secondaryText)
             TextField(promptText, text: $searchText)
+                .submitLabel(.go)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
                         .padding()
@@ -28,6 +30,7 @@ struct SearchBarView: View {
                         },
                     alignment: .trailing
                 )
+                
         }
         .font(.headline)
         .padding()

@@ -11,6 +11,7 @@ struct LogInView: View {
     @State private var username = ""
     @State private var password = ""
     @StateObject private var globalVM = GlobalViewModel.shared
+    @EnvironmentObject private var vm: HomeViewModel
 
     var body: some View {
         VStack {
@@ -35,7 +36,17 @@ struct LogInView: View {
                 // Handle login logic here
                 // You can perform authentication, navigate to another view, etc.
                 print("Login button tapped")
-                globalVM.authenticated = true
+                if username == "player" && password == "Password" {
+                    vm.role = "player"
+                    vm.email = "mj@gmail.com"
+                    vm.name = "Michael Jordan"
+                    vm.authenticated = true
+                } else if username == "coach" && password == "Password" {
+                    vm.role = "coach"
+                    vm.email = "jose_mourinho@gmail.com"
+                    vm.name = "Jose Mourinho"
+                    vm.authenticated = true
+                }
             }) {
                 Text("Login")
                     .foregroundColor(Color.theme.background)

@@ -29,6 +29,19 @@ class NetworkManager {
             .eraseToAnyPublisher()
     }
     
+    static func post(url: URL, data: Data) -> AnyPublisher<Data, Error> {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "content-type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = data
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap({ try handleResponse(output: $0, url: url)})
+            .retry(3)
+            .eraseToAnyPublisher()
+    }
+    
     static func handleResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
         guard let response = output.response as? HTTPURLResponse,
               response.statusCode >= 200 && response.statusCode < 300 else {

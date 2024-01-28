@@ -21,11 +21,13 @@ struct ReviewAttemptView: View {
             
             VStack {
                 AttemptRatingView(rating: $overallRating, label: "Overall")
-                AttemptRatingView(rating: $depthRating, label: "Depth")
+                    .padding(.bottom)
+                AttemptRatingView(rating: $depthRating, label: "Range")
+                    .padding(.bottom)
                 AttemptRatingView(rating: $balanceRating, label: "Balance")
+                    .padding(.bottom)
                 AttemptRatingView(rating: $controlRating, label: "Control")
-
-                TextField("Other Feedback", text: $freeText)
+                    .padding(.bottom)
             }
         }
     }

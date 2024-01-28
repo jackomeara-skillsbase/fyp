@@ -10,7 +10,7 @@ import Foundation
 class GlobalViewModel: ObservableObject {
     static let shared = GlobalViewModel()
     
-    var role: String = "player"
+    @Published var role: String = "player"
     var email: String = "the_special_one@gmail.com"
     var name: String = "Jose Mourinho"
     var id: Int = 1

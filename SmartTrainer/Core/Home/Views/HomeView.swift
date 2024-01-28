@@ -12,6 +12,7 @@ struct HomeView: View {
     
     @State private var showNotifications: Bool = false
     
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -67,9 +68,10 @@ extension HomeView {
 extension HomeView {
     private var attemptsList: some View {
         
-            List(vm.searchText == "" ? vm.attempts : vm.attempts.filter { $0.technique_name.contains(vm.searchText) }) { attempt in
+        List(vm.getRelevantAttempts(searchText: vm.searchText, playerID: vm.role == "player" ? vm.id : 0)) { attempt in
                 AttemptCardView(attempt: attempt)
-                    .background(NavigationLink("", destination: PlayerAttemptView(attempt: attempt))
+                    .background(NavigationLink("", destination: PlayerAttemptView(attempt: attempt)
+                        .environmentObject(vm))
                         .opacity(0))
             }
             .listStyle(PlainListStyle())
