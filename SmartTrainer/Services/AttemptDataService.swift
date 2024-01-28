@@ -12,6 +12,10 @@ class AttemptDataService {
     @Published var allAttempts: [Attempt] = []
     @Published var personalAttempts: [Attempt] = []
     
+    private var role: String = "coach"
+    private var userID: Int = 0
+    
+    
     var attemptSubscription: AnyCancellable?
     
     private struct AttemptResponse: Decodable {
@@ -31,9 +35,10 @@ class AttemptDataService {
             .decode(type: AttemptResponse.self, decoder: decoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: NetworkManager.handleCompletion, receiveValue: {[weak self] (response) in
+                print(response.data)
                 self?.allAttempts = response.data
-                if GlobalViewModel.shared.role == "player" {
-                    self?.personalAttempts = response.data.filter { Int($0.player_id) == GlobalViewModel.shared.id }
+                if self?.role == "player" {
+                    self?.personalAttempts = response.data.filter { Int($0.player_id) == self?.userID }
                 }
                 self?.attemptSubscription?.cancel()
             })

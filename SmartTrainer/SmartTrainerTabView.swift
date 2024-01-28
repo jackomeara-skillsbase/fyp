@@ -8,46 +8,54 @@
 import SwiftUI
 
 struct SmartTrainerTabView: View {
-    @EnvironmentObject private var vm: HomeViewModel
+    @EnvironmentObject private var store: Store
     var body: some View {
-        if vm.role == "player" {
+        if store.role == "player" {
             TabView {
                 HomeView()
                     .tabItem {
                         Image(systemName: "house")
                     }
+                    .environmentObject(store)
                 PlayerRecordView()
                     .tabItem {
                         Image(systemName: "plus")
                     }
+                    .environmentObject(store)
                 PlayerProfileView()
                     .tabItem {
                         Image(systemName: "person")
                     }
+                    .environmentObject(store)
             }
         }
-        else if vm.role == "coach"{
+        else if store.role == "coach"{
             TabView {
                 HomeView()
                     .tabItem {
                         Image(systemName: "house")
                     }
+                    .environmentObject(store)
                 CoachPlayersView()
                     .tabItem {
                         Image(systemName: "person.3")
                     }
+                    .environmentObject(store)
                 CoachProfileView()
                     .tabItem {
                         Image(systemName: "person")
                     }
+                    .environmentObject(store)
                 DrawFeedbackView()
                     .tabItem {
                         Image(systemName: "pencil")
                     }
+                    .environmentObject(store)
                 VideoPlayerView()
                     .tabItem {
                         Image(systemName: "video")
                     }
+                    .environmentObject(store)
             }
         }
     }
@@ -55,5 +63,5 @@ struct SmartTrainerTabView: View {
 
 #Preview {
     SmartTrainerTabView()
-        .environmentObject(HomeViewModel())
+        .environmentObject(Store())
 }

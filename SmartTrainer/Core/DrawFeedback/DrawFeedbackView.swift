@@ -16,8 +16,7 @@ struct Line {
 struct DrawFeedbackView: View {
     @State private var currentLine = Line()
     @State private var lines: [Line] = []
-    @StateObject private var vm: DrawFeedbackViewModel = DrawFeedbackViewModel()
-    
+    @State private var selectedColor: Color = Color.theme.accent
     @State private var lastLineLength: Int = 0
     @State private var lineLengths: [Int] = []
     @State private var nextSubLineNewLine: Bool = true
@@ -53,13 +52,13 @@ struct DrawFeedbackView: View {
                         self.lines.append(currentLine)
                     })
                         .onEnded({ value in
-                            self.currentLine = Line(points: [], color: vm.selectedColor)
+                            self.currentLine = Line(points: [], color: selectedColor)
                             self.nextSubLineNewLine = true
                             self.lineLengths.append(self.lastLineLength)
                         })
                 )
-                ColorPickerView(selectedColor: $vm.selectedColor, goBack: removeLastStep)
-                    .onChange(of: vm.selectedColor) { oldColor, newColor in
+                ColorPickerView(selectedColor: $selectedColor, goBack: removeLastStep)
+                    .onChange(of: selectedColor) { oldColor, newColor in
                         currentLine.color = newColor
                     }
             }

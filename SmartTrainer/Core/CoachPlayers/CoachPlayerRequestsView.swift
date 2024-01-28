@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CoachPlayerRequestsView: View {
     let requestedPlayers: [Player]
-    let vm: CoachPlayersViewModel
     @Binding var showRequests: Bool
     var body: some View {
         VStack {
@@ -58,7 +57,7 @@ extension CoachPlayerRequestsView {
                     Spacer()
                     Button(action: {
                         print("accepting request")
-                        vm.acceptRequest(player: player)
+//                        vm.acceptRequest(player: player)
                     }) {
                         Image(systemName: "checkmark")
                             .foregroundStyle(Color.white)
@@ -68,7 +67,7 @@ extension CoachPlayerRequestsView {
                     .cornerRadius(10)
                     Button(action: {
                         print("rejecting request")
-                        vm.rejectRequest(player: player)
+//                        vm.rejectRequest(player: player)
                     }) {
                         Image(systemName: "xmark")
                             .foregroundStyle(Color.white)
@@ -87,5 +86,5 @@ extension CoachPlayerRequestsView {
     }
 }
 #Preview {
-    CoachPlayerRequestsView(requestedPlayers: [], vm: CoachPlayersViewModel(), showRequests: .constant(true))
+    CoachPlayerRequestsView(requestedPlayers: [], showRequests: .constant(true))
 }

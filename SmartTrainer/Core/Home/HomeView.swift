@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject private var vm: HomeViewModel
-    
+    @EnvironmentObject private var store: Store
     @State private var showNotifications: Bool = false
+    @State private var searchText: String = ""
     
+    private func filterSearch(allAttempts: [Attempt], searchText: String) -> [Attempt] {
+        if searchText == ""{
+            return allAttempts
+        } else {
+            return allAttempts.filter { $0.technique_name.contains(searchText) }
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -25,13 +32,13 @@ struct HomeView: View {
                     header
                     
                     if showNotifications {
-                        List(vm.notifications) { notification in
+                        List(store.notifications) { notification in
                             Text(notification.message)
                                 .foregroundStyle(Color.theme.accent)
                         }
                         .listStyle(PlainListStyle())
                     } else {
-                        SearchBarView(promptText: "Search for an attempt...", searchText: $vm.searchText)
+                        SearchBarView(promptText: "Search for an attempt...", searchText: $searchText)
                         
                         attemptsList
                     }
@@ -68,10 +75,10 @@ extension HomeView {
 extension HomeView {
     private var attemptsList: some View {
         
-        List(vm.getRelevantAttempts(searchText: vm.searchText, playerID: vm.role == "player" ? vm.id : 0)) { attempt in
+        List(filterSearch(allAttempts: store.attempts, searchText: searchText)) { attempt in
                 AttemptCardView(attempt: attempt)
                     .background(NavigationLink("", destination: PlayerAttemptView(attempt: attempt)
-                        .environmentObject(vm))
+                        .environmentObject(store))
                         .opacity(0))
             }
             .listStyle(PlainListStyle())
@@ -80,5 +87,5 @@ extension HomeView {
 
 #Preview {
     HomeView()
-        .environmentObject(HomeViewModel())
+        .environmentObject(Store())
 }

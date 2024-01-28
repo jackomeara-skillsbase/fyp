@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct CoachPlayersView: View {
-    @StateObject private var vm: CoachPlayersViewModel = CoachPlayersViewModel()
+    @EnvironmentObject private var store: Store
     
     @State private var showGroups: Bool = false
     @State private var showRequests: Bool = false
     @State private var newGroup: Bool = false
+    @State private var searchText: String = ""
 
     
     var body: some View {
@@ -25,20 +26,20 @@ struct CoachPlayersView: View {
                     header
                     
                     if !showGroups {
-                        CoachPlayerRequestsView(requestedPlayers: vm.requestedPlayers, vm: vm, showRequests: $showRequests)
+                        CoachPlayerRequestsView(requestedPlayers: [], showRequests: $showRequests)
                         
-                        SearchBarView(promptText: "Search for a player..", searchText: $vm.searchText)
+                        SearchBarView(promptText: "Search for a player..", searchText: $searchText)
                         
-                        List(vm.searchText == "" ? vm.players : vm.players.filter { $0.name.contains(vm.searchText) }) { player in
+                        List(searchText == "" ? store.players : store.players.filter { $0.name.contains(searchText) }) { player in
                             PlayerCardView(player: player)
-                                .background(NavigationLink("", destination: PlayerView(player: player))
+                                .background(NavigationLink("", destination: PlayerView(player: player).environmentObject(store))
                                     .opacity(0))
                         }
                         .listStyle(PlainListStyle())
                     } else {
-                        SearchBarView(promptText: "Search for a group..", searchText: $vm.searchText)
+                        SearchBarView(promptText: "Search for a group..", searchText: $searchText)
                         
-                        List(vm.searchText == "" ? vm.groups : vm.groups.filter { $0.name.contains(vm.searchText) }) { group in
+                        List(searchText == "" ? store.groups : store.groups.filter { $0.name.contains(searchText) }) { group in
                             GroupCardView(group: group)
                                 .background(NavigationLink("", destination: CoachGroupView(group: group))
                                     .opacity(0))
@@ -55,7 +56,7 @@ struct CoachPlayersView: View {
                 Color.theme.secondaryText.opacity(0.7)
                     .ignoresSafeArea()
                 
-                NewGroupView(showPopup: $newGroup, players: vm.players)
+                NewGroupView(showPopup: $newGroup, players: store.players)
             }
         }
     }
@@ -79,7 +80,7 @@ extension CoachPlayersView {
                 .onTapGesture {
                     withAnimation(.spring()) {
                         showGroups.toggle()
-                        vm.searchText = ""
+                        searchText = ""
                         showRequests = false
                     }
                 }

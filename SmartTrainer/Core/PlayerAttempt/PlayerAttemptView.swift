@@ -9,7 +9,7 @@ import SwiftUI
 import AVKit
 
 struct PlayerAttemptView: View {
-    @EnvironmentObject private var vm: HomeViewModel
+    @EnvironmentObject private var store: Store
     @State var coachFeedback: String = ""
     let attempt: Attempt
     let coachReviewData: CoachReview = CoachReview(id: 1, date: Date(), overall: 4, depth: 3, range: 4, control: 5, comments: "Overall good attempt.")
@@ -39,7 +39,7 @@ struct PlayerAttemptView: View {
                         videoPreview
 
                         ScrollView {
-                            if vm.role == "coach" {
+                            if store.role == "coach" {
                                 coachReview
                             } else {
                                 playerCoachReview

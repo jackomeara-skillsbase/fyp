@@ -10,8 +10,7 @@ import SwiftUI
 struct LogInView: View {
     @State private var username = ""
     @State private var password = ""
-    @StateObject private var globalVM = GlobalViewModel.shared
-    @EnvironmentObject private var vm: HomeViewModel
+    @EnvironmentObject private var store: Store
 
     var body: some View {
         VStack {
@@ -33,19 +32,17 @@ struct LogInView: View {
                 .padding(.bottom, 30)
 
             Button(action: {
-                // Handle login logic here
-                // You can perform authentication, navigate to another view, etc.
                 print("Login button tapped")
                 if username == "player" && password == "Password" {
-                    vm.role = "player"
-                    vm.email = "mj@gmail.com"
-                    vm.name = "Michael Jordan"
-                    vm.authenticated = true
+                    store.role = "player"
+                    store.email = "mj@gmail.com"
+                    store.name = "Michael Jordan"
+                    store.authenticated = true
                 } else if username == "coach" && password == "Password" {
-                    vm.role = "coach"
-                    vm.email = "jose_mourinho@gmail.com"
-                    vm.name = "Jose Mourinho"
-                    vm.authenticated = true
+                    store.role = "coach"
+                    store.email = "jose_mourinho@gmail.com"
+                    store.name = "Jose Mourinho"
+                    store.authenticated = true
                 }
             }) {
                 Text("Login")

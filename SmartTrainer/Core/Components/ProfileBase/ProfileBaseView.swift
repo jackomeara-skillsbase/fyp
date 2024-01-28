@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProfileBaseView: View {
-    var name: String = GlobalViewModel.shared.name
-    var email: String = GlobalViewModel.shared.email
+    var name: String
+    var email: String
     var profilePhoto: String = "none"
     var body: some View {
         VStack {
@@ -42,8 +42,8 @@ struct ProfileBaseView: View {
 
 #Preview {
     Group {
-        ProfileBaseView()
-        ProfileBaseView(profilePhoto: "player")
-        ProfileBaseView(profilePhoto: "coach")
+        ProfileBaseView(name: "Jack O'Meara", email: "jackomeara@gmail.com")
+        ProfileBaseView(name: "Kobe Bryant", email: "kobe@gmail.com", profilePhoto: "player")
+        ProfileBaseView(name: "Mo Salah", email: "mo-salah@hotmail.com", profilePhoto: "coach")
     }
 }

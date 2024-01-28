@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CoachProfileView: View {
-    @EnvironmentObject private var hvm: HomeViewModel
+    @EnvironmentObject private var store: Store
     var body: some View {
         VStack {
-            ProfileBaseView(name: hvm.name, email: hvm.email)
+            ProfileBaseView(name: store.name, email: store.email)
             
             HStack {
                 Spacer()
@@ -44,7 +44,7 @@ struct CoachProfileView: View {
             
             Button(action: {
                 print("logging out..")
-                hvm.authenticated = false
+                store.authenticated = false
             }) {
                 Text("Log Out")
                     .foregroundStyle(Color.white)

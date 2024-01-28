@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct PlayerProfileView: View {
-    @StateObject private var vm: PlayerProfileViewModel = PlayerProfileViewModel()
     @State private var showNewCoach: Bool = false
-    @EnvironmentObject private var hvm: HomeViewModel
+    @State private var searchText: String = ""
+    @EnvironmentObject private var store: Store
     
     var body: some View {
         ZStack {
@@ -21,7 +21,7 @@ struct PlayerProfileView: View {
             // content layer
             ScrollView {
                 VStack {
-                    ProfileBaseView(name: hvm.name, email: hvm.email)
+                    ProfileBaseView(name: store.name, email: store.email)
                     
                     HStack {
                         Spacer()
@@ -30,7 +30,7 @@ struct PlayerProfileView: View {
                                 .foregroundStyle(Color.theme.secondaryText)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .padding(.bottom, 2)
-                            Text("\(vm.attempts.count)")
+                            Text("\(store.attempts.count)")
                                 .foregroundStyle(Color.theme.accent)
                                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -56,7 +56,7 @@ struct PlayerProfileView: View {
                     
                     Button(action: {
                         print("logging out..")
-                        hvm.authenticated = false
+                        store.authenticated = false
                     }) {
                         Text("Log Out")
                             .foregroundStyle(Color.white)
@@ -74,8 +74,8 @@ struct PlayerProfileView: View {
                     .ignoresSafeArea()
                 
                 // show popup
-                NewCoachPopupView(searchText: $vm.searchText, showPopup: $showNewCoach)
-                    .environmentObject(vm)
+                NewCoachPopupView(searchText: $searchText, showPopup: $showNewCoach)
+                    .environmentObject(store)
             }
         }
     }
@@ -96,7 +96,7 @@ extension PlayerProfileView {
                     }
             }
             .padding()
-            ForEach(vm.coaches, id: \.self) { coach in
+            ForEach(store.coaches, id: \.self) { coach in
                 CoachRowView(coach: coach)
             }
         }

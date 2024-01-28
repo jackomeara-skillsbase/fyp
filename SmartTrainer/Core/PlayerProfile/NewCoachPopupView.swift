@@ -10,7 +10,7 @@ import SwiftUI
 struct NewCoachPopupView: View {
     @Binding var searchText: String
     @Binding var showPopup: Bool
-    @EnvironmentObject private var vm: PlayerProfileViewModel
+    @EnvironmentObject private var store: Store
     
     var body: some View {
         VStack {

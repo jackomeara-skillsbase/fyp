@@ -9,17 +9,16 @@ import SwiftUI
 
 @main
 struct SmartTrainerApp: App {
-    @StateObject private var vm = HomeViewModel()
-    @StateObject private var globalVM: GlobalViewModel = GlobalViewModel.shared
+    @StateObject private var store: Store = Store()
     
     var body: some Scene {
         WindowGroup {
-            if vm.authenticated {
+            if store.authenticated {
                 SmartTrainerTabView()
-                    .environmentObject(vm)
+                    .environmentObject(store)
             } else {
                 LogInView()
-                    .environmentObject(vm)
+                    .environmentObject(store)
             }
         }
     }

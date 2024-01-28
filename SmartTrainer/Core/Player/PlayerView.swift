@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlayerView: View {
-    @StateObject private var vm: PlayerViewModel = PlayerViewModel()
+    @EnvironmentObject private var store: Store
     let player: Player
     
     var body: some View {
@@ -40,7 +40,7 @@ struct PlayerView: View {
                     }
                     .padding()
                     
-                    ForEach(vm.attempts.filter {Int($0.player_id)! == player.id}, id: \.self) { attempt in
+                    ForEach(store.attempts.filter {Int($0.player_id)! == player.id}, id: \.self) { attempt in
                         AttemptCardView(attempt: attempt)
                             .background(NavigationLink("", destination: PlayerAttemptView(attempt: attempt))
                                 .opacity(0))

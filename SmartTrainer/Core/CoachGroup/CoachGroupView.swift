@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CoachGroupView: View {
-    var vm: CoachPlayersViewModel = CoachPlayersViewModel()
+    @EnvironmentObject private var store: Store
     var group: PlayersGroup
     var body: some View {
         ZStack {
@@ -34,7 +34,7 @@ struct CoachGroupView: View {
                         Spacer()
                     }
                     
-                    List(vm.inflateMembers(group: group)) { player in
+                    List(store.inflateGroupMembers(group: group)) { player in
                         GroupPlayerView(player: player)
                             .background(NavigationLink("", destination: PlayerView(player: player))
                                 .opacity(0))
