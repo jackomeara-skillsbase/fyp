@@ -33,5 +33,5 @@ struct TechniqueCardView: View {
 }
 
 #Preview {
-    TechniqueCardView(technique: Technique(id: UUID(), techniqueName: "Back Squat", videoURL: "back_squat", description: "Parallel depth, knees and hips aligned", aiModel: "sdf", thumbnail: "back_squat"), color: Color.cyan)
+    TechniqueCardView(technique: Technique(id: UUID().uuidString, techniqueName: "Back Squat", videoURL: "back_squat", description: "Parallel depth, knees and hips aligned", aiModel: "sdf", thumbnail: "back_squat"), color: Color.cyan)
 }

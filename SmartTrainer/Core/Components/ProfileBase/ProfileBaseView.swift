@@ -11,6 +11,9 @@ struct ProfileBaseView: View {
     var name: String
     var email: String
     var profilePhoto: String = "none"
+    @State private var image: Image? = nil
+    @State private var isImagePickerPresented = false
+    
     var body: some View {
         VStack {
             if profilePhoto == "none" {
@@ -25,6 +28,12 @@ struct ProfileBaseView: View {
                     )
             } else {
                 CirclePhotoView(url: profilePhoto, size: 140)
+                    .onTapGesture {
+                        isImagePickerPresented.toggle()
+                    }
+//                    .sheet(isPresented: $isImagePickerPresented) {
+//                        ImagePicker(selectedImage: self.$image)
+//                    }
             }
             
             Text(name)

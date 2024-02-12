@@ -8,8 +8,8 @@
 import Foundation
 
 struct Relationship: Identifiable, Codable, Hashable {
-    let id: Int64
-    let player_email: String
-    let coach_email: String
+    let id: String
+    let player_id: String
+    let coach_id: String
     let status: String
 }

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct GroupPlayerView: View {
-    var player: Player
+    var player: User
     var body: some View {
         HStack {
-            CirclePhotoView(url: player.image)
+            CirclePhotoView(url: "")
             
             Text(player.name)
                 .foregroundStyle(Color.theme.accent)
@@ -29,5 +29,5 @@ struct GroupPlayerView: View {
 }
 
 #Preview {
-    GroupPlayerView(player: Player(id: 1234, name: "Lionel Messi", email: "lmessi@gmail.com", image: "null"))
+    GroupPlayerView(player: User(id: "1234", name: "Lionel Messi", email: "lmessi@gmail.com", isCoach: false, image_url: ""))
 }

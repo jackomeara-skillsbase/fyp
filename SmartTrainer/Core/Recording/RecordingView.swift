@@ -28,7 +28,9 @@ struct CameraPreview: UIViewRepresentable {
 }
 
 struct RecordingView: View {
-  @StateObject private var recorder = Recorder()
+    @StateObject private var recorder: Recorder = Recorder()
+    @EnvironmentObject private var store: Store
+    var technique: Technique
 
   var body: some View {
     VStack {
@@ -37,11 +39,6 @@ struct RecordingView: View {
         Button(action: {
           recorder.toggleState()
         }) {
-//            Text(!recorder.isRecording ? "Record" : "Stop")
-//            .padding()
-//            .background(!recorder.isRecording ? .black : .red)
-//            .foregroundColor(.white)
-//            .cornerRadius(8)
             Image(systemName: !recorder.isRecording ? "record.circle" : "stop.circle.fill")
                 .padding()
                 .foregroundColor(!recorder.isRecording ? .red : .black)
@@ -54,6 +51,10 @@ struct RecordingView: View {
           .foregroundColor(.red)
       }
     }
+    .onAppear {
+        self.recorder.technique = self.technique
+        self.recorder.store = self.store
+    }
   }
 }
 
@@ -61,8 +62,10 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
   @Published var session = AVCaptureSession() // session is now @Published
   @Published var isRecording = false
   private let movieOutput = AVCaptureMovieFileOutput()
-
-  override init() {
+  var technique: Technique? = nil
+  var store: Store? = nil
+    
+    override init() {
     super.init()
     addAudioInput()
     addVideoInput()
@@ -122,38 +125,24 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
     // Handle actions when recording starts
   }
 
-  func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-    // Check for recording error
-    if let error = error {
-      print("Error recording: \(error.localizedDescription)")
-      return
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        // Check for recording error
+        if let error = error {
+            print("Error recording: \(error.localizedDescription)")
+            return
+            }
+        
+        Task {
+            do {
+                try await store!.createAttempt(fileURL: outputFileURL, technique: self.technique!)
+            } catch {
+                print("Video upload failed: \(error.localizedDescription)")
+            }
+        }
     }
-    // Upload to directus
-      NetworkManager.uploadVideo(outputFileURL: outputFileURL) { result in
-          switch result {
-          case .success(let data):
-              print("Upload successful. Response data: \(data)")
-              // Handle the success case here
-          case .failure(let error):
-              print("Upload failed with error: \(error)")
-              // Handle the failure case here
-          }
-      }
-    
-
-//    // Save video to Photos
-//    PHPhotoLibrary.shared().performChanges({
-//      PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
-//    }) { saved, error in
-//      if saved {
-//        print("Successfully saved video to Photos.")
-//      } else if let error = error {
-//        print("Error saving video to Photos: \(error.localizedDescription)")
-//      }
-//    }
-  }
 }
 
+
 #Preview {
-    RecordingView()
+    RecordingView(technique: Technique(id: "sd", techniqueName: "sad", videoURL: "dasf", description: "asfs", aiModel: "asdsaf", thumbnail: "asfs"))
 }

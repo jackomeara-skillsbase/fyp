@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlayerView: View {
     @EnvironmentObject private var store: Store
-    let player: Player
+    let player: User
     
     var body: some View {
         ZStack {
@@ -18,7 +18,7 @@ struct PlayerView: View {
             
             ScrollView {
                 VStack {
-                    ProfileBaseView(name: player.name, email: player.email, profilePhoto: player.image)
+                    ProfileBaseView(name: player.name, email: player.email, profilePhoto: "")
                     
                     Button(action: {
                         print("generating report...")
@@ -40,9 +40,9 @@ struct PlayerView: View {
                     }
                     .padding()
                     
-                    ForEach(store.attempts.filter {Int($0.player_id)! == player.id}, id: \.self) { attempt in
+                    ForEach(store.attempts.filter {$0.player_id == player.id}, id: \.self) { attempt in
                         AttemptCardView(attempt: attempt)
-                            .background(NavigationLink("", destination: PlayerAttemptView(attempt: attempt))
+                            .background(NavigationLink("", destination: AttemptResource(attempt: attempt))
                                 .opacity(0))
                     }
                     .padding(.horizontal)
@@ -55,5 +55,5 @@ struct PlayerView: View {
 }
 
 #Preview {
-    PlayerView(player: Player(id: 123456, name: "Michael Jordan", email: "mj@gmail.com", image: "player"))
+    PlayerView(player: User(id: "123456", name: "Michael Jordan", email: "mj@gmail.com", isCoach: false, image_url: ""))
 }

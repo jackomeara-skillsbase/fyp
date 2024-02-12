@@ -8,13 +8,11 @@
 import Foundation
 
 struct Attempt: Identifiable, Codable, Hashable {
-    let id: Int64
+    let id: String
     let date: Date
     let video_url: String
     let player_name: String
     let player_id: String
     let technique_name: String
     let technique_id: String
-    let coach_review: Int
-    let ai_review: String
 }

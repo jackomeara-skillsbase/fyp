@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct PlayerCardView: View {
-    let player: Player
+    let player: User
     var body: some View {
         HStack {
-            CirclePhotoView(url: player.image, size: 50)
+            CirclePhotoView(url: "", size: 50)
             Text(player.name)
                 .padding(.horizontal)
                 .foregroundStyle(Color.theme.accent)
@@ -22,5 +22,5 @@ struct PlayerCardView: View {
 }
 
 #Preview {
-    PlayerCardView(player: Player(id: 1234, name: "Kobe Bryant", email: "", image: "player"))
+    PlayerCardView(player: User(id: "1234", name: "Kobe Bryant", email: "", isCoach: false, image_url: ""))
 }

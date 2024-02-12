@@ -8,11 +8,11 @@
 import Foundation
 
 struct CoachReview: Identifiable, Codable, Hashable {
-    let id: Int
+    let id: String
     let date: Date
     let overall: Int
-    let depth: Int
     let range: Int
+    let balance: Int
     let control: Int
     let comments: String
 }

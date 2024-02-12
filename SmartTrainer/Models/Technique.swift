@@ -8,7 +8,7 @@
 import Foundation
 
 struct Technique: Identifiable, Codable {
-    let id: UUID
+    let id: String
     let techniqueName: String
     let videoURL: String
     let description: String

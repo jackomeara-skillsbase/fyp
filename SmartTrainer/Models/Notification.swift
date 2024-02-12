@@ -8,9 +8,8 @@
 import Foundation
 
 struct Notification: Identifiable, Codable, Hashable {
-    let id: Int64
+    let id: String
     let date: Date
-    let is_player: Bool
-    let subject_id: Int64
+    let user_id: String
     let message: String
 }

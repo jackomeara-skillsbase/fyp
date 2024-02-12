@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewGroupView: View {
     @Binding var showPopup: Bool
-    var players: [Player]
+    var players: [User]
     @State private var playerAdded: [Bool] = []
     var body: some View {
         VStack {
@@ -62,8 +62,8 @@ struct NewGroupView: View {
 
 #Preview {
     NewGroupView(showPopup: .constant(true), players: [
-        Player(id: 1, name: "Player 1", email: "dsf", image: "null"),
-        Player(id: 2, name: "Player 2", email: "asd", image: "null"),
-        Player(id: 3, name: "Player 3", email: "dsd", image: "null"),
+        User(id: "1", name: "Player 1", email: "dsf", isCoach: false, image_url: ""),
+        User(id: "2", name: "Player 2", email: "asd", isCoach: false, image_url: ""),
+        User(id: "3", name: "Player 3", email: "dsd", isCoach: false, image_url: ""),
     ])
 }

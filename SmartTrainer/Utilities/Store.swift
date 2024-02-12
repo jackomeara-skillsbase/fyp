@@ -7,69 +7,115 @@
 
 import Foundation
 import Combine
+import Firebase
+import FirebaseFirestoreSwift
 
 @MainActor
 class Store: ObservableObject {
-    // user settings
-    @Published var name: String = "Jack O'Meara"
-    @Published var email: String = "jackomeara@gmail.com"
-    @Published var id: Int = 1
-    @Published var role: String = "player"
-    @Published var authenticated: Bool = true
+    // firebase user auth data
+    @Published var userSession: FirebaseAuth.User?
+    @Published var currentUser: User?
     
     // model data
     @Published var attempts: [Attempt] = []
-    @Published var players: [Player] = []
+    @Published var players: [User] = []
     @Published var groups: [PlayersGroup] = []
     @Published var coaches: [Coach] = []
     @Published var notifications: [Notification] = []
     @Published var relationships: [Relationship] = []
     
-    // data services and network variables
-    private var cancellables: Set<AnyCancellable> = []
-    private var attemptDataService: AttemptDataService = AttemptDataService()
-    private var playerDataService: PlayerDataService = PlayerDataService()
-    private var groupDataService: GroupDataService = GroupDataService()
-    private var coachDataService: CoachDataService = CoachDataService()
-    private var notificationDataService: NotificationDataService = NotificationDataService()
-    private var relationshipDataService: RelationshipDataService = RelationshipDataService()
-    
     init() {
-        setupBindings()
+        self.userSession = Auth.auth().currentUser
+        Task {
+            await fetchUser()
+        }
     }
     
-    // bind data services to published variables
-    private func setupBindings() {
-        attemptDataService.$allAttempts
-            .assign(to: \.attempts, on: self)
-            .store(in: &cancellables)
-        playerDataService.$allPlayers
-            .assign(to: \.players, on: self)
-            .store(in: &cancellables)
-        groupDataService.$allGroups
-            .assign(to: \.groups, on: self)
-            .store(in: &cancellables)
-        coachDataService.$allCoaches
-            .assign(to: \.coaches, on: self)
-            .store(in: &cancellables)
-        notificationDataService.$allNotifications
-            .assign(to: \.notifications, on: self)
-            .store(in: &cancellables)
-        relationshipDataService.$allRelationships
-            .assign(to: \.relationships, on: self)
-            .store(in: &cancellables)
+    func logIn(withEmail email: String, password: String) async throws {
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.userSession = result.user
+            await fetchUser()
+        } catch {
+            print("DEBUG: Failed to log in: \(error.localizedDescription)")
+        }
     }
     
-    // inflate group members (array of ID's) to players
-    func inflateGroupMembers(group: PlayersGroup) -> [Player] {
-        return self.players.filter {group.members.contains(Member(id: Int($0.id)))}
+    func signUp(withEmail email: String, password: String, name: String, isCoach: Bool) async throws {
+        do {
+            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            self.userSession = result.user
+            let user = User(id: result.user.uid, name: name, email: email, isCoach: isCoach, image_url: "")
+            let encodedUser = try Firestore.Encoder().encode(user)
+            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
+            await fetchUser()
+        } catch {
+            print("DEBUG: Failed to create user: \(error.localizedDescription)")
+        }
     }
     
-    // define methods to refresh data
-    func fetchAttempts() { attemptDataService.getAttempts() }
-    func fetchPlayers() { playerDataService.getPlayers() }
-    func fetchGroups() { groupDataService.getGroups() }
-    func fetchCoaches() { coachDataService.getCoaches() }
-    func fetchNotifications() { notificationDataService.getNotifications() }
-    func fetchRelationships() { relationshipDataService.getRelationships() }
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.userSession = nil
+            self.currentUser = nil
+        } catch {
+            print("Failed to sign out: \(error.localizedDescription)")
+        }
+    }
+    
+    func fetchUser() async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        print("uid was found: \(uid)")
+        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        print("snapshot was completed")
+        self.currentUser = try? snapshot.data(as: User.self)
+        print("Current User: \(self.currentUser)")
+    }
+    
+    func fetchAttempts() async throws {
+        if let currentUser = self.currentUser {
+            if currentUser.isCoach {
+                self.attempts = try await AttemptDataService.getAttemptsForCoach()
+            } else {
+                self.attempts = try await AttemptDataService.getAttemptsByPlayer()
+            }
+        }
+    }
+    
+    func fetchPlayers() async throws {
+            self.players = try await UserDataService.fetchPlayers()
+    }
+    
+    func fetchNotifications() async throws {
+        if self.currentUser != nil {
+            self.notifications = try await NotificationDataService.fetchNotifications()
+        }
+    }
+    
+    // inflate group members (array of ID's) to users
+    func inflateGroupMembers(group: PlayersGroup) -> [User] {
+        return self.players.filter {group.members.contains(Member(id: Int($0.id)!))}
+    }
+    
+    func createAttempt(fileURL: URL, technique: Technique) async throws {
+        if let currentUser = self.currentUser {
+            do {
+                // upload video first and get firebase file URL
+                guard let videoURL = try await VideoDataService.uploadVideo(fileURL: fileURL) else { return }
+                
+                // create attempt object using firebase file URL
+                let attempt = Attempt(id: UUID().uuidString,
+                                      date: Date(),
+                                      video_url: videoURL,
+                                      player_name: currentUser.name,
+                                      player_id: currentUser.id,
+                                      technique_name: technique.techniqueName,
+                                      technique_id: technique.id)
+                try await AttemptDataService.createAttempt(attempt: attempt)
+            } catch {
+                print("DEBUG: Couldn't create attempt with error: \(error.localizedDescription)")
+            }
+        }
+    }
 }

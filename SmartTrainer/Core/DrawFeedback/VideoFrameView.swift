@@ -6,13 +6,42 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct VideoFrameView: View {
+    let videoURL: URL
+    let timestamp: CMTime
+    
+    @State private var extractedImage: UIImage?
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if let image = extractedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                Text("Loading...")
+            }
+        }
+        .onAppear {
+            extractImage()
+        }
+    }
+    func extractImage() {
+        let asset = AVURLAsset(url: videoURL)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+
+        do {
+            let cgImage = try imageGenerator.copyCGImage(at: timestamp, actualTime: nil)
+            self.extractedImage = UIImage(cgImage: cgImage)
+        } catch let error {
+            print("Error generating image: \(error)")
+        }
     }
 }
 
 #Preview {
-    VideoFrameView()
+    VideoFrameView(videoURL: Bundle.main.url(forResource: "squat_attempt", withExtension: "MOV")!, timestamp: CMTime(seconds: 2, preferredTimescale: 1))
 }

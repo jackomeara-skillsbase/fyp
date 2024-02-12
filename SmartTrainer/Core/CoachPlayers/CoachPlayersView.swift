@@ -59,6 +59,11 @@ struct CoachPlayersView: View {
                 NewGroupView(showPopup: $newGroup, players: store.players)
             }
         }
+        .onAppear {
+            Task {
+                try await store.fetchPlayers()
+            }
+        }
     }
 }
 

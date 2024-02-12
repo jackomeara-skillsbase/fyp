@@ -29,12 +29,18 @@ class NetworkManager {
             .eraseToAnyPublisher()
     }
     
-    static func post(url: URL, data: Data) -> AnyPublisher<Data, Error> {
+    static func post(url: URL, data: Encodable) -> AnyPublisher<Data, Error> {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "content-type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.httpBody = data
+        
+        let encoder = JSONEncoder()
+        do {
+            request.httpBody = try encoder.encode(data)
+        } catch {
+            return Fail(error: error).eraseToAnyPublisher()
+        }
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap({ try handleResponse(output: $0, url: url)})

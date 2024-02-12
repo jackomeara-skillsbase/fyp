@@ -6,31 +6,33 @@
 //
 
 import Foundation
-import Combine
+import Firebase
+import FirebaseFirestoreSwift
 
 class CoachReviewDataService {
-    @Published var allCoachReviews: [CoachReview] = []
-    
-    var coachReviewSubscription: AnyCancellable?
-    
-    private struct CoachReviewResponse: Decodable {
-        let data: [CoachReview]
+    static func getAttemptReview(attemptID: String) async throws -> CoachReview? {
+        do {            
+            guard let snapshot = try? await Firestore.firestore().collection("coach_reviews").document(attemptID).getDocument() else { return nil }
+            
+            let attempt = try snapshot.data(as: CoachReview.self)
+            return attempt
+            
+        } catch {
+            print("DEBUG: Could not get coach review: \(error.localizedDescription)")
+        }
+        return nil
     }
     
-    init() {
-        getCoachReviews()
-    }
-    
-    func getCoachReviews() {
-        guard let url = URL(string: "http://ec2-54-170-28-60.eu-west-1.compute.amazonaws.com:8080/fyp/items/coach_review") else {return}
-        let decoder = JSONDecoder()
-        
-        coachReviewSubscription = NetworkManager.download(url: url)
-            .decode(type: CoachReviewResponse.self, decoder: decoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: NetworkManager.handleCompletion, receiveValue: {[weak self] (response) in
-                self?.allCoachReviews = response.data
-                self?.coachReviewSubscription?.cancel()
-            })
+    static func reviewAttempt(review: CoachReview) async throws {
+        do {
+            // encode review and add it
+            let encodedReview = try Firestore.Encoder().encode(review)
+            do {
+                try await Firestore.firestore().collection("coach_reviews").document(review.id).setData(encodedReview)
+            }
+        } catch {
+            
+            print("DEBUG: Couldn't create coach review: \(error.localizedDescription)")
+        }
     }
 }

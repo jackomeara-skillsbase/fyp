@@ -47,6 +47,12 @@ struct HomeView: View {
                 }
             }
         }
+        .onAppear {
+            Task {
+                try await store.fetchAttempts()
+                try await store.fetchNotifications()
+            }
+        }
     }
 }
 
@@ -77,7 +83,8 @@ extension HomeView {
         
         List(filterSearch(allAttempts: store.attempts, searchText: searchText)) { attempt in
                 AttemptCardView(attempt: attempt)
-                    .background(NavigationLink("", destination: PlayerAttemptView(attempt: attempt)
+                    .background(NavigationLink("", 
+                                               destination: AttemptResource(attempt: attempt)
                         .environmentObject(store))
                         .opacity(0))
             }

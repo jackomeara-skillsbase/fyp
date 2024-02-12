@@ -42,8 +42,8 @@ struct AttemptCardView: View {
                         .foregroundStyle(Color.theme.accent)
                         .frame(width: 25, height: 25)
                     Spacer()
-                    Text(attempt.ai_review)
-                        .foregroundStyle(getAIScoreColor(score: attempt.ai_review))
+                    Text("A")
+                        .foregroundStyle(getAIScoreColor(score: "A"))
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.title)
                 }
@@ -54,9 +54,9 @@ struct AttemptCardView: View {
                         .frame(width: 25, height: 25)
                         .foregroundStyle(Color.theme.accent)
                     Spacer()
-                    Image(systemName: attempt.coach_review == 0 ? "xmark" : "checkmark")
+                    Image(systemName: 1 == 0 ? "xmark" : "checkmark")
                         .resizable()
-                        .foregroundStyle(attempt.coach_review == 0 ? Color.red : Color.green)
+                        .foregroundStyle(1 == 0 ? Color.red : Color.green)
                         .frame(width: 20, height: 20)
                         
                 }

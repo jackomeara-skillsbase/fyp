@@ -68,7 +68,7 @@ extension PlayerRecordAttemptView {
     private var recordButton: some View {
         HStack {
             Spacer()
-            NavigationLink(destination: RecordingView()) {
+            NavigationLink(destination: RecordingView(technique: technique)) {
                     Text("Record Attempt")
                         .foregroundStyle(Color.white)
                         .padding(.horizontal)
@@ -83,5 +83,5 @@ extension PlayerRecordAttemptView {
 }
 
 #Preview {
-    PlayerRecordAttemptView(technique: Technique(id: UUID(), techniqueName: "Back Squat", videoURL: "back_squat", description: "Start with your feet at least shoulder-width apart. In a controlled manner, squat down until your legs are at least parallel with the ground. Pause shortly at the bottom, before standing back up to complete the exercise. You can put your hands out for balance as you complete the exercise.", aiModel: "ai_model123", thumbnail: "back_squat"))
+    PlayerRecordAttemptView(technique: Technique(id: UUID().uuidString, techniqueName: "Back Squat", videoURL: "back_squat", description: "Start with your feet at least shoulder-width apart. In a controlled manner, squat down until your legs are at least parallel with the ground. Pause shortly at the bottom, before standing back up to complete the exercise. You can put your hands out for balance as you complete the exercise.", aiModel: "ai_model123", thumbnail: "back_squat"))
 }

@@ -6,31 +6,25 @@
 //
 
 import Foundation
-import Combine
+import Firebase
+import FirebaseFirestoreSwift
 
 class NotificationDataService {
-    @Published var allNotifications: [Notification] = []
-    
-    var notificationSubscription: AnyCancellable?
-    
-    private struct NotificationResponse: Decodable {
-        let data: [Notification]
-    }
-    
-    init() {
-        getNotifications()
-    }
-    
-    func getNotifications() {
-        guard let url = URL(string: "http://ec2-54-170-28-60.eu-west-1.compute.amazonaws.com:8080/fyp/items/relationship") else {return}
-        let decoder = JSONDecoder()
-        notificationSubscription = NetworkManager.download(url: url)
-            .decode(type: NotificationResponse.self, decoder: decoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: NetworkManager.handleCompletion, receiveValue: {
-                [weak self] (response) in
-                self?.allNotifications = response.data
-                self?.notificationSubscription?.cancel()
-            })
+    static func fetchNotifications() async throws -> [Notification] {
+        do {
+            guard let uid = Auth.auth().currentUser?.uid else { return [] }
+
+            guard let snapshot = try? await Firestore.firestore().collection("notifications").whereField("user_id", isEqualTo: uid).getDocuments() else { return [] }
+            
+            var notificationsList: [Notification] = []
+            for firebaseNotification in snapshot.documents {
+                let notification = try firebaseNotification.data(as: Notification.self)
+                notificationsList.append(notification)
+            }
+            return notificationsList
+        } catch {
+            print("DEBUG: Error fetching notifications: \(error.localizedDescription)")
+        }
+        return []
     }
 }

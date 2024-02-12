@@ -13,69 +13,70 @@ struct PlayerProfileView: View {
     @EnvironmentObject private var store: Store
     
     var body: some View {
-        ZStack {
-            // background layer
-                Color.theme.background
-                    .ignoresSafeArea()
-            
-            // content layer
-            ScrollView {
-                VStack {
-                    ProfileBaseView(name: store.name, email: store.email)
-                    
-                    HStack {
-                        Spacer()
-                        VStack {
-                            Text("Attempts")
-                                .foregroundStyle(Color.theme.secondaryText)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .padding(.bottom, 2)
-                            Text("\(store.attempts.count)")
-                                .foregroundStyle(Color.theme.accent)
-                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        }
-                        Spacer()
-                        VStack {
-                            Text("A Grades")
-                                .foregroundStyle(Color.theme.secondaryText)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .padding(.bottom, 2)
-                            Text("12")
-                                .foregroundStyle(Color.theme.accent)
-                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        }
-                        Spacer()
-                    }
-                    .padding(.top, 20)
-                    
-                    coachesSection
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        print("logging out..")
-                        store.authenticated = false
-                    }) {
-                        Text("Log Out")
-                            .foregroundStyle(Color.white)
-                            .padding(.horizontal)
-                    }
-                    .padding()
-                    .background(Color.red)
-                    .cornerRadius(10)
-                }
-            }
-            
-            if showNewCoach {
-                // background to disable content behind popup
-                Color.theme.secondaryText.opacity(0.7)
-                    .ignoresSafeArea()
+        if let currentUser = store.currentUser {
+            ZStack {
+                // background layer
+                    Color.theme.background
+                        .ignoresSafeArea()
                 
-                // show popup
-                NewCoachPopupView(searchText: $searchText, showPopup: $showNewCoach)
-                    .environmentObject(store)
+                // content layer
+                ScrollView {
+                    VStack {
+                        ProfileBaseView(name: currentUser.name, email: currentUser.email)
+                        
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Text("Attempts")
+                                    .foregroundStyle(Color.theme.secondaryText)
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .padding(.bottom, 2)
+                                Text("\(store.attempts.count)")
+                                    .foregroundStyle(Color.theme.accent)
+                                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            }
+                            Spacer()
+                            VStack {
+                                Text("A Grades")
+                                    .foregroundStyle(Color.theme.secondaryText)
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .padding(.bottom, 2)
+                                Text("12")
+                                    .foregroundStyle(Color.theme.accent)
+                                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            }
+                            Spacer()
+                        }
+                        .padding(.top, 20)
+                        
+                        coachesSection
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            store.signOut()
+                        }) {
+                            Text("Log Out")
+                                .foregroundStyle(Color.white)
+                                .padding(.horizontal)
+                        }
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(10)
+                    }
+                }
+                
+                if showNewCoach {
+                    // background to disable content behind popup
+                    Color.theme.secondaryText.opacity(0.7)
+                        .ignoresSafeArea()
+                    
+                    // show popup
+                    NewCoachPopupView(searchText: $searchText, showPopup: $showNewCoach)
+                        .environmentObject(store)
+                }
             }
         }
     }

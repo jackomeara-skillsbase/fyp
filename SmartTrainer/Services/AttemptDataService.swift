@@ -6,41 +6,69 @@
 //
 
 import Foundation
-import Combine
+import Firebase
+import FirebaseFirestoreSwift
 
 class AttemptDataService {
-    @Published var allAttempts: [Attempt] = []
-    @Published var personalAttempts: [Attempt] = []
-    
-    private var role: String = "coach"
-    private var userID: Int = 0
-    
-    
-    var attemptSubscription: AnyCancellable?
-    
-    private struct AttemptResponse: Decodable {
-        let data: [Attempt]
+    static func createAttempt(attempt: Attempt) async throws {
+        do {
+            let encodedAttempt = try Firestore.Encoder().encode(attempt)
+            try await Firestore.firestore().collection("attempts").document(attempt.id).setData(encodedAttempt)
+        } catch {
+            print("DEBUG: Couldn't create attempt: \(error.localizedDescription)")
+        }
     }
     
-    init() {
-        getAttempts()
+    static func getAttemptsByPlayer() async throws -> [Attempt] {
+        do {
+            // get ID of logged-in player
+            guard let uid = Auth.auth().currentUser?.uid else { return [] }
+            
+            // get attempts by this player
+            guard let snapshot = try? await Firestore.firestore().collection("attempts").whereField("player_id", isEqualTo: uid).getDocuments() else { return [] }
+            
+            // convert to Attempt object and add to array
+            var attemptsList: [Attempt] = []
+            for firebaseAttempt in snapshot.documents {
+                let attempt = try firebaseAttempt.data(as: Attempt.self)
+                attemptsList.append(attempt)
+            }
+            return attemptsList
+        } catch {
+            print("DEBUG: Couldn't get attempts for logged in player: \(error.localizedDescription)")
+        }
+        return []
     }
     
-    func getAttempts() {
-        guard let url = URL(string: "http://ec2-54-170-28-60.eu-west-1.compute.amazonaws.com:8080/fyp/items/attempt") else { return }
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        
-        attemptSubscription = NetworkManager.download(url: url)
-            .decode(type: AttemptResponse.self, decoder: decoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: NetworkManager.handleCompletion, receiveValue: {[weak self] (response) in
-                print(response.data)
-                self?.allAttempts = response.data
-                if self?.role == "player" {
-                    self?.personalAttempts = response.data.filter { Int($0.player_id) == self?.userID }
-                }
-                self?.attemptSubscription?.cancel()
-            })
+    static func getAttemptsForCoach() async throws -> [Attempt] {
+        do {
+            // get ID of coach
+            guard let uid = Auth.auth().currentUser?.uid else { return [] }
+            
+            // get active relationships for coach
+            guard let snapshot = try? await Firestore.firestore().collection("relationships").whereField("coach_id", isEqualTo: uid).whereField("status", isEqualTo: "accepted").getDocuments() else { return [] }
+            
+            // get array of player IDs that coach is responsible for
+            var playersList: [String] = []
+            for firebaseRelationship in snapshot.documents {
+                let relationshipData = try firebaseRelationship.data(as: Relationship.self)
+                playersList.append(relationshipData.player_id)
+            }
+            
+            // get attempts for players under coach
+            guard let snapshot = try? await Firestore.firestore().collection("attempts").whereField("player_id", in: playersList).getDocuments() else { return [] }
+            
+            // convert to Attempt object and add to array
+            var attemptsList: [Attempt] = []
+            for firebaseAttempt in snapshot.documents {
+                let attempt = try firebaseAttempt.data(as: Attempt.self)
+                attemptsList.append(attempt)
+            }
+            return attemptsList
+        } catch {
+            print("DEBUG: Couldn't get attempts for coach: \(error.localizedDescription)")
+        }
+        return []
     }
+    
 }
