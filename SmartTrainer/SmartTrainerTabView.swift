@@ -55,6 +55,9 @@ struct SmartTrainerTabView: View {
                 }
             }
         }
+        else {
+            Text("Going to tab view but no user found!")
+        }
     }
 }
 

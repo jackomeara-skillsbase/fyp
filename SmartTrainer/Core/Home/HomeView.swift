@@ -84,7 +84,7 @@ extension HomeView {
         List(filterSearch(allAttempts: store.attempts, searchText: searchText)) { attempt in
                 AttemptCardView(attempt: attempt)
                     .background(NavigationLink("", 
-                                               destination: AttemptResource(attempt: attempt)
+                                               destination: AttemptResourceView(attempt: attempt)
                         .environmentObject(store))
                         .opacity(0))
             }

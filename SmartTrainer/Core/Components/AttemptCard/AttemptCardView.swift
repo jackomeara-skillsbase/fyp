@@ -30,7 +30,7 @@ struct AttemptCardView: View {
                 Text(attempt.player_name)
                     .foregroundStyle(Color.theme.accent)
                     .font(.subheadline)
-                Text("3 days ago")
+                Text(attempt.date.toTimeAgoString())
                     .foregroundStyle(Color.theme.secondaryText)
                     .font(.subheadline)
             }

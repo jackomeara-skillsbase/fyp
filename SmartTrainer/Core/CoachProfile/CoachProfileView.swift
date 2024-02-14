@@ -12,7 +12,8 @@ struct CoachProfileView: View {
     var body: some View {
         if let currentUser = store.currentUser {
             VStack {
-                ProfileBaseView(name: currentUser.name, email: currentUser.email)
+                ProfileBaseView(user: currentUser)
+                    .environmentObject(store)
                 
                 HStack {
                     Spacer()

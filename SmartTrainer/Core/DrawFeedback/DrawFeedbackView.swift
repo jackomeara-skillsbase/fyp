@@ -14,6 +14,7 @@ struct Line {
 }
 
 struct DrawFeedbackView: View {
+    var frame: UIImage?
     @State private var currentLine = Line()
     @State private var lines: [Line] = []
     @State private var selectedColor: Color = Color.theme.accent
@@ -23,12 +24,14 @@ struct DrawFeedbackView: View {
     
     var body: some View {
         ZStack {
-            GeometryReader { geometry in
-                Image("back_squat")
+            if let frame = frame {
+                Image(uiImage: frame)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .ignoresSafeArea()
+                    .containerRelativeFrame([.horizontal, .vertical])
+                    .rotationEffect(.degrees(90))
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                Text("No Image Found to draw on!")
             }
             VStack {
                 Canvas { context, size in

@@ -49,6 +49,8 @@
 		EC2CAFA02B5AFC300079DE11 /* NotificationDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CAF9F2B5AFC300079DE11 /* NotificationDataService.swift */; };
 		EC2CAFA52B5AFDAB0079DE11 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CAFA42B5AFDAB0079DE11 /* LogInView.swift */; };
 		EC2CAFA72B5AFFF70079DE11 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CAFA62B5AFFF70079DE11 /* SignUpView.swift */; };
+		EC32CCC22B7CE3F100CAB9EC /* SquatDepthModel2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EC32CCC12B7CE3F100CAB9EC /* SquatDepthModel2.mlmodel */; };
+		EC32CCC52B7CFFEA00CAB9EC /* RolePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC32CCC42B7CFFEA00CAB9EC /* RolePickerView.swift */; };
 		EC3A7FC72B69560F0022A861 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A7FC62B69560F0022A861 /* ChartView.swift */; };
 		EC3A7FCC2B695EE70022A861 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A7FCB2B695EE70022A861 /* FeedView.swift */; };
 		EC3A7FCF2B6966EC0022A861 /* AttemptVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A7FCE2B6966EC0022A861 /* AttemptVideoView.swift */; };
@@ -58,6 +60,9 @@
 		EC3A7FD92B6A90F40022A861 /* CoachReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A7FD82B6A90F40022A861 /* CoachReviewView.swift */; };
 		EC3A7FDB2B6A96AA0022A861 /* AIReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A7FDA2B6A96AA0022A861 /* AIReviewView.swift */; };
 		EC3A7FDD2B6A971F0022A861 /* AIRatingReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A7FDC2B6A971F0022A861 /* AIRatingReviewView.swift */; };
+		EC3BD4EE2B7CC76800681FC3 /* IMG_7215.MOV in Resources */ = {isa = PBXBuildFile; fileRef = EC3BD4ED2B7CC76800681FC3 /* IMG_7215.MOV */; };
+		EC3BD4F02B7CC8ED00681FC3 /* AIReviewDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BD4EF2B7CC8ED00681FC3 /* AIReviewDataService.swift */; };
+		EC3BD4F22B7CC92400681FC3 /* AIReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BD4F12B7CC92400681FC3 /* AIReview.swift */; };
 		EC4106832B6683E800D9C820 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4106822B6683E700D9C820 /* Store.swift */; };
 		EC43B8F22B5D9790007A55F0 /* CoachGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B8F12B5D9790007A55F0 /* CoachGroupView.swift */; };
 		EC43B8F42B5D9EED007A55F0 /* GroupPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC43B8F32B5D9EED007A55F0 /* GroupPlayerView.swift */; };
@@ -130,6 +135,8 @@
 		EC2CAF9F2B5AFC300079DE11 /* NotificationDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataService.swift; sourceTree = "<group>"; };
 		EC2CAFA42B5AFDAB0079DE11 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		EC2CAFA62B5AFFF70079DE11 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		EC32CCC12B7CE3F100CAB9EC /* SquatDepthModel2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SquatDepthModel2.mlmodel; sourceTree = "<group>"; };
+		EC32CCC42B7CFFEA00CAB9EC /* RolePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePickerView.swift; sourceTree = "<group>"; };
 		EC3A7FC62B69560F0022A861 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		EC3A7FCB2B695EE70022A861 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		EC3A7FCE2B6966EC0022A861 /* AttemptVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptVideoView.swift; sourceTree = "<group>"; };
@@ -139,6 +146,9 @@
 		EC3A7FD82B6A90F40022A861 /* CoachReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachReviewView.swift; sourceTree = "<group>"; };
 		EC3A7FDA2B6A96AA0022A861 /* AIReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIReviewView.swift; sourceTree = "<group>"; };
 		EC3A7FDC2B6A971F0022A861 /* AIRatingReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIRatingReviewView.swift; sourceTree = "<group>"; };
+		EC3BD4ED2B7CC76800681FC3 /* IMG_7215.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_7215.MOV; sourceTree = "<group>"; };
+		EC3BD4EF2B7CC8ED00681FC3 /* AIReviewDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIReviewDataService.swift; sourceTree = "<group>"; };
+		EC3BD4F12B7CC92400681FC3 /* AIReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIReview.swift; sourceTree = "<group>"; };
 		EC4106822B6683E700D9C820 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		EC43B8F12B5D9790007A55F0 /* CoachGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachGroupView.swift; sourceTree = "<group>"; };
 		EC43B8F32B5D9EED007A55F0 /* GroupPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPlayerView.swift; sourceTree = "<group>"; };
@@ -322,6 +332,7 @@
 				EC8134192B59BD0000CB8723 /* Relationship.swift */,
 				EC43B8FF2B5DDEF6007A55F0 /* CoachReview.swift */,
 				ECEE652D2B73F13B00504A19 /* User.swift */,
+				EC3BD4F12B7CC92400681FC3 /* AIReview.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -337,6 +348,7 @@
 		EC0E003D2B4DB8D900F06B98 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EC32CCC32B7CFFD900CAB9EC /* RolePicker */,
 				ECFAF2BA2B756817003F04F4 /* ImagePicker */,
 				ECFAF2B52B7564CE003F04F4 /* Toast */,
 				EC3A7FC52B6955F70022A861 /* Chart */,
@@ -377,6 +389,14 @@
 				EC2CAFA62B5AFFF70079DE11 /* SignUpView.swift */,
 			);
 			path = Authenticate;
+			sourceTree = "<group>";
+		};
+		EC32CCC32B7CFFD900CAB9EC /* RolePicker */ = {
+			isa = PBXGroup;
+			children = (
+				EC32CCC42B7CFFEA00CAB9EC /* RolePickerView.swift */,
+			);
+			path = RolePicker;
 			sourceTree = "<group>";
 		};
 		EC3A7FC52B6955F70022A861 /* Chart */ = {
@@ -453,6 +473,7 @@
 		EC6AE2D02B4DEFA000F8C0D2 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				EC3BD4ED2B7CC76800681FC3 /* IMG_7215.MOV */,
 				EC8134132B59A63700CB8723 /* squat_attempt.MOV */,
 				EC6AE2D12B4DEFA000F8C0D2 /* back_squat.mp4 */,
 			);
@@ -535,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				EC96204C2B6C0FAD00AC860A /* SquatDepthModel.mlmodel */,
+				EC32CCC12B7CE3F100CAB9EC /* SquatDepthModel2.mlmodel */,
 			);
 			path = CoreMLModels;
 			sourceTree = "<group>";
@@ -551,6 +573,7 @@
 				EC43B9012B5DDF40007A55F0 /* CoachReviewDataService.swift */,
 				ECEE652F2B73FC2F00504A19 /* VideoDataService.swift */,
 				ECFAF2B82B756797003F04F4 /* ImageDataService.swift */,
+				EC3BD4EF2B7CC8ED00681FC3 /* AIReviewDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -723,6 +746,7 @@
 				EC0E00292B4DB01D00F06B98 /* Preview Assets.xcassets in Resources */,
 				EC6AE2D22B4DEFA000F8C0D2 /* back_squat.mp4 in Resources */,
 				EC884E142B73DBF900F556A6 /* GoogleService-Info.plist in Resources */,
+				EC3BD4EE2B7CC76800681FC3 /* IMG_7215.MOV in Resources */,
 				EC0E00262B4DB01D00F06B98 /* Assets.xcassets in Resources */,
 				EC8134142B59A63700CB8723 /* squat_attempt.MOV in Resources */,
 			);
@@ -760,6 +784,8 @@
 				ECE43EB72B4ED13F00BDE0C7 /* CoachRowView.swift in Sources */,
 				EC6AE2D72B4DF5F200F8C0D2 /* PlayerProfileView.swift in Sources */,
 				EC4106832B6683E800D9C820 /* Store.swift in Sources */,
+				EC32CCC22B7CE3F100CAB9EC /* SquatDepthModel2.mlmodel in Sources */,
+				EC32CCC52B7CFFEA00CAB9EC /* RolePickerView.swift in Sources */,
 				EC903F092B5024FC00B3AB1F /* Player.swift in Sources */,
 				EC8134182B59BC9000CB8723 /* CoachDataService.swift in Sources */,
 				ECFAF2B92B756797003F04F4 /* ImageDataService.swift in Sources */,
@@ -770,6 +796,7 @@
 				EC3A7FD92B6A90F40022A861 /* CoachReviewView.swift in Sources */,
 				EC3A7FCF2B6966EC0022A861 /* AttemptVideoView.swift in Sources */,
 				EC4DCAB12B4DD59100B610DC /* AttemptCardView.swift in Sources */,
+				EC3BD4F22B7CC92400681FC3 /* AIReview.swift in Sources */,
 				EC43B9052B5DE0A1007A55F0 /* StarReviewView.swift in Sources */,
 				EC0E00422B4DC48C00F06B98 /* SmartTrainerTabView.swift in Sources */,
 				EC3A7FC72B69560F0022A861 /* ChartView.swift in Sources */,
@@ -801,6 +828,7 @@
 				ECE43EB92B4ED49200BDE0C7 /* NewCoachPopupView.swift in Sources */,
 				EC0E00372B4DB2C100F06B98 /* PreviewProvider.swift in Sources */,
 				ECFAF2B72B7564DC003F04F4 /* ToastView.swift in Sources */,
+				EC3BD4F02B7CC8ED00681FC3 /* AIReviewDataService.swift in Sources */,
 				EC3A7FD52B6A7AD30022A861 /* AttemptView.swift in Sources */,
 				ECAA8EB02B54981A0001FE7D /* ColorPickerView.swift in Sources */,
 				EC8134232B59C9B400CB8723 /* ReviewAttemptView.swift in Sources */,

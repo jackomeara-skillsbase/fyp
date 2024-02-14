@@ -20,11 +20,7 @@ struct SignUpView: View {
     var body: some View {
         VStack {
             // some icon
-            Image(systemName: "person")
-                .resizable()
-                .scaledToFill()
-                .frame(width:100, height: 120)
-                .padding(.vertical, 32)
+            RolePickerView(isCoach: $isCoach)
             
             // fields
             VStack(spacing: 24) {
@@ -33,7 +29,6 @@ struct SignUpView: View {
                 AuthenticationFormField(text: $name, title: "Full Name", placeholder: "Enter your name")
                 AuthenticationFormField(text: $password, title: "Create Password", placeholder: "Enter your password", isSecureField: true)
                 AuthenticationFormField(text: $confirmPassword, title: "Confirm Password", placeholder: "Confirm your password", isSecureField: true)
-                Toggle("Coach", isOn: $isCoach)
             }
             .padding(.horizontal)
             .padding(.top, 12)
@@ -45,7 +40,7 @@ struct SignUpView: View {
                 }
             } label: {
                 HStack {
-                    Text("SIGN IN")
+                    Text("SIGN UP")
                         .fontWeight(.semibold)
                     Image(systemName: "arrow.right")
                 }
@@ -71,55 +66,7 @@ struct SignUpView: View {
                 .foregroundStyle(Color(.systemBlue))
             }
         }
-        
-//        VStack {
-//            Image(systemName: "person.crop.circle")
-//                .font(.system(size: 100))
-//                .foregroundColor(Color.theme.accent)
-//                .padding(.bottom, 30)
-//            
-//
-//            TextField("Name", text: $name)
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
-//                .padding(.horizontal, 20)
-//                .padding(.bottom, 10)
-//
-//            TextField("Email", text: $email)
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
-//                .keyboardType(.emailAddress)
-//                .autocapitalization(.none)
-//                .padding(.horizontal, 20)
-//                .padding(.bottom, 10)
-//
-//            SecureField("Password", text: $password)
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
-//                .padding(.horizontal, 20)
-//                .padding(.bottom, 10)
-//
-//            SecureField("Confirm Password", text: $confirmPassword)
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
-//                .padding(.horizontal, 20)
-//                .padding(.bottom, 30)
-//            
-//
-//            Button(action: {
-//                // Handle sign-up logic here
-//                // You can validate inputs, create a new user, etc.
-//                print("Sign Up button tapped")
-//            }) {
-//                Text("Sign Up")
-//                    .foregroundColor(Color.theme.background)
-//                    .padding()
-//                    .frame(maxWidth: .infinity)
-//                    .background(Color.theme.accent)
-//                    .cornerRadius(8)
-//            }
-//            .padding(.horizontal, 20)
-//
-//            Spacer()
-//        }
-//        .padding()
-//        .navigationBarTitle("Sign Up", displayMode: .inline)
+        .padding(.top)
     }
 }
 

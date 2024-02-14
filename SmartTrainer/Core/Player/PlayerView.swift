@@ -18,7 +18,8 @@ struct PlayerView: View {
             
             ScrollView {
                 VStack {
-                    ProfileBaseView(name: player.name, email: player.email, profilePhoto: "")
+                    ProfileBaseView(user: player)
+                        .environmentObject(store)
                     
                     Button(action: {
                         print("generating report...")
@@ -42,7 +43,7 @@ struct PlayerView: View {
                     
                     ForEach(store.attempts.filter {$0.player_id == player.id}, id: \.self) { attempt in
                         AttemptCardView(attempt: attempt)
-                            .background(NavigationLink("", destination: AttemptResource(attempt: attempt))
+                            .background(NavigationLink("", destination: AttemptResourceView(attempt: attempt))
                                 .opacity(0))
                     }
                     .padding(.horizontal)

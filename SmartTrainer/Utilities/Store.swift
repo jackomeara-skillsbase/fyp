@@ -66,11 +66,8 @@ class Store: ObservableObject {
     
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        print("uid was found: \(uid)")
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        print("snapshot was completed")
         self.currentUser = try? snapshot.data(as: User.self)
-        print("Current User: \(self.currentUser)")
     }
     
     func fetchAttempts() async throws {
@@ -113,9 +110,33 @@ class Store: ObservableObject {
                                       technique_name: technique.techniqueName,
                                       technique_id: technique.id)
                 try await AttemptDataService.createAttempt(attempt: attempt)
+                
+                // conduct AI review
+                VideoRecognizer().recognizeDepth(from: fileURL) { result in
+                    switch result {
+                    case .success(let range):
+                        let review = AIReview(id: NSUUID().uuidString, date: Date(), range: range, control: "", balance: "", attempt_id: attempt.id)
+                        Task {
+                            try await AIReviewDataService.uploadAIReview(review: review)
+                        }
+                    case .failure(let error):
+                        fatalError(error.localizedDescription)
+                    }
+                }
             } catch {
                 print("DEBUG: Couldn't create attempt with error: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    func updateProfilePhoto(image: UIImage) async throws {
+        do {
+            // upload image first
+            guard let fileURL = try await ImageDataService.uploadImage(image: image) else { return }
+            
+            // set url as image_url in user
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).updateData(["image_url": fileURL]) else { return }
         }
     }
 }
