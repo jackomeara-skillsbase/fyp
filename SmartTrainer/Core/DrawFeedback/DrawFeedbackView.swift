@@ -15,6 +15,8 @@ struct Line {
 
 struct DrawFeedbackView: View {
     var frame: UIImage?
+    @Binding var showScreen: Bool
+    
     @State private var currentLine = Line()
     @State private var lines: [Line] = []
     @State private var selectedColor: Color = Color.theme.accent
@@ -27,12 +29,11 @@ struct DrawFeedbackView: View {
             if let frame = frame {
                 Image(uiImage: frame)
                     .resizable()
-                    .containerRelativeFrame([.horizontal, .vertical])
-                    .rotationEffect(.degrees(90))
-                    .aspectRatio(contentMode: .fill)
+                    .containerRelativeFrame([.vertical, .horizontal])
             } else {
                 Text("No Image Found to draw on!")
             }
+            
             VStack {
                 Canvas { context, size in
                     for line in lines {
@@ -65,8 +66,27 @@ struct DrawFeedbackView: View {
                         currentLine.color = newColor
                     }
             }
-            .frame(minWidth: 400, minHeight: 400)
             .padding()
+            
+            VStack {
+                HStack {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .foregroundStyle(.red)
+                        .frame(width: 40, height: 40)
+                        .onTapGesture {
+                            showScreen = false
+                        }
+                    Spacer()
+                    Image(systemName: "checkmark.circle.fill")
+                        .resizable()
+                        .foregroundStyle(.green)
+                        .frame(width: 40, height: 40)
+
+                }
+                .padding()
+                Spacer()
+            }
         }
     }
     
@@ -82,5 +102,5 @@ struct DrawFeedbackView: View {
 
 
 #Preview {
-    DrawFeedbackView()
+    DrawFeedbackView(showScreen: .constant(true))
 }

@@ -14,6 +14,19 @@ struct AIRatingReviewView: View {
     let successColor: Color = .green
     let emptyColor: Color = .gray
     
+    func getColor(rating: Int) -> Color {
+        switch rating {
+        case 0:
+            return Color.red
+        case 1:
+            return Color.yellow
+        case 2:
+            return Color.green
+        default:
+            return Color.green
+        }
+    }
+    
     var body: some View {
         VStack {
             Text(title)
@@ -21,31 +34,31 @@ struct AIRatingReviewView: View {
             VStack {
                 HStack(spacing: 0) {
                     Rectangle()
-                        .fill(successColor)
+                        .fill(getColor(rating: rating))
                         .frame(width: 15, height: 8)
                     
                     Circle()
-                        .fill(successColor)
+                        .fill(getColor(rating: rating))
                         .frame(width: 30, height: 30)
                     
                     Rectangle()
-                        .fill(rating > 0 ? successColor : emptyColor)
+                        .fill(rating > 0 ? getColor(rating: rating) : emptyColor)
                         .frame(width: 50, height: 8)
                     
                     Circle()
-                        .fill(rating > 0 ? successColor : emptyColor)
+                        .fill(rating > 0 ? getColor(rating: rating) : emptyColor)
                         .frame(width: 30, height: 30)
                     
                     Rectangle()
-                        .fill(rating > 1 ? successColor : emptyColor)
+                        .fill(rating > 1 ? getColor(rating: rating) : emptyColor)
                         .frame(width: 50, height: 8)
                     
                     Circle()
-                        .fill(rating > 1 ? successColor : emptyColor)
+                        .fill(rating > 1 ? getColor(rating: rating) : emptyColor)
                         .frame(width: 30, height: 30)
                     
                     Rectangle()
-                        .fill(rating == 2 ? successColor : emptyColor)
+                        .fill(rating == 2 ? getColor(rating: rating) : emptyColor)
                         .frame(width: 15, height: 8)
                 }
                 .frame(height: 20)

@@ -47,11 +47,6 @@ struct SmartTrainerTabView: View {
                             Image(systemName: "person")
                         }
                         .environmentObject(store)
-                    DrawFeedbackView()
-                        .tabItem {
-                            Image(systemName: "pencil")
-                        }
-                        .environmentObject(store)
                 }
             }
         }

@@ -35,7 +35,7 @@ struct AttemptResourceView: View {
                 return
             }
             
-            let uiImage = UIImage(cgImage: cgImage)
+            let uiImage = UIImage(cgImage: cgImage, scale: 1, orientation: .right)
             completion(uiImage)
         }
     }
@@ -59,6 +59,7 @@ struct AttemptResourceView: View {
                         }
                     
                     VStack {
+                        
                         Spacer()
                         
                         HStack(alignment: .bottom) {
@@ -149,7 +150,7 @@ struct AttemptResourceView: View {
                     }
                 }
             } else {
-                DrawFeedbackView(frame: drawingFrame)
+                DrawFeedbackView(frame: drawingFrame, showScreen: $showDrawingView)
             }
         }
     }

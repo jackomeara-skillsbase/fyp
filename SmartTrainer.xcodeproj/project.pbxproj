@@ -101,6 +101,7 @@
 		ECAA8EAE2B5495240001FE7D /* DrawFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EAD2B5495240001FE7D /* DrawFeedbackView.swift */; };
 		ECAA8EB02B54981A0001FE7D /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EAF2B54981A0001FE7D /* ColorPickerView.swift */; };
 		ECAA8EB72B54A6520001FE7D /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAA8EB62B54A6520001FE7D /* RecordingView.swift */; };
+		ECC9F6AC2B7D3E2500936725 /* PlayerReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC9F6AB2B7D3E2500936725 /* PlayerReportView.swift */; };
 		ECCC1FC52B671772004CF111 /* VideoFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC1FC42B671772004CF111 /* VideoFrameView.swift */; };
 		ECCDEED72B599B9D00F19A1F /* VideoAutoplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDEED62B599B9D00F19A1F /* VideoAutoplayView.swift */; };
 		ECE43EA52B4E09E200BDE0C7 /* TechniqueCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE43EA42B4E09E200BDE0C7 /* TechniqueCardView.swift */; };
@@ -188,6 +189,7 @@
 		ECAA8EAD2B5495240001FE7D /* DrawFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawFeedbackView.swift; sourceTree = "<group>"; };
 		ECAA8EAF2B54981A0001FE7D /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		ECAA8EB62B54A6520001FE7D /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		ECC9F6AB2B7D3E2500936725 /* PlayerReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerReportView.swift; sourceTree = "<group>"; };
 		ECCC1FC42B671772004CF111 /* VideoFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFrameView.swift; sourceTree = "<group>"; };
 		ECCDEED62B599B9D00F19A1F /* VideoAutoplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAutoplayView.swift; sourceTree = "<group>"; };
 		ECE43EA42B4E09E200BDE0C7 /* TechniqueCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechniqueCardView.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 		EC0E002F2B4DB06200F06B98 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				ECC9F6AA2B7D3E1600936725 /* PlayerReport */,
 				EC3A7FD32B6A7AC10022A861 /* Attempt */,
 				EC3A7FCD2B6966D50022A861 /* AttemptVideo */,
 				EC3A7FCA2B695ED30022A861 /* Feed */,
@@ -596,6 +599,14 @@
 			path = Recording;
 			sourceTree = "<group>";
 		};
+		ECC9F6AA2B7D3E1600936725 /* PlayerReport */ = {
+			isa = PBXGroup;
+			children = (
+				ECC9F6AB2B7D3E2500936725 /* PlayerReportView.swift */,
+			);
+			path = PlayerReport;
+			sourceTree = "<group>";
+		};
 		ECCDEED52B599B8600F19A1F /* VideoAutoplay */ = {
 			isa = PBXGroup;
 			children = (
@@ -785,6 +796,7 @@
 				EC6AE2D72B4DF5F200F8C0D2 /* PlayerProfileView.swift in Sources */,
 				EC4106832B6683E800D9C820 /* Store.swift in Sources */,
 				EC32CCC22B7CE3F100CAB9EC /* SquatDepthModel2.mlmodel in Sources */,
+				ECC9F6AC2B7D3E2500936725 /* PlayerReportView.swift in Sources */,
 				EC32CCC52B7CFFEA00CAB9EC /* RolePickerView.swift in Sources */,
 				EC903F092B5024FC00B3AB1F /* Player.swift in Sources */,
 				EC8134182B59BC9000CB8723 /* CoachDataService.swift in Sources */,

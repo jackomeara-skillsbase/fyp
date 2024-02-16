@@ -12,43 +12,36 @@ struct PlayerView: View {
     let player: User
     
     var body: some View {
-        ZStack {
-            Color.theme.background
-                .ignoresSafeArea()
-            
-            ScrollView {
-                VStack {
-                    ProfileBaseView(user: player)
-                        .environmentObject(store)
-                    
-                    Button(action: {
-                        print("generating report...")
-                    }) {
-                        Text("Generate Report")
-                            .foregroundStyle(Color.white)
-                            .padding(.horizontal)
-                    }
-                    .padding(8)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    .padding(.vertical)
-                    
-                    HStack {
-                        Text("Attempts")
-                            .foregroundStyle(Color.theme.accent)
-                            .font(.title)
+        NavigationStack {
+            ZStack {
+                Color.theme.background
+                    .ignoresSafeArea()
+                
+                ScrollView {
+                    VStack {
+                        ProfileBaseView(user: player)
+                            .environmentObject(store)
+                        
+                        NavigationLink("View Report", destination: PlayerReportView())
+                            .padding(10)
+                        
+                        HStack {
+                            Text("Attempts")
+                                .foregroundStyle(Color.theme.accent)
+                                .font(.title)
+                            Spacer()
+                        }
+                        .padding()
+                        
+                        ForEach(store.attempts.filter {$0.player_id == player.id}, id: \.self) { attempt in
+                            AttemptCardView(attempt: attempt)
+                                .background(NavigationLink("", destination: AttemptResourceView(attempt: attempt))
+                                    .opacity(0))
+                        }
+                        .padding(.horizontal)
+                        
                         Spacer()
                     }
-                    .padding()
-                    
-                    ForEach(store.attempts.filter {$0.player_id == player.id}, id: \.self) { attempt in
-                        AttemptCardView(attempt: attempt)
-                            .background(NavigationLink("", destination: AttemptResourceView(attempt: attempt))
-                                .opacity(0))
-                    }
-                    .padding(.horizontal)
-                    
-                    Spacer()
                 }
             }
         }
