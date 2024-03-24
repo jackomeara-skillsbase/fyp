@@ -10,15 +10,15 @@ import SwiftUI
 struct SmartTrainerTabView: View {
     @EnvironmentObject private var store: Store
     var body: some View {
-        if let currentUser = store.currentUser {
-            if !(currentUser.isCoach) {
+        if let currentUser = store.currentUser, store.isLoaded {
+            if currentUser.role == userRole.player {
                 TabView {
                     HomeView()
                         .tabItem {
                             Image(systemName: "house")
                         }
                         .environmentObject(store)
-                    PlayerRecordView()
+                    SelectTechniqueView()
                         .tabItem {
                             Image(systemName: "plus")
                         }
@@ -30,7 +30,7 @@ struct SmartTrainerTabView: View {
                         .environmentObject(store)
                 }
             }
-            else {
+            else if currentUser.role == userRole.coach {
                 TabView {
                     HomeView()
                         .tabItem {
@@ -49,9 +49,30 @@ struct SmartTrainerTabView: View {
                         .environmentObject(store)
                 }
             }
+            else if currentUser.role == userRole.manager {
+                TabView {
+                    ManagerOverviewView()
+                        .tabItem {
+                            Image(systemName: "house")
+                        }
+                        .environmentObject(store)
+                    ManagerCoachesView()
+                        .tabItem {
+                         Image(systemName: "person.3")
+                        }
+                        .environmentObject(store)
+                    ManagerProfileView()
+                        .tabItem {
+                            Image(systemName: "person")
+                        }
+                        .environmentObject(store)
+                }
+            }
         }
         else {
-            Text("Going to tab view but no user found!")
+            ProgressView("Loading...")
+                .progressViewStyle(CircularProgressViewStyle())
+                .padding()
         }
     }
 }

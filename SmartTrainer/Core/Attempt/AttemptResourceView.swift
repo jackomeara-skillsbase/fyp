@@ -12,6 +12,7 @@ struct AttemptResourceView: View {
     @State var isPlaying: Bool = false
     @State var showAI: Bool = false
     @State var showCoachReview: Bool = false
+    @State var showComments: Bool = false
     private var player: AVLooperPlayer
     @EnvironmentObject private var store: Store
     @State var showDrawingView: Bool = false
@@ -76,7 +77,7 @@ struct AttemptResourceView: View {
                             
                             VStack(spacing: 30) {
                                 
-                                CirclePhotoView(url: "player", size: 64)
+                                CirclePhotoView(url: "", size: 64)
                                 
                                 Button {
                                     showAI.toggle()
@@ -107,7 +108,22 @@ struct AttemptResourceView: View {
                                         .environmentObject(store)
                                 }
                                 
-                                if currentUser.isCoach {
+                                Button {
+                                    showComments.toggle()
+                                } label: {
+                                    Image(systemName: "message.fill")
+                                        .resizable()
+                                        .frame(width: 48, height: 48)
+                                        .foregroundStyle(.white)
+                                        .shadow(color: .black, radius: 3)
+                                }
+                                .sheet(isPresented: $showComments) {
+                                    CommentsPopupView(comments: [])
+                                        .presentationDetents([.fraction(0.7)])
+                                        .environmentObject(store)
+                                }
+                                
+                                if currentUser.role == userRole.coach {
                                     Button {
                                         
                                     } label: {
@@ -121,7 +137,6 @@ struct AttemptResourceView: View {
                                                 isPlaying = false
                                                 extractImage() { image in
                                                     if let image = image {
-                                                        print("got image!!")
                                                         showDrawingView = true
                                                         drawingFrame = image
                                                     } else {

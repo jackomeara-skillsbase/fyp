@@ -36,7 +36,7 @@ struct SignUpView: View {
             // sign in button
             Button {
                 Task {
-                    try await store.signUp(withEmail: email, password: password, name: name, isCoach: isCoach)
+                    try await store.signUp(withEmail: email, password: password, name: name, role: (isCoach == true ? userRole.coach : userRole.player))
                 }
             } label: {
                 HStack {

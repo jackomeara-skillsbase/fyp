@@ -24,6 +24,36 @@ struct DrawFeedbackView: View {
     @State private var lineLengths: [Int] = []
     @State private var nextSubLineNewLine: Bool = true
     
+    
+    var canvas: some View {
+        return Canvas { context, size in
+            for line in lines {
+                var path = Path()
+                path.addLines(line.points)
+                context.stroke(path, with: .color(line.color), lineWidth: line.lineWidth)
+            }
+            
+        }
+        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+            .onChanged({ value in
+                if nextSubLineNewLine {
+                    self.lastLineLength = 0
+                }
+                self.nextSubLineNewLine = false
+                self.lastLineLength += 1
+                
+                let newPoint = value.location
+                currentLine.points.append(newPoint)
+                self.lines.append(currentLine)
+            })
+                .onEnded({ value in
+                    self.currentLine = Line(points: [], color: selectedColor)
+                    self.nextSubLineNewLine = true
+                    self.lineLengths.append(self.lastLineLength)
+                })
+        )
+    }
+    
     var body: some View {
         ZStack {
             if let frame = frame {
@@ -35,32 +65,7 @@ struct DrawFeedbackView: View {
             }
             
             VStack {
-                Canvas { context, size in
-                    for line in lines {
-                        var path = Path()
-                        path.addLines(line.points)
-                        context.stroke(path, with: .color(line.color), lineWidth: line.lineWidth)
-                    }
-                    
-                }
-                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                    .onChanged({ value in
-                        if nextSubLineNewLine {
-                            self.lastLineLength = 0
-                        }
-                        self.nextSubLineNewLine = false
-                        self.lastLineLength += 1
-                        
-                        let newPoint = value.location
-                        currentLine.points.append(newPoint)
-                        self.lines.append(currentLine)
-                    })
-                        .onEnded({ value in
-                            self.currentLine = Line(points: [], color: selectedColor)
-                            self.nextSubLineNewLine = true
-                            self.lineLengths.append(self.lastLineLength)
-                        })
-                )
+                canvas
                 ColorPickerView(selectedColor: $selectedColor, goBack: removeLastStep)
                     .onChange(of: selectedColor) { oldColor, newColor in
                         currentLine.color = newColor
@@ -82,6 +87,16 @@ struct DrawFeedbackView: View {
                         .resizable()
                         .foregroundStyle(.green)
                         .frame(width: 40, height: 40)
+                        .onTapGesture {
+                            // save canvas to uiimage
+                            let drawingImage = canvas.frame(width: 400, height: 500)
+                                .snapshot()
+                            if let frame = frame {
+                                // merge image and canvas
+                                let mergedImage: UIImage = frame.mergeWith(topImage: drawingImage)
+                                // TODO: send image to server
+                            }
+                        }
 
                 }
                 .padding()

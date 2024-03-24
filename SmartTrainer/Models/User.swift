@@ -7,10 +7,14 @@
 
 import Foundation
 
+enum userRole: String, Codable {
+    case player, coach, manager
+}
+
 struct User: Identifiable, Codable {
     let id: String
     let name: String
     let email: String
-    let isCoach: Bool
+    let role: userRole
     let image_url: String
 }

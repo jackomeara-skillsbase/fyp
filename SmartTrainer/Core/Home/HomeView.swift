@@ -13,7 +13,7 @@ struct HomeView: View {
     @State private var searchText: String = ""
     
     private func filterSearch(allAttempts: [Attempt], searchText: String) -> [Attempt] {
-        if searchText == ""{
+        if searchText == "" {
             return allAttempts
         } else {
             return allAttempts.filter { $0.technique_name.contains(searchText) }
@@ -60,7 +60,6 @@ extension HomeView {
     private var header: some View {
         HStack {
             CircleButtonView(iconName: "arrow.clockwise")
-                .rotationEffect(.degrees(90))
             Spacer()
             Text(showNotifications ? "Notifications" : "Home")
                 .font(.headline)

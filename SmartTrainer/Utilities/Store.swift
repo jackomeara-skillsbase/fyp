@@ -16,6 +16,9 @@ class Store: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     
+    // init bool to load initial data
+    @Published var isLoaded: Bool = false
+    
     // model data
     @Published var attempts: [Attempt] = []
     @Published var players: [User] = []
@@ -28,6 +31,14 @@ class Store: ObservableObject {
         self.userSession = Auth.auth().currentUser
         Task {
             await fetchUser()
+            if let currentUser = self.currentUser {
+                try await fetchAttempts()
+                if currentUser.role == userRole.coach {
+                    try await fetchPlayers()
+                    // try await fetchGroups()
+                }
+                self.isLoaded = true
+            }
         }
     }
     
@@ -41,11 +52,11 @@ class Store: ObservableObject {
         }
     }
     
-    func signUp(withEmail email: String, password: String, name: String, isCoach: Bool) async throws {
+    func signUp(withEmail email: String, password: String, name: String, role: userRole) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            let user = User(id: result.user.uid, name: name, email: email, isCoach: isCoach, image_url: "")
+            let user = User(id: result.user.uid, name: name, email: email, role: role, image_url: "")
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
@@ -72,11 +83,12 @@ class Store: ObservableObject {
     
     func fetchAttempts() async throws {
         if let currentUser = self.currentUser {
-            if currentUser.isCoach {
+            if currentUser.role == userRole.coach {
                 self.attempts = try await AttemptDataService.getAttemptsForCoach()
             } else {
                 self.attempts = try await AttemptDataService.getAttemptsByPlayer()
             }
+            self.attempts.sort { $0.date < $1.date }
         }
     }
     
@@ -112,15 +124,10 @@ class Store: ObservableObject {
                 try await AttemptDataService.createAttempt(attempt: attempt)
                 
                 // conduct AI review
-                VideoRecognizer().recognizeDepth(from: fileURL) { result in
-                    switch result {
-                    case .success(let range):
-                        let review = AIReview(id: NSUUID().uuidString, date: Date(), range: range, control: "", balance: "", attempt_id: attempt.id)
-                        Task {
-                            try await AIReviewDataService.uploadAIReview(review: review)
-                        }
-                    case .failure(let error):
-                        fatalError(error.localizedDescription)
+                SquatRecognizer().analyseSquat(from: fileURL) { result in
+                    let review = AIReview(id: NSUUID().uuidString, date: Date(), range: result.range, control: "", balance: "", attempt_id: attempt.id)
+                    Task {
+                        try await AIReviewDataService.uploadAIReview(review: review)
                     }
                 }
             } catch {

@@ -49,5 +49,5 @@ struct PlayerView: View {
 }
 
 #Preview {
-    PlayerView(player: User(id: "123456", name: "Michael Jordan", email: "mj@gmail.com", isCoach: false, image_url: ""))
+    PlayerView(player: User(id: "123456", name: "Michael Jordan", email: "mj@gmail.com", role: userRole.player, image_url: ""))
 }
