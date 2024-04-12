@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct CoachPlayerRequestsView: View {
-    let requestedPlayers: [Player]
+    @EnvironmentObject private var store: Store
     @Binding var showRequests: Bool
+    @State private var requestedPlayers: [User] = .init()
+    
     var body: some View {
         VStack {
             if !requestedPlayers.isEmpty {
@@ -19,6 +21,9 @@ struct CoachPlayerRequestsView: View {
                     requestedPlayersView
                 }
             }
+        }
+        .task {
+            self.requestedPlayers = await User.requestedPlayers
         }
     }
 }
@@ -49,42 +54,51 @@ extension CoachPlayerRequestsView {
 extension CoachPlayerRequestsView {
     private var requestedPlayersView: some View {
         VStack {
-            ForEach(requestedPlayers, id: \.self) { player in
-                HStack {
-                    CirclePhotoView(url: player.image, size: 50)
-                    Text(player.name)
-                        .foregroundStyle(Color.theme.accent)
-                    Spacer()
-                    Button(action: {
-                        print("accepting request")
-//                        vm.acceptRequest(player: player)
-                    }) {
-                        Image(systemName: "checkmark")
-                            .foregroundStyle(Color.white)
-                    }
-                    .padding(12)
-                    .background(Color.green)
-                    .cornerRadius(10)
-                    Button(action: {
-                        print("rejecting request")
-//                        vm.rejectRequest(player: player)
-                    }) {
-                        Image(systemName: "xmark")
-                            .foregroundStyle(Color.white)
-                    }
-                    .padding(12)
-                    .background(Color.red)
-                    .cornerRadius(10)
-                }
-                .padding()
-                .background(Color.theme.background)
-                .cornerRadius(10)
-                .shadow(color: Color.theme.accent.opacity(0.3), radius: 5, x:0, y:0)
-                .padding(.horizontal)
-            }
+//            ForEach(requestedPlayers) { player in
+//                HStack {
+//                    CirclePhotoView(url: player.image_url, size: 50)
+//                    Text(player.name)
+//                        .foregroundStyle(Color.theme.accent)
+//                    Spacer()
+//                    Button(action: {
+//                        print("accepting request")
+////                        vm.acceptRequest(player: player)
+//                        store.requestedPlayers.removeAll { $0.id == player.id}
+//                        store.players.append(player)
+//                        Task {
+//                            try await RelationshipDataService.acceptPlayerRequest(playerID: player.id)
+//                        }
+//                    }) {
+//                        Image(systemName: "checkmark")
+//                            .foregroundStyle(Color.white)
+//                    }
+//                    .padding(12)
+//                    .background(Color.green)
+//                    .cornerRadius(10)
+//                    Button(action: {
+//                        print("rejecting request")
+//                        store.requestedPlayers.removeAll { $0.id == player.id}
+////                        vm.rejectRequest(player: player)
+//                        Task {
+//                            try await RelationshipDataService.rejectPlayerRequest(playerID: player.id)
+//                        }
+//                    }) {
+//                        Image(systemName: "xmark")
+//                            .foregroundStyle(Color.white)
+//                    }
+//                    .padding(12)
+//                    .background(Color.red)
+//                    .cornerRadius(10)
+//                }
+//                .padding()
+//                .background(Color.theme.background)
+//                .cornerRadius(10)
+//                .shadow(color: Color.theme.accent.opacity(0.3), radius: 5, x:0, y:0)
+//                .padding(.horizontal)
+//            }
         }
     }
 }
 #Preview {
-    CoachPlayerRequestsView(requestedPlayers: [], showRequests: .constant(true))
+    CoachPlayerRequestsView(showRequests: .constant(true))
 }

@@ -36,7 +36,15 @@ struct NewCoachPopupView: View {
                     // Check if the return key is pressed
                     if UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) {
                         Task {
-                            try await RelationshipDataService.requestCoach(coachEmail: searchText)
+                            showPopup = false
+                            let status = try await RelationshipDataService.requestCoach(coachEmail: searchText)
+                            if status == "no_coach" {
+                                await store.sendToast(type: .error, message: "👎 Coach not found.")
+                            } else if status == "success" {
+                                await store.sendToast(type: .success, message: "🎉 Coach request sent.")
+                            } else {
+                                await store.sendToast(type: .warning, message: "⚠️ Coach already connected.")
+                            }
                         }
                     }
                 })

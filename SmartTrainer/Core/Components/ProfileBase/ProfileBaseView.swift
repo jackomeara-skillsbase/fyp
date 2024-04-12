@@ -9,38 +9,35 @@ import SwiftUI
 
 struct ProfileBaseView: View {
     var user: User
+    var isCurrentUser: Bool = true
     @State private var image: Image? = nil
     @State private var isImagePickerPresented = false
     @EnvironmentObject private var store: Store
     
     var body: some View {
         VStack {
-            if user.image_url == "" {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .foregroundColor(Color.theme.accent)
-                    .frame(width:140, height:140)
-                    .padding(.top, 50)
-                    .shadow(
-                        color: Color.theme.accent.opacity(0.25),
-                        radius: 10, x:0.0, y:0.0
-                    )
-                    .onTapGesture {
-                        print("photo tapped")
-                        isImagePickerPresented.toggle()
-                    }
-                    .sheet(isPresented: $isImagePickerPresented) {
-                        ImagePicker(selectedImage: self.$image, store: store)
-                    }
-            } else {
-                CirclePhotoView(url: user.image_url, size: 140)
-                    .onTapGesture {
-                        print("photo tapped")
-//                        isImagePickerPresented.toggle()
-                    }
-                    .sheet(isPresented: $isImagePickerPresented) {
-                        ImagePicker(selectedImage: self.$image, store: store)
-                    }
+            
+            ZStack {
+                    CirclePhotoView(url: user.image_url, size: 140)
+                        .onTapGesture {
+                            print(user.image_url)
+                            print("photo tapped")
+                            if isCurrentUser {
+                                isImagePickerPresented.toggle()
+                            }
+                        }
+                        .sheet(isPresented: $isImagePickerPresented) {
+                            ImagePicker(selectedImage: self.$image, store: store)
+                        }
+                
+                if isCurrentUser {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundStyle(.blue)
+                        .backgroundStyle(.white)
+                        .offset(x: 45, y: 45)
+                }
             }
             
             Text(user.name)

@@ -9,7 +9,20 @@ import SwiftUI
 
 struct CoachGroupView: View {
     @EnvironmentObject private var store: Store
+    @State private var feedMode: Int = 0
+    @State private var searchText: String = ""
     var group: PlayersGroup
+    @State private var groupPlayers: [User] = .init()
+    
+    private func filterSearch(allAttempts: [Attempt], searchText: String) -> [Attempt] {
+        let groupAttempts = allAttempts.filter { group.player_ids.contains($0.player_id) }
+        if searchText == "" {
+            return groupAttempts
+        } else {
+            return groupAttempts.filter { $0.technique_name.contains(searchText) }
+        }
+    }
+    
     var body: some View {
         ZStack {
             Color.theme.background
@@ -26,28 +39,56 @@ struct CoachGroupView: View {
                         Spacer()
                     }
                     
-                    HStack {
-                        Text("Members (\(group.members.count))")
-                            .foregroundStyle(Color.theme.accent)
-                            .font(.headline)
-                            .padding()
+                    Picker("", selection: $feedMode) {
+                        Text("Members").tag(0)
+                        Text("Activity").tag(1)
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal)
+                    
+                    if feedMode == 0 {
+                        
+                        HStack {
+                            Text("Members (\(group.player_ids.count))")
+                                .foregroundStyle(Color.theme.accent)
+                                .font(.headline)
+                                .padding()
+                            Spacer()
+                        }
+                        
+                        List(groupPlayers) { player in
+                            PlayerCardView(player: player)
+                                .background(NavigationLink("", destination: PlayerView(player: player))
+                                    .opacity(0))
+                        }
+                        .listStyle(PlainListStyle())
+                        
+                        NavigationLink(destination: EditGroupMembersView(group: group).environmentObject(store)) {
+                            Text("Edit Members")
+                        }
                         Spacer()
+                        
                     }
                     
-                    List(store.inflateGroupMembers(group: group)) { player in
-                        GroupPlayerView(player: player)
-                            .background(NavigationLink("", destination: PlayerView(player: player))
-                                .opacity(0))
+                    if feedMode == 1 {
+                        SearchBarView(promptText: "Search for an attempt...", searchText: $searchText)
+                        
+                        List(filterSearch(allAttempts: store.attempts, searchText: searchText)) { attempt in
+                                AttemptCardView(attempt: attempt)
+                                    .background(NavigationLink("",
+                                                               destination: AttemptFeedView(attempt: attempt)
+                                        .environmentObject(store))
+                                        .opacity(0))
+                            }
+                            .listStyle(PlainListStyle())
                     }
-                    .listStyle(PlainListStyle())
-                    
-                    NavigationLink(destination: EditGroupMembersView(group: group)) {
-                        Text("Edit Members")
-                    }
-                    Spacer()
                 }
             }
-            }
+        }
+        .task {
+            var allPlayers = await User.players
+            self.groupPlayers = allPlayers.filter {group.player_ids.contains($0.id)}
+        }
     }
 }
 

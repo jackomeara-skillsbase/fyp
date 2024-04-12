@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct CommentView: View {
+    @EnvironmentObject private var store: Store
     var comment: Comment
+    @State private var profile_image: String = ""
+    
     var body: some View {
         HStack(alignment: .top) {
             CirclePhotoView(url: "", size: 40)
@@ -31,6 +34,20 @@ struct CommentView: View {
         }
         .padding(.horizontal)
         .padding(.top)
+//        .onAppear {
+//            if let currentUser = store.currentUser {
+//                if currentUser.id == comment.user_id {
+//                    self.profile_image = currentUser.image_url
+//                }
+//                else if currentUser.role == userRole.player {
+//                    self.profile_image = store.coaches.filter { $0.id == comment.user_id }[0].image_url
+//                }
+//                else {
+//                    self.profile_image = store.players.filter { $0.id == comment.user_id }[0].image_url
+//                }
+//            }
+//            print(self.profile_image)
+//        }
     }
 }
 

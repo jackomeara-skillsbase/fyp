@@ -12,6 +12,8 @@ struct AIReview: Identifiable, Codable, Hashable {
     let date: Date
     let range: String
     let control: String
-    let balance: String
+    let form: String
     let attempt_id: String
+    let flagged: Bool
+    let flagged_description: String
 }

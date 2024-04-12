@@ -15,7 +15,7 @@ struct GroupCardView: View {
                 .foregroundStyle(Color.theme.accent)
                 .font(.headline)
             Spacer()
-            Text("\(group.members.count)")
+            Text("\(group.player_ids.count)")
                 .foregroundStyle(Color.theme.accent)
             Image(systemName: "person")
                 .foregroundStyle(Color.theme.accent)

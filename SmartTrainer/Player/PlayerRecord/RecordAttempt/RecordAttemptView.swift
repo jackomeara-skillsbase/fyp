@@ -31,26 +31,36 @@ struct RecordAttemptView: View {
     @StateObject private var recorder: Recorder = Recorder()
     @EnvironmentObject private var store: Store
     var technique: Technique
+    @State private var showConfirmUpload: Bool = false
 
   var body: some View {
-    VStack {
-      CameraPreview(session: $recorder.session)
-        .frame(height: 500) // Adjust the height to your needs
-        Button(action: {
-          recorder.toggleState()
-        }) {
-            Image(systemName: !recorder.isRecording ? "record.circle" : "stop.circle.fill")
-                .padding()
-                .foregroundColor(!recorder.isRecording ? .red : .black)
-                .cornerRadius(8)
-                .font(.largeTitle)
+    ZStack {
+        CameraPreview(session: $recorder.session)
+        .frame(height: 750) // Adjust the height to your needs
+        VStack {
+            Spacer()
+            Button(action: {
+              recorder.toggleState()
+                if !recorder.isRecording {
+                    showConfirmUpload = true
+                }
+            }) {
+                Image(systemName: !recorder.isRecording ? "record.circle" : "stop.circle.fill")
+                    .resizable()
+                    .foregroundColor(!recorder.isRecording ? .black : .red)
+                    .frame(width: 70, height: 70)
+                    .padding(.bottom, 10)
         }
-
-      if recorder.isRecording {
-        Text("Recording...")
-          .foregroundColor(.red)
-      }
+        }
+        
+        NavigationLink(
+            destination: UploadAttemptView(recorder: recorder, technique: technique),
+            isActive: $showConfirmUpload
+        ) {
+            EmptyView()
+        }
     }
+    .padding(.bottom, 100)
     .onAppear {
         self.recorder.technique = self.technique
         self.recorder.store = self.store
@@ -64,6 +74,7 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
   private let movieOutput = AVCaptureMovieFileOutput()
   var technique: Technique? = nil
   var store: Store? = nil
+    @Published var video_url: URL? = nil
     
     override init() {
     super.init()
@@ -102,7 +113,7 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
   }
 
   func startRecording() {
-    guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("video.mp4") else { return }
+    guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("video.mov") else { return }
     if movieOutput.isRecording == false {
       if FileManager.default.fileExists(atPath: url.path) {
         try? FileManager.default.removeItem(at: url)
@@ -131,18 +142,11 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate, ObservableObject
             print("Error recording: \(error.localizedDescription)")
             return
             }
-        
-        Task {
-            do {
-                try await store!.createAttempt(fileURL: outputFileURL, technique: self.technique!)
-            } catch {
-                print("Video upload failed: \(error.localizedDescription)")
-            }
-        }
+        self.video_url = outputFileURL
     }
 }
 
 
 #Preview {
-    RecordAttemptView(technique: Technique(id: "sd", techniqueName: "sad", videoURL: "dasf", description: "asfs", aiModel: "asdsaf", thumbnail: "asfs"))
+    RecordAttemptView(technique: Technique(id: "sd", technique_name: "sad", video_url: "dasf", description: "asfs", ai_model: "asdsaf", thumbnail: "asfs"))
 }

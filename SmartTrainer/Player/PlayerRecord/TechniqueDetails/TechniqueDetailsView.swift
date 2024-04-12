@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct TechniqueDetailsView: View {
+    @EnvironmentObject private var store: Store
     let technique: Technique
+    @State private var player: AVLooperPlayer? = nil
     
     var body: some View {
         ZStack {
@@ -17,39 +19,44 @@ struct TechniqueDetailsView: View {
                 .ignoresSafeArea()
             
             // content layer
-            NavigationStack {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(technique.techniqueName)
-                                .foregroundStyle(Color.theme.accent)
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .padding()
-                            
-                            Spacer()
+            VStack(alignment: .leading) {
+                
+                if let player = player {
+                    ZStack {
+                        CustomVideoPlayer(player: player)
+                            .frame(maxHeight: 400)
+                        
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(technique.technique_name)
+                                    .foregroundStyle(.white)
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .padding()
+                                Spacer()
+                            }
+                            .padding(.top, 340)
                         }
-                        
-                        videoPreview
-                        
-                        exerciseDescription
-                        
-                        recordButton
-                        
-                        Spacer()
+                    }
                 }
+                
+                exerciseDescription
+                
+                Spacer()
+                
+                recordButton
             }
+            .ignoresSafeArea(.container, edges: .top)
         }
-    }
-}
-
-extension TechniqueDetailsView {
-    private var videoPreview: some View {
-//        Rectangle()
-//            .fill(Color.blue)
-//            .frame(width: 180, height: 320)
-//            .padding(.horizontal)
-        VideoAutoplayView(videoFile: technique.videoURL)
-            .frame(maxHeight: 320)
+        .onAppear {
+            let url = Bundle.main.url(forResource: technique.video_url, withExtension: "mp4")!
+            self.player = AVLooperPlayer(url: url)
+            self.player?.play()
+        }
+        .onDisappear {
+            self.player?.pause()
+            self.player = nil
+        }
     }
 }
 
@@ -59,7 +66,7 @@ extension TechniqueDetailsView {
             Text("\(technique.description)\n\nRecord one repetition. Film in portrait mode. Try to keep the phone still.")
         }
         .padding()
-        .foregroundStyle(Color.theme.accent)
+        .foregroundStyle(.secondaryText)
             
     }
 }
@@ -69,19 +76,24 @@ extension TechniqueDetailsView {
         HStack {
             Spacer()
             NavigationLink(destination: RecordAttemptView(technique: technique)) {
+                HStack {
+                    Spacer()
                     Text("Record Attempt")
-                        .foregroundStyle(Color.white)
+                            .foregroundStyle(Color.white)
                         .padding(.horizontal)
+                    Spacer()
+                }
             }
             .padding()
-            .background(Color.green)
+            .background(.blue)
             .cornerRadius(10)
             
             Spacer()
         }
+        .padding(.bottom, 10)
     }
 }
 
 #Preview {
-    TechniqueDetailsView(technique: Technique(id: UUID().uuidString, techniqueName: "Back Squat", videoURL: "back_squat", description: "Start with your feet at least shoulder-width apart. In a controlled manner, squat down until your legs are at least parallel with the ground. Pause shortly at the bottom, before standing back up to complete the exercise. You can put your hands out for balance as you complete the exercise.", aiModel: "ai_model123", thumbnail: "back_squat"))
+    TechniqueDetailsView(technique: Technique(id: UUID().uuidString, technique_name: "Back Squat", video_url: "back_squat", description: "Start with your feet at least shoulder-width apart. In a controlled manner, squat down until your legs are at least parallel with the ground. Pause shortly at the bottom, before standing back up to complete the exercise. You can put your hands out for balance as you complete the exercise.", ai_model: "ai_model123", thumbnail: "back_squat"))
 }

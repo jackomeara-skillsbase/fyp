@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct CirclePhotoView: View {
-    let url: String
+    var url: String
     var size: CGFloat = 60
     
     var body: some View {
-        AsyncImage(url: URL(string: url)) { image in
+        AsyncCachedImage(url: URL(string: url)) { image in
             image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -22,7 +22,12 @@ struct CirclePhotoView: View {
                 .shadow(color: Color.theme.accent.opacity(0.4), radius: 10, x:0, y:0)
         } placeholder: {
             if url != "" {
-                ProgressView()
+                VStack {
+                    ProgressView()
+                }
+                .frame(width: size, height: size)
+                .overlay(Circle().stroke(Color.theme.accent.opacity(0.8), lineWidth: 2))
+                .shadow(color: Color.theme.accent.opacity(0.4), radius: 10, x:0, y:0)
             } else {
                 Image(systemName: "person.circle.fill")
                     .resizable()

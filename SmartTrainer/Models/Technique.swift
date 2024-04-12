@@ -7,11 +7,22 @@
 
 import Foundation
 
-struct Technique: Identifiable, Codable {
+struct Technique: Identifiable, Codable, Hashable {
     let id: String
-    let techniqueName: String
-    let videoURL: String
+    let technique_name: String
+    let video_url: String
     let description: String
-    let aiModel: String
+    let ai_model: String
     let thumbnail: String
+    
+    static var all: [Technique] {
+        get async {
+            do {
+                let techniques = try await TechniqueDataService.fetchTechniques()
+                return techniques
+            } catch {
+                return []
+            }
+        }
+    }
 }

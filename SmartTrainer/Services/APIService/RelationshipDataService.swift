@@ -10,22 +10,22 @@ import Firebase
 import FirebaseFirestoreSwift
 
 class RelationshipDataService {
-    static func requestCoach(coachEmail: String) async throws {
+    static func requestCoach(coachEmail: String) async throws -> String {
         do {
             // get ID of logged-in player
-            guard let uid = Auth.auth().currentUser?.uid else { return }
-            guard let coachID = try? await UserDataService.getUserIDByEmail(email: coachEmail) else { return }
+            guard let uid = Auth.auth().currentUser?.uid else { return "" }
+            guard let coachID = try? await UserDataService.getUserIDByEmail(email: coachEmail) else { return "no_coach" }
             
-            guard let relationshipExists = try? await checkRelationshipExistsAsPlayer(coachEmail: coachEmail) else { return }
+            guard let relationshipExists = try? await checkRelationshipExistsAsPlayer(coachEmail: coachEmail) else { return "" }
             if relationshipExists {
                 // get id of relationship so it can be updated
-                guard let snapshot = try? await Firestore.firestore().collection("relationships").whereField("coach_id", isEqualTo: coachID).whereField("player_id", isEqualTo: uid).getDocuments() else { return }
+                guard let snapshot = try? await Firestore.firestore().collection("relationships").whereField("coach_id", isEqualTo: coachID).whereField("player_id", isEqualTo: uid).getDocuments() else { return "" }
                 if !snapshot.documents.isEmpty {
                     // update the relationship
                     let relationship = snapshot.documents[0]
                     
                     // don't allow already accepted relationship to send request
-                    if try relationship.data(as: Relationship.self).status == "accepted" { return }
+                    if try relationship.data(as: Relationship.self).status == "accepted" { return "already_accepted" }
                     
                     // create relationship object and send it
                     let documentID = relationship.documentID
@@ -42,6 +42,7 @@ class RelationshipDataService {
             } catch {
                 print("DEBUG: Couldn't request coach: \(error.localizedDescription)")
         }
+        return "success"
     }
     
     static func checkRelationshipExistsAsPlayer(coachEmail: String) async throws -> Bool {
@@ -98,9 +99,41 @@ class RelationshipDataService {
         return ""
     }
     
-    static func acceptPlayerRequest(playerID: String) async throws {}
+    static func acceptPlayerRequest(playerID: String) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("relationships").whereField("coach_id", isEqualTo: uid).whereField("player_id", isEqualTo: playerID).getDocuments() else { return }
+        if !snapshot.documents.isEmpty {
+            // update the relationship
+            let relationship = snapshot.documents[0]
+            
+            // don't allow already accepted relationship to send request
+            if try relationship.data(as: Relationship.self).status == "accepted" { return }
+            
+            // create relationship object and send it
+            let documentID = relationship.documentID
+            let relationshipObject = Relationship(id: documentID, player_id: playerID, coach_id: uid, status: "accepted")
+            let encodedRelationship = try Firestore.Encoder().encode(relationshipObject)
+            try await Firestore.firestore().collection("relationships").document(documentID).updateData(encodedRelationship)
+        }
+    }
     
-    static func rejectPlayerRequest(playerID: String) async throws {}
+    static func rejectPlayerRequest(playerID: String) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("relationships").whereField("coach_id", isEqualTo: uid).whereField("player_id", isEqualTo: playerID).getDocuments() else { return }
+        if !snapshot.documents.isEmpty {
+            // update the relationship
+            let relationship = snapshot.documents[0]
+            
+            // don't allow already accepted relationship to send request
+            if try relationship.data(as: Relationship.self).status == "accepted" { return }
+            
+            // create relationship object and send it
+            let documentID = relationship.documentID
+            let relationshipObject = Relationship(id: documentID, player_id: playerID, coach_id: uid, status: "rejected")
+            let encodedRelationship = try Firestore.Encoder().encode(relationshipObject)
+            try await Firestore.firestore().collection("relationships").document(documentID).updateData(encodedRelationship)
+        }
+    }
     
     static func getPendingRelationshipsForCoach() async throws -> [Relationship] {
         do {

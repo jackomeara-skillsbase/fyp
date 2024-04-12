@@ -8,10 +8,24 @@
 import SwiftUI
 
 struct AddCommentView: View {
+    @EnvironmentObject private var store: Store
     @Binding var commentText: String
+    var media_id: String
+    @Binding var comments: [Comment]
     var body: some View {
         HStack {
-            TextField("Add comment...", text: $commentText)
+            TextField("Add comment...", text: $commentText, onCommit: {
+                // Check if the return key is pressed
+                if UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) {
+                    Task {
+                        let comment = Comment(id: UUID().uuidString, media_id: media_id, date: Date(), user_id: store.currentUser!.id, user_name: store.currentUser!.name, comment: commentText)
+                        do {
+                            try await CommentDataService.addComment(comment: comment)
+                            comments.append(comment)
+                        } catch {}
+                    }
+                }
+            })
                 .submitLabel(.go)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
@@ -41,5 +55,5 @@ struct AddCommentView: View {
 }
 
 #Preview {
-    AddCommentView(commentText: .constant(""))
+    AddCommentView(commentText: .constant(""), media_id: "", comments: .constant([]))
 }

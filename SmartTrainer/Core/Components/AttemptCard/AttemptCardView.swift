@@ -42,10 +42,10 @@ struct AttemptCardView: View {
                         .foregroundStyle(Color.theme.accent)
                         .frame(width: 25, height: 25)
                     Spacer()
-                    Text("A")
-                        .foregroundStyle(getAIScoreColor(score: "A"))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.title)
+                    Image(systemName: !attempt.ai_reviewed ? "xmark" : "checkmark")
+                        .resizable()
+                        .foregroundStyle(!attempt.ai_reviewed ? Color.red : Color.green)
+                        .frame(width: 20, height: 20)
                 }
                 .frame(width: 60)
                 HStack {
@@ -54,9 +54,9 @@ struct AttemptCardView: View {
                         .frame(width: 25, height: 25)
                         .foregroundStyle(Color.theme.accent)
                     Spacer()
-                    Image(systemName: 1 == 0 ? "xmark" : "checkmark")
+                    Image(systemName: !attempt.coach_reviewed ? "xmark" : "checkmark")
                         .resizable()
-                        .foregroundStyle(1 == 0 ? Color.red : Color.green)
+                        .foregroundStyle(!attempt.coach_reviewed ? Color.red : Color.green)
                         .frame(width: 20, height: 20)
                         
                 }

@@ -11,6 +11,10 @@ struct PlayerProfileView: View {
     @State private var showNewCoach: Bool = false
     @State private var searchText: String = ""
     @EnvironmentObject private var store: Store
+    @State private var coaches: [User] = .init()
+    @State private var requestedCoaches: [User] = .init()
+    @State private var techniquesCount: Int = 0
+    @State private var attemptsCount: Int = 0
     
     var body: some View {
         if let currentUser = store.currentUser {
@@ -24,6 +28,7 @@ struct PlayerProfileView: View {
                     VStack {
                         ProfileBaseView(user: currentUser)
                             .environmentObject(store)
+                            .padding(.top, 30)
                         
                         HStack {
                             Spacer()
@@ -32,18 +37,18 @@ struct PlayerProfileView: View {
                                     .foregroundStyle(Color.theme.secondaryText)
                                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                     .padding(.bottom, 2)
-                                Text("\(store.attempts.count)")
+                                Text("\(attemptsCount)")
                                     .foregroundStyle(Color.theme.accent)
                                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             }
                             Spacer()
                             VStack {
-                                Text("A Grades")
+                                Text("Techniques")
                                     .foregroundStyle(Color.theme.secondaryText)
                                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                     .padding(.bottom, 2)
-                                Text("12")
+                                Text("\(techniquesCount)")
                                     .foregroundStyle(Color.theme.accent)
                                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -79,6 +84,12 @@ struct PlayerProfileView: View {
                         .environmentObject(store)
                 }
             }
+            .task {
+                self.coaches = await User.coaches
+                self.requestedCoaches = await User.requestedCoaches
+                self.techniquesCount = await Technique.all.count
+                self.attemptsCount = await Attempt.playersAttempts.count
+            }
         }
     }
 }
@@ -98,8 +109,11 @@ extension PlayerProfileView {
                     }
             }
             .padding()
-            ForEach(store.coaches, id: \.self) { coach in
-                CoachRowView(coach: coach)
+            ForEach(coaches, id: \.self) { coach in
+                CoachRowView(coach: coach, status: "accepted")
+            }
+            ForEach(requestedCoaches, id: \.self) { coach in
+                CoachRowView(coach: coach, status: "pending")
             }
         }
     }

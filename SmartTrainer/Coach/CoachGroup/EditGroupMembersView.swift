@@ -8,32 +8,43 @@
 import SwiftUI
 
 struct EditGroupMembersView: View {
+    @EnvironmentObject private var store: Store
     var group: PlayersGroup
-    var players: [Player] = []
+    @State private var players: [User] = .init()
+    @State private var playerAdded: [Bool] = .init()
+    
     var body: some View {
-        VStack {
-            List(players) { player in
-                memberCard(player: player)
+            VStack {
+                List(playerAdded.indices, id:\.self) {index in
+                    HStack {
+                        Text(players[index].name)
+                            .foregroundStyle(Color.theme.accent)
+                        Spacer()
+                        Toggle("", isOn: $playerAdded[index])
+                    }
+                }
+                .listStyle(PlainListStyle())
+                Button {
+                    var ids: [String] = [String]()
+                    for (index, value) in playerAdded.enumerated() {
+                        if value {
+                            ids.append(players[index].id)
+                        }
+                    }
+                    Task {
+//                        await group.updateMembers(players: ids)
+                    }
+                } label: {
+                    Text("Save")
+                }
             }
-            .listStyle(PlainListStyle())
+            .task {
+                self.players = await User.players
+                self.playerAdded = self.players.map { player in group.player_ids.contains(player.id) }
+            }
         }
-    }
 }
 
-extension EditGroupMembersView {
-    struct memberCard: View {
-        var player: Player
-        var body: some View {
-            HStack {
-                Text(player.name)
-                    .foregroundStyle(Color.theme.accent)
-                Spacer()
-                Toggle("", isOn: .constant(false))
-                    .padding()
-            }
-        }
-    }
-}
 //
 //#Preview {
 //    EditGroupMembersView(group: PlayersGroup(id: 1, name: "NBA Players", members: [

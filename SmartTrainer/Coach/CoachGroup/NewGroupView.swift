@@ -11,6 +11,9 @@ struct NewGroupView: View {
     @Binding var showPopup: Bool
     var players: [User]
     @State private var playerAdded: [Bool] = []
+    @State private var nameText: String = ""
+    @EnvironmentObject private var store: Store
+    
     var body: some View {
         VStack {
             HStack {
@@ -27,7 +30,7 @@ struct NewGroupView: View {
             .padding(.horizontal)
             .padding(.top)
             
-            SearchBarView(promptText: "Enter the group's name..", searchText: .constant(""))
+            SearchBarView(promptText: "Enter the group's name..", searchText: $nameText)
             
             List(playerAdded.indices, id:\.self) {index in
                 HStack {
@@ -39,12 +42,16 @@ struct NewGroupView: View {
             .listStyle(PlainListStyle())
             
             Button("Create") {
-//                var ids = []
-//                for (index, value) in playerAdded.enumerated() {
-//                    if value {
-//                        ids.append(players[index].id)
-//                    }
-//                }
+                var ids: [String] = [String]()
+                for (index, value) in playerAdded.enumerated() {
+                    if value {
+                        ids.append(players[index].id)
+                    }
+                }
+                Task {
+                    let group = 
+                    try await store.createGroup(name: nameText, players: ids)
+                }
                 
             }
             
@@ -56,6 +63,8 @@ struct NewGroupView: View {
         .frame(minHeight: 500)
         .onAppear {
             playerAdded = players.map { _ in false }
+            print(players)
+            print(playerAdded)
         }
     }
 }

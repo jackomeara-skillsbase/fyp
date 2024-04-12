@@ -9,6 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var store: Store
+    @State private var attempts: [Attempt] = .init()
+    @State private var notifications: [Notification] = .init()
+    
     @State private var showNotifications: Bool = false
     @State private var searchText: String = ""
     
@@ -16,7 +19,10 @@ struct HomeView: View {
         if searchText == "" {
             return allAttempts
         } else {
-            return allAttempts.filter { $0.technique_name.contains(searchText) }
+            return allAttempts.filter { attempt in
+                attempt.technique_name.range(of: searchText, options: .caseInsensitive) != nil ||
+                attempt.player_name.range(of: searchText, options: .caseInsensitive) != nil
+            }
         }
     }
     
@@ -29,14 +35,11 @@ struct HomeView: View {
                 
                 // content layer
                 VStack {
-                    header
+                    HomeHeaderView(showNotifications: $showNotifications, attempts: $attempts)
+                        .environmentObject(store)
                     
                     if showNotifications {
-                        List(store.notifications) { notification in
-                            Text(notification.message)
-                                .foregroundStyle(Color.theme.accent)
-                        }
-                        .listStyle(PlainListStyle())
+                        NotificationsView()
                     } else {
                         SearchBarView(promptText: "Search for an attempt...", searchText: $searchText)
                         
@@ -47,43 +50,26 @@ struct HomeView: View {
                 }
             }
         }
-        .onAppear {
-            Task {
-                try await store.fetchAttempts()
-                try await store.fetchNotifications()
+        .task {
+            self.notifications = await Notification.all
+            if let currentUser = store.currentUser {
+                if currentUser.role == userRole.coach {
+                    self.attempts = await Attempt.coachesAttempts
+                } else {
+                    self.attempts = await Attempt.playersAttempts
+                }
             }
         }
     }
 }
 
 extension HomeView {
-    private var header: some View {
-        HStack {
-            CircleButtonView(iconName: "arrow.clockwise")
-            Spacer()
-            Text(showNotifications ? "Notifications" : "Home")
-                .font(.headline)
-                .fontWeight(.heavy)
-                .foregroundStyle(Color.theme.accent)
-            Spacer()
-            CircleButtonView(iconName: showNotifications ? "house" : "bell")
-                .onTapGesture {
-                    withAnimation(.spring()) {
-                        showNotifications.toggle()
-                    }
-                }
-        }
-        .padding(.horizontal)
-    }
-}
-
-extension HomeView {
     private var attemptsList: some View {
         
-        List(filterSearch(allAttempts: store.attempts, searchText: searchText)) { attempt in
+        List(filterSearch(allAttempts: attempts, searchText: searchText)) { attempt in
                 AttemptCardView(attempt: attempt)
                     .background(NavigationLink("", 
-                                               destination: AttemptResourceView(attempt: attempt)
+                                               destination: AttemptFeedView(attempt: attempt)
                         .environmentObject(store))
                         .opacity(0))
             }

@@ -11,7 +11,7 @@ struct PlayerCardView: View {
     let player: User
     var body: some View {
         HStack {
-            CirclePhotoView(url: "", size: 50)
+            CirclePhotoView(url: player.image_url, size: 50)
             Text(player.name)
                 .padding(.horizontal)
                 .foregroundStyle(Color.theme.accent)

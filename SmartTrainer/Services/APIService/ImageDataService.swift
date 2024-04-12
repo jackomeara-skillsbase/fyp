@@ -13,7 +13,7 @@ class ImageDataService {
     static func uploadImage(image: UIImage) async throws -> String? {
         let fileName = NSUUID().uuidString
         let ref = Storage.storage().reference().child("/images/\(fileName)")
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+        guard let imageData = image.jpegData(compressionQuality: 0.4) else {
             print("Failed to convert image to data")
             return nil
         }

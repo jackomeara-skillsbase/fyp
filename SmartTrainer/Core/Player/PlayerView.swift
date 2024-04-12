@@ -11,18 +11,20 @@ struct PlayerView: View {
     @EnvironmentObject private var store: Store
     let player: User
     
+    private func filterAttempts(allAttempts: [Attempt]) -> [Attempt] {
+        return allAttempts.filter { $0.player_id == player.id }
+    }
+    
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color.theme.background
                     .ignoresSafeArea()
                 
-                ScrollView {
                     VStack {
-                        ProfileBaseView(user: player)
+                        ProfileBaseView(user: player, isCurrentUser: false)
                             .environmentObject(store)
                         
-                        NavigationLink("View Report", destination: PlayerReportView())
+                        NavigationLink("View Report", destination: PlayerReportView(player: player))
                             .padding(10)
                         
                         HStack {
@@ -33,18 +35,17 @@ struct PlayerView: View {
                         }
                         .padding()
                         
-                        ForEach(store.attempts.filter {$0.player_id == player.id}, id: \.self) { attempt in
+                        List(filterAttempts(allAttempts: store.attempts)) { attempt in
                             AttemptCardView(attempt: attempt)
-                                .background(NavigationLink("", destination: AttemptResourceView(attempt: attempt))
+                                .background(NavigationLink("", destination: AttemptFeedView(attempt: attempt)
+                                    .environmentObject(store))
                                     .opacity(0))
                         }
-                        .padding(.horizontal)
+                        .listStyle(PlainListStyle())
                         
                         Spacer()
                     }
-                }
             }
-        }
     }
 }
 

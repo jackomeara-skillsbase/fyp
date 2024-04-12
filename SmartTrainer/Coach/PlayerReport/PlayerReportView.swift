@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PlayerReportView: View {
+    var player: User
     var body: some View {
         ScrollView {
             VStack {
@@ -16,11 +17,7 @@ struct PlayerReportView: View {
                 HStack {
                     
                     // profile image
-                    Image("athlete")
-                        .resizable()
-                        .frame(width: 90, height: 90)
-                        .clipShape(Circle())
-                        .aspectRatio(contentMode: .fit)
+                    CirclePhotoView(url: player.image_url, size: 90)
                     
                     // basic details
                     VStack(alignment: .leading) {
@@ -172,5 +169,5 @@ struct PlayerReportView: View {
 }
 
 #Preview {
-    PlayerReportView()
+    PlayerReportView(player: User(id: "", name: "", email: "", role: userRole.player, image_url: ""))
 }

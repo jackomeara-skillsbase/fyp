@@ -19,27 +19,38 @@ class Store: ObservableObject {
     // init bool to load initial data
     @Published var isLoaded: Bool = false
     
+    // tab item manager view
+    @Published var selectedTab: Int = 0
+    
     // model data
     @Published var attempts: [Attempt] = []
-    @Published var players: [User] = []
-    @Published var groups: [PlayersGroup] = []
-    @Published var coaches: [Coach] = []
-    @Published var notifications: [Notification] = []
     @Published var relationships: [Relationship] = []
+    
+    // toast message details
+    @Published var currentToast: ToastMessage = ToastMessage(id: "", type: .info, message: "")
+    @Published var toastMessage: String = ""
+    @Published var showToast: Bool = false
+    @Published var toastType: ToastType = .info
     
     init() {
         self.userSession = Auth.auth().currentUser
         Task {
             await fetchUser()
             if let currentUser = self.currentUser {
-                try await fetchAttempts()
-                if currentUser.role == userRole.coach {
-                    try await fetchPlayers()
-                    // try await fetchGroups()
-                }
                 self.isLoaded = true
             }
         }
+    }
+    
+    func sendToast(type: ToastType, message: String) async {
+        self.toastType = type
+        self.toastMessage = message
+        self.showToast = true
+        do {
+            try await Task.sleep(nanoseconds: 2*1_000_000_000)
+            self.showToast = false
+        }
+        catch {}
     }
     
     func logIn(withEmail email: String, password: String) async throws {
@@ -47,6 +58,7 @@ class Store: ObservableObject {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             await fetchUser()
+            self.isLoaded = true
         } catch {
             print("DEBUG: Failed to log in: \(error.localizedDescription)")
         }
@@ -60,6 +72,7 @@ class Store: ObservableObject {
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
+            self.isLoaded = true
         } catch {
             print("DEBUG: Failed to create user: \(error.localizedDescription)")
         }
@@ -81,59 +94,31 @@ class Store: ObservableObject {
         self.currentUser = try? snapshot.data(as: User.self)
     }
     
-    func fetchAttempts() async throws {
-        if let currentUser = self.currentUser {
-            if currentUser.role == userRole.coach {
-                self.attempts = try await AttemptDataService.getAttemptsForCoach()
-            } else {
-                self.attempts = try await AttemptDataService.getAttemptsByPlayer()
-            }
-            self.attempts.sort { $0.date < $1.date }
-        }
-    }
-    
-    func fetchPlayers() async throws {
-            self.players = try await UserDataService.fetchPlayers()
-    }
-    
-    func fetchNotifications() async throws {
-        if self.currentUser != nil {
-            self.notifications = try await NotificationDataService.fetchNotifications()
-        }
-    }
-    
-    // inflate group members (array of ID's) to users
-    func inflateGroupMembers(group: PlayersGroup) -> [User] {
-        return self.players.filter {group.members.contains(Member(id: Int($0.id)!))}
-    }
-    
-    func createAttempt(fileURL: URL, technique: Technique) async throws {
+    func addDrawing(img: UIImage, attempt: Attempt) async throws {
         if let currentUser = self.currentUser {
             do {
-                // upload video first and get firebase file URL
-                guard let videoURL = try await VideoDataService.uploadVideo(fileURL: fileURL) else { return }
+                guard let imageURL = try await ImageDataService.uploadImage(image: img) else { return }
                 
-                // create attempt object using firebase file URL
-                let attempt = Attempt(id: UUID().uuidString,
-                                      date: Date(),
-                                      video_url: videoURL,
-                                      player_name: currentUser.name,
-                                      player_id: currentUser.id,
-                                      technique_name: technique.techniqueName,
-                                      technique_id: technique.id)
-                try await AttemptDataService.createAttempt(attempt: attempt)
+                // update local array
+                let attemptIndex = self.attempts.firstIndex(where: {$0.id == attempt.id })
+                self.attempts[attemptIndex!].imgs.append(imageURL)
                 
-                // conduct AI review
-                SquatRecognizer().analyseSquat(from: fileURL) { result in
-                    let review = AIReview(id: NSUUID().uuidString, date: Date(), range: result.range, control: "", balance: "", attempt_id: attempt.id)
-                    Task {
-                        try await AIReviewDataService.uploadAIReview(review: review)
-                    }
-                }
-            } catch {
-                print("DEBUG: Couldn't create attempt with error: \(error.localizedDescription)")
+                // update attempt object
+                try await AttemptDataService.addDrawing(attempt: attempt, imgURL: imageURL)
             }
         }
+    }
+    
+    func createGroup(name: String, players: [String]) async throws {
+        if let currentUser = currentUser {
+            let group = PlayersGroup(id: UUID().uuidString, name: name, coach_id: currentUser.id, player_ids: players)
+            try await GroupDataService.createGroup(group: group)
+        }
+    }
+    
+    func updateGroupMembers(group: PlayersGroup, players: [String]) async throws {
+        let group = PlayersGroup(id: group.id, name: group.name, coach_id: group.coach_id, player_ids: players)
+        try await GroupDataService.updateGroup(group: group)
     }
     
     func updateProfilePhoto(image: UIImage) async throws {
@@ -144,6 +129,7 @@ class Store: ObservableObject {
             // set url as image_url in user
             guard let uid = Auth.auth().currentUser?.uid else { return }
             guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).updateData(["image_url": fileURL]) else { return }
+            self.currentUser?.image_url = fileURL
         }
     }
 }

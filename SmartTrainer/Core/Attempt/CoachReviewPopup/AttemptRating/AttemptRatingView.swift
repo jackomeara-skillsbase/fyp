@@ -10,6 +10,7 @@ import SwiftUI
 struct AttemptRatingView: View {
     @Binding var rating: Int
     var label: String = "Overall"
+    var editable: Bool
     
     let offColor: Color = Color.gray
     let onColor: Color = Color.yellow
@@ -21,7 +22,9 @@ struct AttemptRatingView: View {
                 .padding(.trailing)
             ForEach(1...5, id:\.self) { number in
                 Button {
-                    rating = number
+                    if editable {
+                        rating = number
+                    }
                 } label: {
                     image(for: number)
                         .foregroundStyle(number > rating ? offColor : onColor)
@@ -41,5 +44,5 @@ struct AttemptRatingView: View {
 }
 
 #Preview {
-    AttemptRatingView(rating: .constant(4))
+    AttemptRatingView(rating: .constant(4), editable: false)
 }

@@ -9,11 +9,14 @@ import SwiftUI
 
 struct CoachProfileView: View {
     @EnvironmentObject private var store: Store
+    @State private var playersCount: Int = 0
+    @State private var attemptsCount: Int = 0
     var body: some View {
         if let currentUser = store.currentUser {
             VStack {
                 ProfileBaseView(user: currentUser)
                     .environmentObject(store)
+                    .padding(.top, 30)
                 
                 HStack {
                     Spacer()
@@ -22,18 +25,18 @@ struct CoachProfileView: View {
                             .foregroundStyle(Color.theme.secondaryText)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .padding(.bottom, 2)
-                        Text("\(store.players.count)")
+                        Text("\(playersCount)")
                             .foregroundStyle(Color.theme.accent)
                             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     }
                     Spacer()
                     VStack {
-                        Text("To Review")
+                        Text("Attempts")
                             .foregroundStyle(Color.theme.secondaryText)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .padding(.bottom, 2)
-                        Text("16")
+                        Text("\(attemptsCount)")
                             .foregroundStyle(Color.theme.accent)
                             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -56,6 +59,10 @@ struct CoachProfileView: View {
                 .cornerRadius(10)
                 
                 Spacer()
+            }
+            .task {
+                self.attemptsCount = await Attempt.coachesAttempts.count
+                self.playersCount = await User.players.count
             }
         }
     }

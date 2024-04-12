@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct AIRatingReviewView: View {
-    let title: String
-    let rating: Int
+    var title: String = ""
+    var rating: Int = 0
     
     let successColor: Color = .green
     let emptyColor: Color = .gray
+    
+    init(title: String, rating: String) {
+        self.title = title
+        self.rating = getIntForRating(rating: rating)
+    }
     
     func getColor(rating: Int) -> Color {
         switch rating {
@@ -20,10 +25,22 @@ struct AIRatingReviewView: View {
             return Color.red
         case 1:
             return Color.yellow
-        case 2 :
+        case 2:
             return Color.green
         default:
             return Color.green
+        }
+    }
+    
+    private func getIntForRating(rating: String) -> Int {
+        switch rating {
+        case "poor":
+            return 0
+        case "average":
+            return 1
+        case "good":
+            return 2
+        default: return 0
         }
     }
     
@@ -88,10 +105,10 @@ struct AIRatingReviewView: View {
 struct AIRatingReviewView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            AIRatingReviewView(title: "Depth", rating: 1)
-            AIRatingReviewView(title: "Control", rating: 0)
-            AIRatingReviewView(title: "Balance", rating: 2)
-            AIRatingReviewView(title: "Other", rating: 1)
+            AIRatingReviewView(title: "Depth", rating: "")
+            AIRatingReviewView(title: "Control", rating: "")
+            AIRatingReviewView(title: "Balance", rating: "")
+            AIRatingReviewView(title: "Other", rating: "")
         }
     }
 }

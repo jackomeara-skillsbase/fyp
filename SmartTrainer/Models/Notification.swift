@@ -12,4 +12,13 @@ struct Notification: Identifiable, Codable, Hashable {
     let date: Date
     let user_id: String
     let message: String
+    
+    static var all: [Notification] {
+        get async {
+            do {
+                let notifications = try await NotificationDataService.fetchNotifications()
+                return notifications
+            } catch { return [] }
+        }
+    }
 }

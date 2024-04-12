@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AttemptVisibilityView: View {
-    @State var visibilityLevel: Int = 0
+    @Binding var visibilityLevel: Int
     var body: some View {
         HStack {
             VStack {
@@ -34,14 +34,13 @@ struct AttemptVisibilityView: View {
                 }
             }
             
-            
             VStack {
-                Image(systemName: "person.2.fill")
+                Image(systemName: "person.fill")
                     .resizable()
                     .foregroundStyle(visibilityLevel == 2 ? .accent : .secondaryText)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 30, height: 30)
-                Text("Coach")
+                Text("Me")
                     .foregroundStyle(visibilityLevel == 2 ? .accent : .secondaryText)
                     .font(.subheadline)
             }
@@ -57,34 +56,10 @@ struct AttemptVisibilityView: View {
                     visibilityLevel = 2
                 }
             }
-            
-            
-            VStack {
-                Image(systemName: "person.fill")
-                    .resizable()
-                    .foregroundStyle(visibilityLevel == 3 ? .accent : .secondaryText)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 30, height: 30)
-                Text("Me")
-                    .foregroundStyle(visibilityLevel == 3 ? .accent : .secondaryText)
-                    .font(.subheadline)
-            }
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(visibilityLevel == 3 ? Color.blue : Color.clear, lineWidth: 3)
-            )
-            .onTapGesture {
-                if visibilityLevel == 3 {
-                    visibilityLevel = 0
-                } else {
-                    visibilityLevel = 3
-                }
-            }
         }
     }
 }
 
 #Preview {
-    AttemptVisibilityView()
+    AttemptVisibilityView(visibilityLevel: .constant(1))
 }

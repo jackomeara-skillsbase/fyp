@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestoreSwift
 
 class CommentDataService {
-    static func getCommentsForMedia(mediaID: String) async throws -> [Comment]? {
+    static func fetchCommentsForMedia(mediaID: String) async throws -> [Comment] {
         do {
             guard let snapshot = try? await Firestore.firestore().collection("comments").whereField("media_id", isEqualTo: mediaID).getDocuments() else { return [] }
             
@@ -24,5 +24,14 @@ class CommentDataService {
             print("DEBUG: Error fetching comments: \(error.localizedDescription)")
         }
         return []
+    }
+    
+    static func addComment(comment: Comment) async throws -> Void {
+        do {
+            let encodedComment = try Firestore.Encoder().encode(comment)
+            try await Firestore.firestore().collection("comments").document(comment.id).setData(encodedComment)
+        } catch {
+            print("DEBUG: Error adding comment: \(error.localizedDescription)")
+        }
     }
 }
