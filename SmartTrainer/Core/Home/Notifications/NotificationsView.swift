@@ -11,8 +11,7 @@ struct NotificationsView: View {
     @State private var notifications: [Notification] = .init()
     var body: some View {
         List(notifications) { notification in
-            Text(notification.message)
-                .foregroundStyle(.accent)
+            NotificationView(notification: notification, notifications: $notifications)
         }
         .listStyle(PlainListStyle())
         .task {

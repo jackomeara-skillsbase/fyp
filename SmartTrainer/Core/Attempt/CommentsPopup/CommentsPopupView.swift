@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CommentsPopupView: View {
     @EnvironmentObject private var store: Store
-    var commentsLoaded: Bool = true
+    @State private var commentsLoaded: Bool = true
     var media_id: String
     @State var comments: [Comment] = []
     @State var newCommentText: String = ""

@@ -19,6 +19,8 @@ class CommentDataService {
                 let comment = try firebaseComment.data(as: Comment.self)
                 commentsList.append(comment)
             }
+            print(mediaID)
+            print("comments from ds: \(commentsList)")
             return commentsList
         } catch {
             print("DEBUG: Error fetching comments: \(error.localizedDescription)")

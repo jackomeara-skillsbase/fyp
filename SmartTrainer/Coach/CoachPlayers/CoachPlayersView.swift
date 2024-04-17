@@ -31,8 +31,7 @@ struct CoachPlayersView: View {
                     header
                     
                     if !showGroups {
-                        CoachPlayerRequestsView(showRequests: $showRequests)
-                            .environmentObject(store)
+                        CoachPlayerRequestsView(showRequests: $showRequests, players: $players)
                         
                         SearchBarView(promptText: "Search for a player..", searchText: $searchText)
                         
@@ -61,7 +60,7 @@ struct CoachPlayersView: View {
                     Color.theme.secondaryText.opacity(0.7)
                         .ignoresSafeArea()
                     
-                    NewGroupView(showPopup: $newGroup, players: players)
+                    NewGroupView(showPopup: $newGroup, players: players, groups: $groups)
                         .environmentObject(store)
                 }
             }

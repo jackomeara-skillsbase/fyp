@@ -10,9 +10,7 @@ import SwiftUI
 struct ImageResourceView: View {
     @EnvironmentObject private var store: Store
     
-    var imageURL: String = ""
-    
-    @State private var showComments: Bool = false
+    var imageURL: String
     
     var body: some View {
         ZStack {
@@ -55,12 +53,8 @@ struct ImageResourceView: View {
                         
                         
                         // comments popup button
-                        PopupButton(showState: $showComments, symbol: "message.fill")
-                            .sheet(isPresented: $showComments) {
-                                CommentsPopupView(media_id: imageURL)
-                                    .presentationDetents([.fraction(0.7)])
-                                    .environmentObject(store)
-                            }
+                        PopupButton(imageURL: imageURL, symbol: "message.fill")
+                            .environmentObject(store)
                     }
                     .padding()
                 }
@@ -70,12 +64,14 @@ struct ImageResourceView: View {
     }
                             
     struct PopupButton: View {
-        @Binding var showState: Bool
+        @EnvironmentObject private var store: Store
+        var imageURL: String
         var symbol: String
         
         var body: some View {
             Button {
-                showState.toggle()
+                store.commentMedia = imageURL
+                store.showComments = true
             } label: {
                 Image(systemName: symbol)
                     .resizable()
@@ -89,5 +85,5 @@ struct ImageResourceView: View {
 }
 
 #Preview {
-    ImageResourceView()
+    ImageResourceView(imageURL: "someimage")
 }

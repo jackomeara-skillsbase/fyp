@@ -18,7 +18,7 @@
 		EC0E00402B4DB8FA00F06B98 /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E003F2B4DB8FA00F06B98 /* CircleButtonView.swift */; };
 		EC0E00422B4DC48C00F06B98 /* SmartTrainerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00412B4DC48C00F06B98 /* SmartTrainerTabView.swift */; };
 		EC0E00452B4DC75300F06B98 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0E00442B4DC75300F06B98 /* SearchBarView.swift */; };
-		EC0F84202BC95E2F00A90915 /* ControlClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EC0F841F2BC95E2F00A90915 /* ControlClassifier.mlmodel */; };
+		EC0F84222BCD9B6100A90915 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0F84212BCD9B6100A90915 /* NotificationView.swift */; };
 		EC10D8B12B94F8E2000227B5 /* ActivityChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC10D8B02B94F8E2000227B5 /* ActivityChartView.swift */; };
 		EC10D8B32B94F9AA000227B5 /* ChartPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC10D8B22B94F9AA000227B5 /* ChartPoint.swift */; };
 		EC10D8B62B9539E2000227B5 /* CoachScoresChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC10D8B52B9539E2000227B5 /* CoachScoresChartView.swift */; };
@@ -81,6 +81,12 @@
 		EC6AE2CA2B4DE7F100F8C0D2 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6AE2C92B4DE7F100F8C0D2 /* Notification.swift */; };
 		EC6AE2D22B4DEFA000F8C0D2 /* back_squat.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC6AE2D12B4DEFA000F8C0D2 /* back_squat.mp4 */; };
 		EC6AE2D72B4DF5F200F8C0D2 /* PlayerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6AE2D62B4DF5F200F8C0D2 /* PlayerProfileView.swift */; };
+		EC6C2A162BCE67AD000D9E0E /* triangle_pose.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC6C2A132BCE658C000D9E0E /* triangle_pose.mp4 */; };
+		EC6C2A182BCE684F000D9E0E /* push_up.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EC6C2A172BCE684E000D9E0E /* push_up.mp4 */; };
+		EC6C2A1A2BCEB298000D9E0E /* ControlClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EC6C2A192BCEB298000D9E0E /* ControlClassifier.mlmodel */; };
+		EC6C2A1C2BCEDC25000D9E0E /* LoadingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6C2A1B2BCEDC25000D9E0E /* LoadingCardView.swift */; };
+		EC6C2A1E2BCEE3D8000D9E0E /* NoCoachReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6C2A1D2BCEE3D8000D9E0E /* NoCoachReviewView.swift */; };
+		EC6C2A202BCEEDE8000D9E0E /* SquatRangeModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EC6C2A1F2BCEEDE8000D9E0E /* SquatRangeModel.mlmodel */; };
 		EC6F7FCA2B769DA30077D20F /* SquatRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6F7FC92B769DA30077D20F /* SquatRecognizer.swift */; };
 		EC701C0D2B9E64AA000BEDD8 /* ManagerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC701C0C2B9E64AA000BEDD8 /* ManagerProfileView.swift */; };
 		EC701C112B9E6689000BEDD8 /* ManagerOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC701C102B9E6689000BEDD8 /* ManagerOverviewView.swift */; };
@@ -117,7 +123,6 @@
 		ECBF103B2BB5A2ED008E43BB /* AsyncCachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF103A2BB5A2ED008E43BB /* AsyncCachedImage.swift */; };
 		ECBF103E2BB5AF05008E43BB /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF103D2BB5AF05008E43BB /* HomeHeaderView.swift */; };
 		ECBF10412BB5B1BB008E43BB /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF10402BB5B1BB008E43BB /* NotificationsView.swift */; };
-		ECBF10432BB5C553008E43BB /* SquatRangeModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = ECBF10422BB5C553008E43BB /* SquatRangeModel.mlmodel */; };
 		ECC9F6AC2B7D3E2500936725 /* PlayerReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC9F6AB2B7D3E2500936725 /* PlayerReportView.swift */; };
 		ECCC1FC52B671772004CF111 /* VideoFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCC1FC42B671772004CF111 /* VideoFrameView.swift */; };
 		ECCDD3822BBAC0890058B6B3 /* NoAIReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCDD3812BBAC0890058B6B3 /* NoAIReviewView.swift */; };
@@ -159,7 +164,7 @@
 		EC0E003F2B4DB8FA00F06B98 /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
 		EC0E00412B4DC48C00F06B98 /* SmartTrainerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTrainerTabView.swift; sourceTree = "<group>"; };
 		EC0E00442B4DC75300F06B98 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
-		EC0F841F2BC95E2F00A90915 /* ControlClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ControlClassifier.mlmodel; sourceTree = "<group>"; };
+		EC0F84212BCD9B6100A90915 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		EC10D8B02B94F8E2000227B5 /* ActivityChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartView.swift; sourceTree = "<group>"; };
 		EC10D8B22B94F9AA000227B5 /* ChartPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPoint.swift; sourceTree = "<group>"; };
 		EC10D8B52B9539E2000227B5 /* CoachScoresChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachScoresChartView.swift; sourceTree = "<group>"; };
@@ -195,6 +200,12 @@
 		EC6AE2C92B4DE7F100F8C0D2 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		EC6AE2D12B4DEFA000F8C0D2 /* back_squat.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = back_squat.mp4; sourceTree = "<group>"; };
 		EC6AE2D62B4DF5F200F8C0D2 /* PlayerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfileView.swift; sourceTree = "<group>"; };
+		EC6C2A132BCE658C000D9E0E /* triangle_pose.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = triangle_pose.mp4; sourceTree = "<group>"; };
+		EC6C2A172BCE684E000D9E0E /* push_up.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = push_up.mp4; sourceTree = "<group>"; };
+		EC6C2A192BCEB298000D9E0E /* ControlClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ControlClassifier.mlmodel; sourceTree = "<group>"; };
+		EC6C2A1B2BCEDC25000D9E0E /* LoadingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCardView.swift; sourceTree = "<group>"; };
+		EC6C2A1D2BCEE3D8000D9E0E /* NoCoachReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCoachReviewView.swift; sourceTree = "<group>"; };
+		EC6C2A1F2BCEEDE8000D9E0E /* SquatRangeModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SquatRangeModel.mlmodel; sourceTree = "<group>"; };
 		EC6F7FC92B769DA30077D20F /* SquatRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquatRecognizer.swift; sourceTree = "<group>"; };
 		EC701C0C2B9E64AA000BEDD8 /* ManagerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProfileView.swift; sourceTree = "<group>"; };
 		EC701C102B9E6689000BEDD8 /* ManagerOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerOverviewView.swift; sourceTree = "<group>"; };
@@ -232,7 +243,6 @@
 		ECBF103A2BB5A2ED008E43BB /* AsyncCachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCachedImage.swift; sourceTree = "<group>"; };
 		ECBF103D2BB5AF05008E43BB /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		ECBF10402BB5B1BB008E43BB /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
-		ECBF10422BB5C553008E43BB /* SquatRangeModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SquatRangeModel.mlmodel; sourceTree = "<group>"; };
 		ECC9F6AB2B7D3E2500936725 /* PlayerReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerReportView.swift; sourceTree = "<group>"; };
 		ECCC1FC42B671772004CF111 /* VideoFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFrameView.swift; sourceTree = "<group>"; };
 		ECCDD3812BBAC0890058B6B3 /* NoAIReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAIReviewView.swift; sourceTree = "<group>"; };
@@ -575,6 +585,7 @@
 			children = (
 				EC81341D2B59C54500CB8723 /* AttemptRating */,
 				EC3A7FD82B6A90F40022A861 /* CoachReviewView.swift */,
+				EC6C2A1D2BCEE3D8000D9E0E /* NoCoachReviewView.swift */,
 			);
 			path = CoachReviewPopup;
 			sourceTree = "<group>";
@@ -602,6 +613,7 @@
 			isa = PBXGroup;
 			children = (
 				EC4DCAB02B4DD59100B610DC /* AttemptCardView.swift */,
+				EC6C2A1B2BCEDC25000D9E0E /* LoadingCardView.swift */,
 			);
 			path = AttemptCard;
 			sourceTree = "<group>";
@@ -609,6 +621,8 @@
 		EC6AE2D02B4DEFA000F8C0D2 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				EC6C2A172BCE684E000D9E0E /* push_up.mp4 */,
+				EC6C2A132BCE658C000D9E0E /* triangle_pose.mp4 */,
 				ECBE8BC42B86555E00D7E808 /* pull_up.mp4 */,
 				EC3BD4ED2B7CC76800681FC3 /* IMG_7215.MOV */,
 				EC8134132B59A63700CB8723 /* squat_attempt.MOV */,
@@ -739,11 +753,11 @@
 		EC96204B2B6C0F8A00AC860A /* CoreMLModels */ = {
 			isa = PBXGroup;
 			children = (
+				EC6C2A1F2BCEEDE8000D9E0E /* SquatRangeModel.mlmodel */,
+				EC6C2A192BCEB298000D9E0E /* ControlClassifier.mlmodel */,
 				EC5B461B2BBE03B600CD49ED /* FeetDistance.mlmodel */,
-				EC0F841F2BC95E2F00A90915 /* ControlClassifier.mlmodel */,
 				EC7B6B6B2BBDB39900627FAF /* KneeAlignment.mlmodel */,
 				ECF4D3AC2BB9BB6F00F44C80 /* SquatOrNot.mlmodel */,
-				ECBF10422BB5C553008E43BB /* SquatRangeModel.mlmodel */,
 			);
 			path = CoreMLModels;
 			sourceTree = "<group>";
@@ -797,6 +811,7 @@
 			isa = PBXGroup;
 			children = (
 				ECBF10402BB5B1BB008E43BB /* NotificationsView.swift */,
+				EC0F84212BCD9B6100A90915 /* NotificationView.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -964,7 +979,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC0E00292B4DB01D00F06B98 /* Preview Assets.xcassets in Resources */,
+				EC6C2A162BCE67AD000D9E0E /* triangle_pose.mp4 in Resources */,
 				EC6AE2D22B4DEFA000F8C0D2 /* back_squat.mp4 in Resources */,
+				EC6C2A182BCE684F000D9E0E /* push_up.mp4 in Resources */,
 				EC884E142B73DBF900F556A6 /* GoogleService-Info.plist in Resources */,
 				EC3BD4EE2B7CC76800681FC3 /* IMG_7215.MOV in Resources */,
 				EC0E00262B4DB01D00F06B98 /* Assets.xcassets in Resources */,
@@ -983,13 +1000,15 @@
 				ECCDEED72B599B9D00F19A1F /* VideoAutoplayView.swift in Sources */,
 				EC903F132B5039CB00B3AB1F /* Group.swift in Sources */,
 				EC98B9D12BB303A50053525B /* VideoResourceView.swift in Sources */,
+				EC0F84222BCD9B6100A90915 /* NotificationView.swift in Sources */,
 				ECE43EB22B4ECEC000BDE0C7 /* Coach.swift in Sources */,
 				EC7D21F82BB325B900C94B81 /* TechniqueDataService.swift in Sources */,
 				EC903EFE2B501BF700B3AB1F /* CoachProfileView.swift in Sources */,
+				EC6C2A1A2BCEB298000D9E0E /* ControlClassifier.mlmodel in Sources */,
 				EC8134162B59AD6C00CB8723 /* UserDataService.swift in Sources */,
 				ECBDBD592B9EFF5A00C518E0 /* ManagerStatCardView.swift in Sources */,
-				EC0F84202BC95E2F00A90915 /* ControlClassifier.mlmodel in Sources */,
 				EC3A7FDB2B6A96AA0022A861 /* AIReviewView.swift in Sources */,
+				EC6C2A202BCEEDE8000D9E0E /* SquatRangeModel.mlmodel in Sources */,
 				EC0E00352B4DB23900F06B98 /* Technique.swift in Sources */,
 				ECBF103B2BB5A2ED008E43BB /* AsyncCachedImage.swift in Sources */,
 				EC0E00452B4DC75300F06B98 /* SearchBarView.swift in Sources */,
@@ -1057,8 +1076,8 @@
 				ECE793112BAB26B40049F9A4 /* AttemptVisibilityView.swift in Sources */,
 				ECF4D3A92BB6E72F00F44C80 /* Array.swift in Sources */,
 				EC701C162B9E70AA000BEDD8 /* ManagerCoachesView.swift in Sources */,
-				ECBF10432BB5C553008E43BB /* SquatRangeModel.mlmodel in Sources */,
 				EC2CAFA52B5AFDAB0079DE11 /* LogInView.swift in Sources */,
+				EC6C2A1E2BCEE3D8000D9E0E /* NoCoachReviewView.swift in Sources */,
 				EC6AE2CA2B4DE7F100F8C0D2 /* Notification.swift in Sources */,
 				EC81341C2B59BD7D00CB8723 /* RelationshipDataService.swift in Sources */,
 				ECAA8EAE2B5495240001FE7D /* DrawFeedbackView.swift in Sources */,
@@ -1072,6 +1091,7 @@
 				EC903EF62B5015E300B3AB1F /* Date.swift in Sources */,
 				EC3E6D9C2BAB150F0055BEDF /* UploadAttemptView.swift in Sources */,
 				EC0E00332B4DB11E00F06B98 /* Color.swift in Sources */,
+				EC6C2A1C2BCEDC25000D9E0E /* LoadingCardView.swift in Sources */,
 				ECAA8EA12B51B6C40001FE7D /* AttemptDataService.swift in Sources */,
 				ECE43EB92B4ED49200BDE0C7 /* NewCoachPopupView.swift in Sources */,
 				EC5B461C2BBE03B600CD49ED /* FeetDistance.mlmodel in Sources */,
@@ -1228,8 +1248,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1264,8 +1283,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

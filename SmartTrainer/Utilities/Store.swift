@@ -19,6 +19,11 @@ class Store: ObservableObject {
     // init bool to load initial data
     @Published var isLoaded: Bool = false
     
+    @Published var commentMedia: String = ""
+    @Published var showComments: Bool = false
+    
+    @Published var uploadingProgress: Double = -1
+    
     // tab item manager view
     @Published var selectedTab: Int = 0
     
@@ -94,26 +99,30 @@ class Store: ObservableObject {
         self.currentUser = try? snapshot.data(as: User.self)
     }
     
-    func addDrawing(img: UIImage, attempt: Attempt) async throws {
+    func addDrawing(img: UIImage, attempt: Attempt) async throws -> String {
         if let currentUser = self.currentUser {
             do {
-                guard let imageURL = try await ImageDataService.uploadImage(image: img) else { return }
+                guard let imageURL = try await ImageDataService.uploadImage(image: img) else { return "" }
                 
                 // update local array
-                let attemptIndex = self.attempts.firstIndex(where: {$0.id == attempt.id })
-                self.attempts[attemptIndex!].imgs.append(imageURL)
+//                let attemptIndex = self.attempts.firstIndex(where: {$0.id == attempt.id })
+//                self.attempts[attemptIndex!].imgs.append(imageURL)
                 
                 // update attempt object
                 try await AttemptDataService.addDrawing(attempt: attempt, imgURL: imageURL)
+                return imageURL
             }
         }
+        return ""
     }
     
-    func createGroup(name: String, players: [String]) async throws {
+    func createGroup(name: String, players: [String]) async throws -> PlayersGroup? {
         if let currentUser = currentUser {
             let group = PlayersGroup(id: UUID().uuidString, name: name, coach_id: currentUser.id, player_ids: players)
             try await GroupDataService.createGroup(group: group)
+            return group
         }
+        return nil
     }
     
     func updateGroupMembers(group: PlayersGroup, players: [String]) async throws {

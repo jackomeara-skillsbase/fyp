@@ -77,7 +77,6 @@ struct UploadAttemptView: View {
                         ai_reviewed: false,
                         coach_reviewed: false
                     )
-                    // upload attempt
                     Task.detached {
                         do {
                             guard let videoURL = try await VideoDataService.uploadVideo(fileURL: video_url) else { return }
@@ -86,13 +85,18 @@ struct UploadAttemptView: View {
                             
                             try await AttemptDataService.createAttempt(attempt: mainAttempt)
                             print("attempt created")
-                            SquatRecognizer().analyseSquat(from: video_url) { result in
-                                let review = AIReview(id: UUID().uuidString, date: Date(), range: result.range, control: result.control, form: result.form, attempt_id: mainAttempt.id, flagged: false, flagged_description: "")
-                                print("squat analysed")
-                                Task {
-                                    try await AIReviewDataService.uploadAIReview(review: review)
-                                    try await AttemptDataService.confirmAIReview(attemptID: mainAttempt.id)
-                                    print("ai review uploaded")
+                            if mainAttempt.technique_name == "Back Squat" {
+                                SquatRecognizer().analyseSquat(from: video_url) { result in
+                                    let review = AIReview(id: UUID().uuidString, date: Date(), range: result.range, control: result.control, form: result.form, attempt_id: mainAttempt.id, flagged: false, flagged_description: "")
+                                    print("squat analysed")
+                                    Task {
+                                        try await AIReviewDataService.uploadAIReview(review: review)
+                                        Task {
+                                            try await NotificationDataService.createNotification(notification: Notification(id: UUID().uuidString, date: Date(), user_id: store.currentUser!.id, message: "AI Review Completed"))
+                                        }
+                                        try await AttemptDataService.confirmAIReview(attemptID: mainAttempt.id)
+                                        print("ai review uploaded")
+                                    }
                                 }
                             }
                             
@@ -116,7 +120,7 @@ struct UploadAttemptView: View {
         .onAppear {
             Task {
                 while recorder.video_url == nil {
-                    await Task.sleep(100_000_000)
+                    try await Task.sleep(nanoseconds: 200_000_000)
                 }
                 self.player = AVLooperPlayer(url: recorder.video_url!)
                 self.player?.play()

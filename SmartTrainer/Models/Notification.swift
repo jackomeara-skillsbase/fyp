@@ -16,7 +16,8 @@ struct Notification: Identifiable, Codable, Hashable {
     static var all: [Notification] {
         get async {
             do {
-                let notifications = try await NotificationDataService.fetchNotifications()
+                var notifications = try await NotificationDataService.fetchNotifications()
+                notifications.sort { $0.date > $1.date }
                 return notifications
             } catch { return [] }
         }

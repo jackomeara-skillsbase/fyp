@@ -12,21 +12,31 @@ import SwiftUI
 
 struct AttemptFeedView: View {
     @EnvironmentObject var store: Store
-    var attempt: Attempt
+    @State var attempt: Attempt
+    
+    init(attempt: Attempt) {
+        _attempt = State(initialValue: attempt)
+    }
+    
     var body: some View {
-        ScrollView(.vertical) {
-            LazyVStack(spacing: 0) {
-                VideoResourceView(attempt: attempt)
-                    .environmentObject(store)
-                ForEach(attempt.imgs, id: \.self) { image in
-                    ImageResourceView(imageURL: image)
+            ScrollView(.vertical) {
+                LazyVStack(spacing: 0) {
+                    VideoResourceView(attempt: $attempt)
                         .environmentObject(store)
+                    ForEach(attempt.imgs, id: \.self) { image in
+                        ImageResourceView(imageURL: image)
+                            .environmentObject(store)
+                    }
                 }
+                .scrollTargetLayout()
             }
-            .scrollTargetLayout()
-        }
-        .scrollTargetBehavior(.paging)
-        .ignoresSafeArea()
+            .sheet(isPresented: $store.showComments) {
+                CommentsPopupView(media_id: store.commentMedia)
+                    .presentationDetents([.fraction(0.7)])
+                    .environmentObject(store)
+            }
+            .scrollTargetBehavior(.paging)
+            .ignoresSafeArea()
     }
 }
 

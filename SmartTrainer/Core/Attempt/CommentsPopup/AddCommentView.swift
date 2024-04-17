@@ -19,6 +19,7 @@ struct AddCommentView: View {
                 if UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) {
                     Task {
                         let comment = Comment(id: UUID().uuidString, media_id: media_id, date: Date(), user_id: store.currentUser!.id, user_name: store.currentUser!.name, comment: commentText)
+                        commentText = ""
                         do {
                             try await CommentDataService.addComment(comment: comment)
                             comments.append(comment)

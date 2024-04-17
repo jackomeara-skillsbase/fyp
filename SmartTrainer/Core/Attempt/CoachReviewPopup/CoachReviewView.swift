@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct CoachReviewView: View {
+    @State private var review: CoachReview? = nil
     @State var overallRating: Int = 0
-    @State var balanceRating: Int = 0
+    @State var formRating: Int = 0
     @State var rangeRating: Int = 0
     @State var controlRating: Int = 0
     @State var freeText: String = ""
     @Binding var showPanel: Bool
     @EnvironmentObject private var store: Store
     let attempt: Attempt
+    @State private var isLoading: Bool = true
     
     var body: some View {
         if let currentUser = store.currentUser {
@@ -27,63 +29,75 @@ struct CoachReviewView: View {
                         .padding()
                         .foregroundStyle(Color.theme.accent)
                         .font(.title2)
-                                    
-                    AttemptRatingView(rating: $overallRating, label: "Overall", editable: currentUser.role == userRole.coach)
-                        .padding(.bottom)
-                    AttemptRatingView(rating: $rangeRating, label: "Range", editable: currentUser.role == userRole.coach)
-                        .padding(.bottom)
-                    AttemptRatingView(rating: $balanceRating, label: "Balance", editable: currentUser.role == userRole.coach)
-                        .padding(.bottom)
-                    AttemptRatingView(rating: $controlRating, label: "Control", editable: currentUser.role == userRole.coach)
-                        .padding(.bottom)
                     
-                    HStack {
-                        Text("Comments:")
+                    if store.currentUser!.role == userRole.player && !isLoading && review == nil {
+                        NoCoachReviewView()
+                    }
+                    else {
+                        
+                        AttemptRatingView(rating: $overallRating, label: "Overall", editable: currentUser.role == userRole.coach)
+                            .padding(.bottom)
+                        AttemptRatingView(rating: $rangeRating, label: "Range", editable: currentUser.role == userRole.coach)
+                            .padding(.bottom)
+                        AttemptRatingView(rating: $formRating, label: "Form", editable: currentUser.role == userRole.coach)
+                            .padding(.bottom)
+                        AttemptRatingView(rating: $controlRating, label: "Control", editable: currentUser.role == userRole.coach)
+                            .padding(.bottom)
+                        
+                        if (currentUser.role == userRole.coach || !freeText.isEmpty) {
+                            HStack {
+                                Text("Comments:")
+                                Spacer()
+                            }
+                            .padding(.horizontal)
+                        }
+                        HStack {
+                            if currentUser.role == userRole.coach {
+                                TextEditor(text: $freeText)
+                                    .frame(height: 100)
+                                    .padding()
+                                    .cornerRadius(15)
+                                    .border(Color.gray.opacity(0.5), width: 1)
+                            } else {
+                                if !freeText.isEmpty {
+                                    Text(freeText)
+                                        .frame(height: 100)
+                                        .padding()
+                                        .cornerRadius(15)
+                                        .border(Color.gray.opacity(0.5), width: 1)
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                        
+                        if currentUser.role == userRole.coach {
+                            Button {
+                                showPanel = false
+                                let review = CoachReview(id: attempt.id, date: Date(), overall: overallRating, range: rangeRating, balance: formRating, control: controlRating, comments: freeText)
+                                Task {
+                                    try await CoachReviewDataService.reviewAttempt(review: review)
+                                    try await AttemptDataService.confirmCoachReview(attemptID: attempt.id)
+                                    try await NotificationDataService.createNotification(notification: Notification(id: UUID().uuidString, date: Date(), user_id: attempt.player_id, message: "\(store.currentUser!.name) has reviewed your \(attempt.technique_name) attempt"))
+                                }
+                            } label: {
+                                Text("Save")
+                            }
+                        }
                         Spacer()
                     }
-                    .padding(.horizontal)
-                    HStack {
-                        if currentUser.role == userRole.coach {
-                            TextEditor(text: $freeText)
-                                .frame(height: 100)
-                                .padding()
-                                .cornerRadius(15)
-                                .border(Color.gray.opacity(0.5), width: 1)
-                        } else {
-                            Text(freeText)
-                                .frame(height: 100)
-                                .padding()
-                                .cornerRadius(15)
-                                .border(Color.gray.opacity(0.5), width: 1)
-                        }
-                    }
-                    .padding(.horizontal)
-                    
-                    if currentUser.role == userRole.coach {
-                        Button {
-                            showPanel = false
-                            let review = CoachReview(id: attempt.id, date: Date(), overall: overallRating, range: rangeRating, balance: balanceRating, control: controlRating, comments: freeText)
-                            Task {
-                                try await CoachReviewDataService.reviewAttempt(review: review)
-                                try await AttemptDataService.confirmCoachReview(attemptID: attempt.id)
-                            }
-                        } label: {
-                            Text("Save")
-                        }
-                    }
-                    Spacer()
                 }
             }
             .onAppear {
                 Task {
-                    let review = try await CoachReviewDataService.getAttemptReview(attemptID: attempt.id)
-                    if review != nil {
-                        overallRating = review!.overall
-                        balanceRating = review!.balance
-                        controlRating = review!.control
-                        rangeRating = review!.range
-                        freeText = review!.comments
+                    self.review = try await CoachReviewDataService.getAttemptReview(attemptID: attempt.id)
+                    if let review = self.review {
+                        freeText = review.comments
+                        formRating = review.form
+                        controlRating = review.control
+                        overallRating = review.overall
+                        rangeRating = review.range
                     }
+                    self.isLoading = false
                 }
         }
         }

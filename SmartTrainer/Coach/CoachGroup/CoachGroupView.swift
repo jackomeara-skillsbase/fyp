@@ -13,6 +13,7 @@ struct CoachGroupView: View {
     @State private var searchText: String = ""
     var group: PlayersGroup
     @State private var groupPlayers: [User] = .init()
+    @State private var attempts: [Attempt] = .init()
     
     private func filterSearch(allAttempts: [Attempt], searchText: String) -> [Attempt] {
         let groupAttempts = allAttempts.filter { group.player_ids.contains($0.player_id) }
@@ -73,7 +74,7 @@ struct CoachGroupView: View {
                     if feedMode == 1 {
                         SearchBarView(promptText: "Search for an attempt...", searchText: $searchText)
                         
-                        List(filterSearch(allAttempts: store.attempts, searchText: searchText)) { attempt in
+                        List(filterSearch(allAttempts: attempts, searchText: searchText)) { attempt in
                                 AttemptCardView(attempt: attempt)
                                     .background(NavigationLink("",
                                                                destination: AttemptFeedView(attempt: attempt)
@@ -88,6 +89,7 @@ struct CoachGroupView: View {
         .task {
             var allPlayers = await User.players
             self.groupPlayers = allPlayers.filter {group.player_ids.contains($0.id)}
+            self.attempts = await Attempt.coachesAttempts
         }
     }
 }

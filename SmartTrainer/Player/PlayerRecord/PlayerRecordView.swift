@@ -10,8 +10,7 @@ import SwiftUI
 struct PlayerRecordView: View {
     
     var body: some View {
-        // navigation stack for technique selection.
-        // when technique selected, three pages: 0 (technique details), 1 (record view), 2 (confirm upload)
+        // manage between nav stack for upload process and confirm upload stage
         Text("Hello World")
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct PlayerView: View {
     @EnvironmentObject private var store: Store
     let player: User
+    @State private var attempts: [Attempt] = .init()
     
     private func filterAttempts(allAttempts: [Attempt]) -> [Attempt] {
         return allAttempts.filter { $0.player_id == player.id }
@@ -35,7 +36,7 @@ struct PlayerView: View {
                         }
                         .padding()
                         
-                        List(filterAttempts(allAttempts: store.attempts)) { attempt in
+                        List(filterAttempts(allAttempts: attempts)) { attempt in
                             AttemptCardView(attempt: attempt)
                                 .background(NavigationLink("", destination: AttemptFeedView(attempt: attempt)
                                     .environmentObject(store))
@@ -45,6 +46,9 @@ struct PlayerView: View {
                         
                         Spacer()
                     }
+            }
+            .task {
+                self.attempts = await Attempt.coachesAttempts
             }
     }
 }

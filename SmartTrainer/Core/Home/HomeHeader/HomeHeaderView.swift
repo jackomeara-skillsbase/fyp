@@ -12,6 +12,8 @@ struct HomeHeaderView: View {
     @Binding var showNotifications: Bool
     @State private var rotationAngle: Double = 0
     @Binding var attempts: [Attempt]
+    @Binding var attemptsLoaded: Bool
+    @Binding var notifications: [Notification]
     
     private func getRightIcon() -> String {
         if showNotifications {
@@ -37,12 +39,14 @@ struct HomeHeaderView: View {
                     withAnimation(Animation.linear(duration: 1)) {
                         rotationAngle += 360
                         Task {
+                            attemptsLoaded = false
                             if let currentUser = store.currentUser {
                                 if currentUser.role == userRole.coach {
                                     self.attempts = await Attempt.coachesAttempts
                                 } else {
                                     self.attempts = await Attempt.playersAttempts
                                 }
+                                attemptsLoaded = true
                             }
 
                         }
@@ -67,5 +71,5 @@ struct HomeHeaderView: View {
 }
 
 #Preview {
-    HomeHeaderView(showNotifications: .constant(false), attempts: .constant([]))
+    HomeHeaderView(showNotifications: .constant(false), attempts: .constant([]), attemptsLoaded: .constant(true), notifications: .constant([]))
 }

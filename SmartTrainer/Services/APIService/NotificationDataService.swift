@@ -27,4 +27,21 @@ class NotificationDataService {
         }
         return []
     }
+    
+    static func deleteNotification(id: String) async throws {
+        do {
+            guard let _ = try? await Firestore.firestore().collection("notifications").document(id).delete() else { return }
+        } catch {
+            print("DEBUG: Error deleting notification: \(error.localizedDescription)")
+        }
+    }
+    
+    static func createNotification(notification: Notification) async throws {
+        do {
+            let encodedNotification = try Firestore.Encoder().encode(notification)
+            try await Firestore.firestore().collection("notifications").document(notification.id).setData(encodedNotification)
+        } catch {
+            print("DEBUG: Error creating notification: \(error.localizedDescription)")
+        }
+    }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct NewGroupView: View {
     @Binding var showPopup: Bool
     var players: [User]
+    @Binding var groups: [PlayersGroup]
     @State private var playerAdded: [Bool] = []
     @State private var nameText: String = ""
     @EnvironmentObject private var store: Store
@@ -41,7 +42,7 @@ struct NewGroupView: View {
             }
             .listStyle(PlainListStyle())
             
-            Button("Create") {
+            Button {
                 var ids: [String] = [String]()
                 for (index, value) in playerAdded.enumerated() {
                     if value {
@@ -51,9 +52,18 @@ struct NewGroupView: View {
                 Task {
                     let group = 
                     try await store.createGroup(name: nameText, players: ids)
+                    groups.append(group!)
+                    showPopup = false
                 }
                 
+            } label: {
+                Text("Create")
+                    .foregroundStyle(.white)
+                    .padding()
+                    .background(.blue)
+                    .cornerRadius(10)
             }
+            .padding(.bottom)
             
             
         }
@@ -74,5 +84,5 @@ struct NewGroupView: View {
         User(id: "1", name: "Player 1", email: "dsf", role: userRole.player, image_url: ""),
         User(id: "2", name: "Player 2", email: "asd", role: userRole.player, image_url: ""),
         User(id: "3", name: "Player 3", email: "dsd", role: userRole.player, image_url: ""),
-    ])
+    ], groups: .constant([]))
 }

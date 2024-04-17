@@ -24,7 +24,7 @@ struct RectangleShape {
 
 struct DrawFeedbackView: View {
     @EnvironmentObject var store: Store
-    var attempt: Attempt
+    @Binding var attempt: Attempt
     @Binding var frame: UIImage?
     @Binding var showScreen: Bool
     
@@ -122,7 +122,9 @@ struct DrawFeedbackView: View {
                                     let mergedImage: UIImage = resizedFrame.mergeWith(topImage: drawingImage)
                                     Task {
                                         do {
-                                            try await store.addDrawing(img: mergedImage, attempt: attempt)
+                                            let imgURL: String = try await store.addDrawing(img: mergedImage, attempt: attempt)
+                                            attempt.imgs.append(imgURL)
+                                            print(attempt.imgs)
                                             showScreen = false
                                             await store.sendToast(type: ToastType.success, message: "Image feedback added 👍")
                                         } catch {
@@ -214,6 +216,6 @@ extension DrawFeedbackView {
 
 struct DrawFeedbackView_Previews: PreviewProvider {
     static var previews: some View {
-        DrawFeedbackView(attempt: DrawFeedbackView_Previews.dev.attempt, frame: .constant(nil), showScreen: .constant(true))
+        DrawFeedbackView(attempt: .constant(DrawFeedbackView_Previews.dev.attempt), frame: .constant(nil), showScreen: .constant(true))
     }
 }

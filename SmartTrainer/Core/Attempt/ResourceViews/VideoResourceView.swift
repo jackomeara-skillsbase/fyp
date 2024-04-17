@@ -12,24 +12,19 @@ struct VideoResourceView: View {
     @EnvironmentObject private var store: Store
     
     // popup states
-    @State var showAI: Bool = false
-    @State var showCoachReview: Bool = false
-    @State var showComments: Bool = false
-    @State var showDrawingView: Bool = false
+    @State private var showAI: Bool = false
+    @State private var showCoachReview: Bool = false
+//    @State private var showComments: Bool = false
+    @State private var showDrawingView: Bool = false
     
     // declare attempt and player to be initialised
-    var attempt: Attempt
-    @State private var player: AVLooperPlayer? = nil
-    @State var isPlaying: Bool = false
-    @State var drawingFrame: UIImage?
-    private var offlineMode: Bool = true
-    @State var cachedURL: URL? = nil
+    @Binding var attempt: Attempt
     
-    // create video player at init
-    init(attempt: Attempt) {
-//        self.player = AVLooperPlayer(url: (offlineMode ? Bundle.main.url(forResource: "IMG_7215", withExtension: "MOV")! : URL(string: attempt.video_url)!))
-        self.attempt = attempt
-    }
+    @State private var player: AVLooperPlayer? = nil
+    @State private var isPlaying: Bool = false
+    @State private var drawingFrame: UIImage? = nil
+    @State private var cachedURL: URL? = nil
+    @State private var isLoading: Bool = false
     
     func extractImage(completion: @escaping (UIImage?) -> Void) {
         if let player = player {
@@ -89,7 +84,7 @@ struct VideoResourceView: View {
                             Spacer()
                             
                             // tool buttons on right
-                            VStack(alignment: .center, spacing: 30) {
+                            VStack(alignment: .leading, spacing: 30) {
                                 
                                 // ai review popup button
                                 PopupButton(showState: $showAI, symbol: "desktopcomputer")
@@ -108,12 +103,7 @@ struct VideoResourceView: View {
                                     }
                                 
                                 // comments popup button
-                                PopupButton(showState: $showComments, symbol: "message.fill")
-                                    .sheet(isPresented: $showComments) {
-                                        CommentsPopupView(media_id: attempt.video_url)
-                                            .presentationDetents([.fraction(0.7)])
-                                            .environmentObject(store)
-                                    }
+                                CommentPopupButton(videoURL: attempt.video_url, symbol: "message.fill")
                                 
                                 // drawing popup button (only if coach)
                                 if currentUser.role == userRole.coach {
@@ -141,7 +131,7 @@ struct VideoResourceView: View {
                     .padding()
                     
                     // pause button layer
-                    if !isPlaying {
+                    if !isPlaying, let _ = player {
                         Image(systemName: "play.fill")
                             .resizable()
                             .frame(width: 80, height: 100)
@@ -151,7 +141,7 @@ struct VideoResourceView: View {
                     }
                 }
                 .fullScreenCover(isPresented: $showDrawingView) {
-                    DrawFeedbackView(attempt: attempt, frame: $drawingFrame, showScreen: $showDrawingView)
+                    DrawFeedbackView(attempt: $attempt, frame: $drawingFrame, showScreen: $showDrawingView)
                         .environmentObject(store)
                 }
                 .onAppear {
@@ -184,6 +174,27 @@ struct VideoResourceView: View {
             } label: {
                 Image(systemName: symbol)
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 48)
+                    .foregroundStyle(.white)
+                    .shadow(color: .black, radius: 3)
+            }
+        }
+        
+    }
+    
+    struct CommentPopupButton: View {
+        @EnvironmentObject private var store: Store
+        var videoURL: String
+        var symbol: String
+        
+        var body: some View {
+            Button {
+                store.commentMedia = videoURL
+                store.showComments = true
+            } label: {
+                Image(systemName: symbol)
+                    .resizable()
                     .frame(width: 48, height: 48)
                     .foregroundStyle(.white)
                     .shadow(color: .black, radius: 3)
@@ -195,6 +206,6 @@ struct VideoResourceView: View {
 
 struct VideoResourceView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoResourceView(attempt: self.dev.attempt)
+        VideoResourceView(attempt: .constant(self.dev.attempt))
     }
 }
